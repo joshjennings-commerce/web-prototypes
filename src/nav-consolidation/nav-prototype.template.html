@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commerce Consolidated Nav – Combo Prototypes v2</title>
+<style>
+:root{
+  --nav-h:64px; --dd-ms:220ms; --ease:cubic-bezier(.2,.7,.2,1);
+  --accent:#6058ff; --bc-card:#e8ddff; --fdx-card:#d7ebfb; --line:#e3e3e8; --ink:#1a1a1a; --muted:#666;
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#f3f3f3;-webkit-font-smoothing:antialiased}
+body.no-page main{display:none}
+button{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* ── Faux browser chrome + sticky header ── */
+.sticky{position:sticky;top:0;z-index:50}
+.addr{height:36px;background:#e9e9ec;border-bottom:1px solid #d6d6db;display:flex;align-items:center;gap:8px;padding:0 12px;font-size:12.5px;color:#444}
+.addr button{border:0;background:none;width:26px;height:26px;border-radius:6px;cursor:pointer;color:#555}
+.addr button:hover:not(:disabled){background:#dcdce0}
+.addr button:disabled{opacity:.35;cursor:default}
+.url{flex:1;max-width:720px;height:26px;background:#fff;border-radius:7px;display:flex;align-items:center;padding:0 10px;gap:6px;font-variant-numeric:tabular-nums;overflow:hidden;white-space:nowrap}
+.url .host{color:#1a1a1a;font-weight:500}
+.url .path{color:#555}
+.url .lock{font-size:11px;color:#777}
+.site{background:#fff;box-shadow:0 1px 0 var(--line);position:relative}
+
+/* ── Bars ── */
+.bar{height:var(--nav-h);display:flex;align-items:center;gap:26px;padding:0 32px;background:#fff;position:relative}
+.bar + .bar, .pbar-wrap + .bar{border-top:1px solid var(--line)}
+/* Dual nav: the Commerce parent bar is a compact strip above the sub-brand bar. */
+.bar-top{height:var(--top-h,40px);gap:18px}
+.bar-top .logo svg{height:16px}
+.bar-top .links{gap:0}
+.bar-top .link{font-size:12.5px;padding:4px 8px;gap:4px;border-radius:4px}
+.bar-top .link.active::after{left:8px;right:8px;bottom:0}
+.bar-top .caret{font-size:7px}
+.bar-top .btn{font-size:12px;padding:5px 11px;border-width:1px}
+/* Collapsing slides the whole header up under the address bar (transform only), so document height never changes
+   and scroll position can't be clamped — that clamp was what made the header bounce near the page bottom. */
+.site{transition:transform var(--dd-ms) var(--ease)}
+.site.scrolled{transform:translateY(calc(-1 * var(--top-h,40px)))}
+.addr{position:relative;z-index:2}
+.logo{display:flex;align-items:center;cursor:pointer;flex-shrink:0;line-height:0}
+.logo svg{height:24px;width:auto;display:block}
+.logo.bc svg{height:30px}
+.logo.fdx svg{height:24px}
+.links{display:flex;gap:4px;align-items:center}
+.link{font-size:15px;padding:8px 11px;border-radius:6px;cursor:pointer;background:none;border:0;display:flex;gap:6px;align-items:center;white-space:nowrap;position:relative}
+.link:hover{background:#f3f3f5}
+.link.active{background:none}
+.link.active::after{content:"";position:absolute;left:11px;right:11px;bottom:2px;height:2px;background:var(--accent);border-radius:2px}
+.caret{font-size:9px;color:#888;transition:transform var(--dd-ms) var(--ease);display:inline-block}
+.link.active .caret{transform:rotate(180deg)}
+.spacer{flex:1}
+.btn{font-size:14px;font-weight:600;padding:11px 18px;border-radius:var(--btn-r,6px);border:1.5px solid #1a1a1a;background:#1a1a1a;color:#fff;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:8px}
+.btn.ghost{background:#fff;color:#1a1a1a}
+.btn:hover{background:#333;border-color:#333}
+.btn.ghost:hover{background:#f3f3f3;border-color:#1a1a1a}
+.btn .chev{display:none;font-size:15px;line-height:1}
+body.brand-cta .btn.b-fdx:not(.ghost){background:#f2a585;border-color:#f2a585;color:#1a1a1a}
+body.brand-cta .btn.b-fdx:not(.ghost):hover{background:#ee9570;border-color:#ee9570}
+body.brand-cta .btn.b-fdx .chev{display:inline}
+body.brand-cta .btn.b-commerce:not(.ghost){background:var(--accent);border-color:var(--accent)}
+body.brand-cta .btn.b-commerce:not(.ghost):hover{filter:brightness(.92)}
+.login,.util{font-size:14px;background:none;border:0;cursor:pointer;white-space:nowrap;padding:8px 8px;border-radius:6px}
+.util{color:#555;font-size:13px}
+.login:hover,.util:hover{background:#f3f3f5}
+.right{display:flex;align-items:center;gap:10px}
+
+/* ── Dropdown layer ── */
+.dd{position:absolute;left:0;right:0;top:100%;z-index:5;background:#fff;border-bottom:1px solid var(--line);border-top:1px solid #e5e5e5;box-shadow:0 24px 40px -24px rgba(0,0,0,.3);
+  opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity var(--dd-ms) var(--ease),transform var(--dd-ms) var(--ease)}
+.dd.open{opacity:1;transform:none;pointer-events:auto}
+.dd-inner{padding:36px 32px 40px;overflow:hidden}
+
+/* Mega menu primitives (layout modeled on the live BC / Feedonomics menus) */
+.mega{display:flex;gap:40px;align-items:stretch;--panel:#f3f4f7;--icon:var(--accent);--cta2:var(--accent);--hl:#eef0ff}
+.mega.brand-bc{--icon:#1a1a1a;--cta2:#1a1a1a;--panel:#f3f4f7}
+.mega.brand-fdx{--icon:#1f57ff;--cta2:#f2a585;--panel:#eceefc}
+.mega.brand-commerce{--panel:color-mix(in srgb,var(--accent) 7%,#fff)}
+.col{display:flex;flex-direction:column;gap:4px;min-width:180px;flex:1 1 0;max-width:400px}
+.col.wide{flex:2 1 0;max-width:680px}
+.col-h{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#666;font-weight:500;padding:0 0 10px 8px;margin:0 0 10px;border-bottom:1px solid #e1e1e6}
+.brand-fdx .col-h{text-transform:none;letter-spacing:0;font-size:14px;color:#777}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+.mi{display:flex;gap:10px;padding:8px 8px;border-radius:8px;cursor:pointer;align-items:flex-start}
+.mi:hover{background:rgba(0,0,0,.04)}
+.mi-ic{flex:0 0 20px;height:20px;color:var(--icon);margin-top:2px}
+.mi-ic svg{width:20px;height:20px;display:block}
+.mi-body{display:flex;flex-direction:column;gap:3px;min-width:0}
+.mi-t{font-size:16px;font-weight:500;display:flex;align-items:center;gap:8px;line-height:1.3}
+.mi-d{font-size:13.5px;color:var(--muted);line-height:1.4}
+.mi.hl{background:var(--hl);padding:14px 16px;margin-top:6px}
+.mi.hl:hover{background:#e6e9ff}
+.ai{width:18px;height:18px;border-radius:50%;background:#e4e7ff;color:#4b50e6;display:inline-grid;place-items:center;font-size:11px;line-height:1}
+.ext{font-size:12px;color:#777}
+.panel{flex:0 0 320px;background:var(--panel);margin:-36px -32px -40px auto;padding:36px 32px 40px 32px;display:flex;flex-direction:column;gap:28px}
+.panel .col{min-width:0}
+.promo{background:#fff;border-radius:10px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:8px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.promo:hover{box-shadow:0 6px 18px -10px rgba(0,0,0,.3)}
+.promo .col-h{border:0;padding:0;margin:0 0 2px}
+.promo h5{margin:0;font-size:17px;line-height:1.3;font-weight:600}
+.promo p{margin:0;font-size:13.5px;color:#444;line-height:1.5}
+.promo .cta{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;margin-top:10px}
+.promo .cta i{width:30px;height:30px;border-radius:50%;background:var(--cta2);color:#fff;display:grid;place-items:center;font-style:normal;font-size:14px}
+.brand-fdx .promo .cta i{color:#1a1a1a}
+.mega.compact{gap:24px}
+.mega.compact .mi-t{font-size:14.5px}
+.mega.compact .mi-d{font-size:12.5px}
+.mega.compact .col-h{font-size:11px;padding-bottom:8px;margin-bottom:8px}
+.mega.compact .mi.hl{padding:10px 12px}
+
+/* Parent A – Solutions */
+.solA{display:grid;grid-template-columns:minmax(300px,32%) minmax(170px,1fr) 2fr;gap:40px}
+.solA .col{max-width:none}
+.solA .cards{display:flex;flex-direction:column;gap:14px}
+.brand-card{border-radius:10px;padding:22px 24px;cursor:pointer;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;gap:10px}
+.brand-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px -12px rgba(0,0,0,.35)}
+.brand-card.bc{background:var(--bc-card)} .brand-card.fdx{background:var(--fdx-card)}
+.brand-card .logo svg{height:24px}
+.brand-card .logo.bc svg{height:28px}
+.brand-card p{margin:0;font-size:13.5px;line-height:1.5;color:#333}
+.brand-card .cta{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;margin-top:2px}
+.brand-card .cta i{width:26px;height:26px;border-radius:50%;background:#1a1a1a;color:#fff;display:grid;place-items:center;font-style:normal;font-size:12px}
+.solA.compact{grid-template-columns:1.1fr .8fr 1.6fr;gap:20px}
+.solA.compact .igrid{gap:2px 12px}
+.solA.compact .brand-card{padding:16px 18px;gap:6px}
+.solA.compact .brand-card p{font-size:12.5px}
+
+/* Parent B – Platforms */
+.platB{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.plat{border-radius:10px;padding:26px 28px;cursor:default}
+.plat.bc{background:#f3f4f7} .plat.fdx{background:var(--fdx-card)}
+body.dark-alt .plat.bc{background:#17171c;color:#fff}
+body.dark-alt .plat.bc .pgrid a:hover{background:rgba(255,255,255,.08)}
+body.dark-alt .plat.bc p{color:#cfcfd6}
+body.dark-alt .plat.bc .col-h{color:#9a9aa6;border-color:#2e2e36}
+.plat-h{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+.plat-h .logo svg{height:24px}
+.plat-h .go{font-size:14px;font-weight:600}
+.plat p{margin:10px 0 0;font-size:13.5px;line-height:1.5;color:#333}
+.plat .col-h{margin-top:20px;padding-left:0}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px;margin:0 -8px}
+.pgrid a{font-size:15px;padding:9px 8px;border-radius:6px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.pgrid a:hover{background:rgba(0,0,0,.05)}
+
+/* ── Sub-brand B (focused nav + parent expander) ── */
+.bar-sb{padding-left:0}
+.sb-left{flex:1;align-self:stretch;display:flex;align-items:center;gap:22px;position:relative;padding-left:calc(var(--nav-h) + 22px)}
+.sb-tile{position:absolute;left:0;top:0;bottom:0;z-index:3;min-width:var(--nav-h);display:flex;align-items:center;gap:8px;padding:0 14px;
+  background:#fff;border-right:1px solid var(--line);cursor:pointer;overflow:hidden;white-space:nowrap;transition:min-width var(--dd-ms) var(--ease)}
+.sb-tile:hover{background:#fafafa}
+/* One full Commerce logo at a fixed size. Collapsed = clipped to the mark (0–42.9 of the 220-unit viewBox); expanded = reveal the wordmark. */
+.sb-logo{line-height:0;overflow:hidden;flex:0 0 auto;width:27px;transition:width var(--dd-ms) var(--ease)}
+.sb-logo svg{height:26px;width:130px;max-width:none;display:block}
+.sb-caret{font-size:10px;transition:transform var(--dd-ms) var(--ease);margin-left:auto;color:#555}
+.mode-flyout.expanded .sb-tile{min-width:var(--tile-w,280px)}
+.mode-flyout.expanded .sb-logo{width:130px}
+.mode-flyout.expanded .sb-caret{transform:rotate(180deg)}
+
+/* The flyout anchors to the top of the bar: the Commerce column starts under the tile, while the second-level
+   content panel runs flush to the top of the screen and covers the sub-brand links behind it. */
+.fly{position:absolute;top:0;left:0;right:0;display:flex;align-items:stretch;opacity:0;transform:translateY(-6px);pointer-events:none;z-index:4;
+  filter:drop-shadow(0 18px 24px rgba(0,0,0,.14));transition:opacity var(--dd-ms) var(--ease),transform var(--dd-ms) var(--ease)}
+/* Only the column and content panel take pointer events; the empty corner over the tile stays click-through. */
+.mode-flyout.expanded .fly{opacity:1;transform:none}
+.mode-flyout.expanded .fly-col,.mode-flyout.expanded .fly-content{pointer-events:auto}
+.fly-col{width:var(--tile-w,280px);margin-top:var(--nav-h);background:#fff;border:1px solid var(--line);border-top:0;padding:8px;flex-shrink:0}
+.fly-item{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;border-radius:5px;font-size:13.5px;cursor:pointer}
+.fly-item:hover{background:#f3f3f3}
+.fly-item.active{background:color-mix(in srgb,var(--accent) 14%,#fff)}
+.fly-item span{color:#888;font-size:11px}
+.fly-link span{font-size:14px}
+body.no-fly-arrows .fly-link span{display:none}
+.fly-cta{margin-top:8px;padding-top:14px;border-top:1px solid var(--line);border-radius:0 0 5px 5px;font-weight:600;color:var(--accent)}
+.fly-cta span{color:var(--accent)}
+.fly-content{flex:1;min-width:0;overflow-x:auto;min-height:calc(var(--nav-h) + 240px);background:#fff;border:1px solid var(--line);border-top:0;border-left:0;padding:24px 26px 26px}
+
+.sb-inline{position:absolute;inset:0;z-index:4;background:#fff;display:flex;align-items:center;gap:22px;padding-left:20px;border-right:1px solid var(--line);
+  clip-path:inset(0 100% 0 0);transition:clip-path var(--dd-ms) var(--ease);pointer-events:none}
+.mode-inline.expanded .sb-inline{clip-path:inset(0 0 0 0);pointer-events:auto}
+.sb-collapse{align-self:stretch;width:28px;border:0;border-left:1px solid #ddd;background:#f3f3f3;cursor:pointer;font-size:12px}
+.sb-collapse:hover{background:#e8e8e8}
+
+/* ── Page body: blank wireframe ── */
+main{max-width:1200px;margin:0 auto;padding:64px 24px 160px;--wf:#dcdce2;--wf-light:#ececf0}
+main section,main footer{margin-bottom:72px}
+h1{font-size:48px;letter-spacing:-.03em;margin:0 0 22px;line-height:1.05}
+.wf-line{height:12px;border-radius:6px;background:var(--wf);margin:0 0 12px}
+.wf-img{border:1.5px solid var(--wf);border-radius:8px;background:var(--wf-light) linear-gradient(to top right,transparent calc(50% - .75px),var(--wf) calc(50% - .75px),var(--wf) calc(50% + .75px),transparent calc(50% + .75px)),linear-gradient(to top left,transparent calc(50% - .75px),var(--wf) calc(50% - .75px),var(--wf) calc(50% + .75px),transparent calc(50% + .75px));background-color:var(--wf-light);min-height:240px}
+.wf-img.sm{min-height:150px;margin-bottom:18px}
+.wf-btns{display:flex;gap:12px;margin-top:22px}
+.wf-btns.center{justify-content:center}
+.wf-btn{width:132px;height:42px;border-radius:6px;background:#2a2a2e}
+.wf-btn.ghost{background:none;border:1.5px solid #2a2a2e}
+.wf-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+.wf-hero .wf-img{min-height:340px}
+.wf-logos{display:grid;grid-template-columns:repeat(6,1fr);gap:24px}
+.wf-logo{height:36px;border-radius:6px;background:var(--wf)}
+.wf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.wf-card{border:1.5px solid var(--wf);border-radius:10px;padding:20px;background:#fff}
+.wf-split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.wf-band{border:1.5px solid var(--wf);border-radius:12px;padding:48px 24px;background:#fff;display:flex;flex-direction:column;align-items:center}
+.wf-band .wf-line{margin-left:auto;margin-right:auto}
+.wf-footer{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-top:40px;border-top:1.5px solid var(--wf)}
+
+/* ── Prototype toolbar ── */
+.proto{position:fixed;left:16px;bottom:16px;z-index:60;background:#111;color:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:12px;width:360px;max-width:calc(100vw - 90px)}
+.proto-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.proto-row + .proto-row{margin-top:8px}
+.proto-label{color:#888}
+.seg{display:flex;background:#2a2a2a;border-radius:8px;padding:2px}
+.seg button{border:0;background:none;color:#bbb;padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px}
+.seg button.on{background:#fff;color:#111;font-weight:600}
+.proto-cap{margin-top:8px;color:#aaa;line-height:1.45}
+.proto-cap b{color:#fff;font-weight:600}
+.status{margin-top:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#8fd3a7;min-height:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.status:empty::before{content:"hover a link to preview its URL";color:#555;font-family:inherit}
+</style>
+</head>
+<body>
+
+<div class="sticky">
+  <div class="addr" id="addr"></div>
+  <header class="site" id="site"></header>
+</div>
+<main id="page"></main>
+<div class="proto" id="proto"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// CONTROLS — in-code control panel.
+// Edit `value` here by hand, or tune live via the gear at bottom-right.
+// These values ship as-is when the runtime panel is stripped out.
+// ═══════════════════════════════════════════════════════════════
+const CONTROLS = [
+  { id: 'parentCta',  label: 'Parent nav CTA',            type: 'text',   value: 'Get Started', group: 'Content' },
+  { id: 'topCta',     label: 'Dual-nav parent bar CTA',   type: 'text',   value: "Let's Talk",  group: 'Content' },
+  { id: 'showPage',   label: 'Show in-page placeholder content', type: 'toggle', value: true, group: 'Content' },
+  { id: 'trigParent', label: 'Parent nav items open on',  type: 'select', value: 'click', options: [{ value: 'hover', label: 'Hover (click goes to hub page)' }, { value: 'click', label: 'Click to toggle' }], group: 'Behavior' },
+  { id: 'trigSub',    label: 'Sub-brand nav items open on', type: 'select', value: 'click', options: [{ value: 'hover', label: 'Hover (click goes to hub page)' }, { value: 'click', label: 'Click to toggle' }], group: 'Behavior' },
+  { id: 'trigTile',   label: 'V3: "C" opener expands on', type: 'select', value: 'click', options: [{ value: 'hover', label: 'Hover' }, { value: 'click', label: 'Click' }], group: 'Behavior' },
+  { id: 'trigFly',    label: 'V3: "C" dropdown items switch on', type: 'select', value: 'hover', options: [{ value: 'hover', label: 'Hover (click goes to hub page)' }, { value: 'click', label: 'Click (second click goes to hub page)' }], group: 'Behavior' },
+  { id: 'logoHome',   label: 'V3: Commerce logo in "C" tile links home (off = "Home" row in dropdown)', type: 'toggle', value: false, group: 'Behavior' },
+  { id: 'flyArrows',  label: 'V3: show arrows on Home / Get Started rows', type: 'toggle', value: false, group: 'Style' },
+  { id: 'hoverDelay', label: 'Hover intent delay',        type: 'range',  value: 120, min: 0, max: 600, step: 20, unit: 'ms', group: 'Behavior' },
+  { id: 'expandMode', label: 'Sub-brand B expander',      type: 'select', value: 'flyout', options: [{ value: 'flyout', label: 'Flyout panel' }, { value: 'inline', label: 'Inline slide-over' }], group: 'Behavior' },
+  { id: 'extraMenus', label: 'Extra dropdowns beyond Figma (Partners, Feedo Integrations)', type: 'toggle', value: true, group: 'Behavior' },
+  { id: 'utilityLinks', label: 'Show Help Center / Dev Center utility links', type: 'toggle', value: false, group: 'Behavior' },
+  { id: 'collapseOnScroll', label: 'Dual nav: hide parent bar on scroll', type: 'toggle', value: true, group: 'Behavior' },
+  { id: 'ddMs',       label: 'Menu animation duration',   type: 'range',  value: 300, min: 0, max: 800, step: 20, unit: 'ms', group: 'Animation' },
+  { id: 'navH',       label: 'Nav bar height',            type: 'range',  value: 72, min: 48, max: 96, step: 2, unit: 'px', group: 'Style' },
+  { id: 'topBarH',    label: 'Dual nav: parent bar height', type: 'range', value: 40, min: 32, max: 64, step: 2, unit: 'px', group: 'Style' },
+  { id: 'btnRadius',  label: 'Button corner radius',      type: 'range',  value: 4, min: 0, max: 24, step: 1, unit: 'px', group: 'Style' },
+  { id: 'brandCta',   label: 'Brand-colored CTAs (Feedonomics peach, Commerce accent)', type: 'toggle', value: true, group: 'Style' },
+  { id: 'accent',     label: 'Accent color',              type: 'color',  value: '#6058ff', group: 'Style' },
+  { id: 'bcCard',     label: 'BigCommerce card color',    type: 'color',  value: '#e8ddff', group: 'Style' },
+  { id: 'fdxCard',    label: 'Feedonomics card color',    type: 'color',  value: '#d7ebfb', group: 'Style' },
+  { id: 'darkAlt',    label: 'Parent B: dark BigCommerce panel', type: 'toggle', value: false, group: 'Style' },
+];
+
+let V = Object.fromEntries(CONTROLS.map(c => [c.id, c.value]));
+let rendered = false, structKey = '';
+
+function apply(v) {
+  V = v;
+  const r = document.documentElement.style;
+  r.setProperty('--nav-h', v.navH + 'px');
+  r.setProperty('--top-h', v.topBarH + 'px');
+  r.setProperty('--dd-ms', v.ddMs + 'ms');
+  r.setProperty('--accent', v.accent);
+  r.setProperty('--bc-card', v.bcCard);
+  r.setProperty('--fdx-card', v.fdxCard);
+  r.setProperty('--btn-r', v.btnRadius + 'px');
+  document.body.classList.toggle('dark-alt', !!v.darkAlt);
+  document.body.classList.toggle('brand-cta', !!v.brandCta);
+  document.body.classList.toggle('no-page', !v.showPage);
+  document.body.classList.toggle('no-fly-arrows', !v.flyArrows);
+  document.querySelectorAll('.js-parent-cta').forEach(el => el.textContent = v.parentCta);
+  document.querySelectorAll('.js-top-cta').forEach(el => el.textContent = v.topCta);
+  const k = [v.expandMode, v.extraMenus, v.utilityLinks, v.logoHome, v.parentCta].join('|');
+  if (rendered && k !== structKey) { state.expanded = false; renderHeader(); }
+  structKey = k;
+  checkScroll();
+}
+
+/* ─────────────── Logos (inlined from /logos) ─────────────── */
+const SVG = {
+  commerce: `{{SVG_COMMERCE}}`,
+  bc: `{{SVG_BC}}`,
+  fdx: `{{SVG_FDX}}`,
+};
+
+/* ─────────────── Content model ───────────────
+   URLs follow the "Commerce Website Consolidation Architecture Exploration" sheet:
+   commerce.com/solutions|case-studies|blog|resources|demo and
+   commerce.com/{bigcommerce|feedonomics}/products|services|integrations|pricing|…
+   Menu items/descriptions come from the current bigcommerce.com and feedonomics.com navs.
+   Items marked PLACEHOLDER are not in either source.                                     */
+const BRAND = {
+  commerce: { name: 'Commerce',    home: '/' },
+  bc:  { name: 'BigCommerce', home: '/bigcommerce/', trial: '/bigcommerce/free-trial/', demo: '/bigcommerce/demo/', login: 'https://login.bigcommerce.com/login/',
+         blurb: 'Open SaaS ecommerce platform for B2C and B2B brands.', // PLACEHOLDER copy
+         util: [['Help Center', 'https://support.bigcommerce.com/'], ['Developer Center', 'https://developer.bigcommerce.com/']] },
+  fdx: { name: 'Feedonomics', home: '/feedonomics/', trial: null, demo: '/feedonomics/demo/', login: 'https://auth.feedonomics.com/login',
+         blurb: 'Full-service product feed management for ads, marketplaces, and agentic commerce.', // PLACEHOLDER copy
+         util: [['FeedSupport™', 'https://meta.feedonomics.com/app/'], ['Contact', '/feedonomics/contact/']] },
+};
+
+/* Simple line icons standing in for the Streamline set used on the live sites. */
+const ICONS = {
+  grid:    '<rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/>',
+  sparkle: '<path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6L4.5 10.5l5.6-1.9z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z"/>',
+  layout:  '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M9.5 9.5V20"/>',
+  plug:    '<path d="M9 3v4M15 3v4M6.5 7h11v3.5a5.5 5.5 0 0 1-11 0zM12 16v5"/>',
+  migrate: '<path d="M4 6h8M4 12h5M4 18h8M13 12h7m-3-3 3 3-3 3"/>',
+  cube:    '<path d="M12 3 4 7.2v9.6L12 21l8-4.2V7.2zM4 7.2l8 4.2 8-4.2M12 11.4V21"/>',
+  steps:   '<path d="M4 18h4V9H4zM10 18h4V5h-4zM16 18h4v-6h-4z"/>',
+  target:  '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/>',
+  nodes:   '<rect x="3" y="3" width="7" height="7" rx="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.8"/><path d="M10 6.5h4.5a3 3 0 0 1 3 3V14"/>',
+  route:   '<path d="M3.5 7h5l5 10h7M3.5 17h5M15.5 7h5m-2.5-2.5 2.5 2.5-2.5 2.5"/>',
+  wand:    '<path d="M3.5 20.5 14 10M15.5 3.5l.7 2M20.5 8.5l-2 .7M12 5l1.5 1.5M18 11l1.5 1.5M18.5 5.5l-3 3"/>',
+  sync:    '<path d="M20 12a8 8 0 0 1-13.7 5.6M4 12a8 8 0 0 1 13.7-5.6M17.7 2.5v4h-4M6.3 21.5v-4h4"/>',
+  list:    '<path d="M8.5 6h12M8.5 12h12M8.5 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+  globe:   '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/>',
+  doc:     '<path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h6"/>',
+  shield:  '<path d="M12 3 4.5 6v6c0 4.8 3.2 8 7.5 9 4.3-1 7.5-4.2 7.5-9V6z"/>',
+  server:  '<rect x="3.5" y="4" width="17" height="6.5" rx="1.5"/><rect x="3.5" y="13.5" width="17" height="6.5" rx="1.5"/><path d="M7 7.25h.01M7 16.75h.01"/>',
+  layers:  '<path d="M12 3.5 3.5 8l8.5 4.5L20.5 8zM3.5 13l8.5 4.5 8.5-4.5"/>',
+  chat:    '<path d="M4 5h16v10.5H9.5L4.5 20z"/>',
+  bolt:    '<path d="M13 2.5 4.5 14h7l-1 7.5L19.5 10h-7z"/>',
+  tag:     '<path d="M3.5 12.5V4.5h8l9 9-8 8zM8 8h.01"/>',
+  cart:    '<path d="M3.5 4h2.5l2.2 11h10.3l2-7H7"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17.5" cy="19.5" r="1.3"/>',
+};
+const ic = n => n && ICONS[n] ? `<span class="mi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[n]}</svg></span>` : '';
+
+// I(title, href, description, flags: 'ai' | 'hl' | 'ai hl', icon)
+const I = (t, h, d, f, icon) => ({ t, h, d, ai: /\bai\b/.test(f || ''), hl: /\bhl\b/.test(f || ''), icon, ext: /^https?:/.test(h) });
+
+const INDUSTRIES = [ // first three from Figma; rest PLACEHOLDER
+  I('Automotive', '/solutions/industries/automotive/'), I('Sports & Outdoors', '/solutions/industries/sports-outdoors/'),
+  I('B2B & Wholesale', '/solutions/industries/b2b-wholesale/'), I('Fashion & Apparel', '/solutions/industries/fashion-apparel/'),
+  I('Health & Beauty', '/solutions/industries/health-beauty/'), I('Food & Beverage', '/solutions/industries/food-beverage/'),
+  I('Home & Garden', '/solutions/industries/home-garden/'), I('Manufacturing', '/solutions/industries/manufacturing/'),
+];
+const TEAMS = [ // from Figma; URLs use the open "solutions/{cross-sell capability}" slot
+  I('Marketing', '/solutions/marketing/'), I('Developers', '/solutions/developers/'),
+  I('Ecommerce', '/solutions/ecommerce/'), I('IT & Security', '/solutions/it-security/'),
+];
+
+const BC_PRODUCTS = {
+  hub: '/bigcommerce/products/',
+  cols: [
+    { title: 'Start & Build', items: [
+      I('Product Overview', '/bigcommerce/products/', 'What you can do with BigCommerce.', '', 'grid'),
+      I('Agentic Commerce', '/bigcommerce/products/agentic-commerce/', 'AI-powered solutions for growth.', 'ai', 'sparkle'),
+      I('Design Your Store', '/bigcommerce/products/store-design/', 'Build your store with or without code.', '', 'layout'),
+      I('Apps & Integrations', '/bigcommerce/integrations/', 'Over 1,200 apps to help you grow.', '', 'plug'),
+      I('Migrate to BigCommerce', '/bigcommerce/migration/', 'Switch from Shopify, WooCommerce, Salesforce, Magento, and more.', '', 'migrate'),
+    ]},
+    { title: 'Sell Your Way', items: [
+      I('B2B Commerce', '/bigcommerce/products/b2b-commerce/'), I('Channels & Advertising', '/bigcommerce/products/omnichannel/'),
+      I('Product Feed Management', '/bigcommerce/products/feedonomics-surface/'), I('Multi-Storefront', '/bigcommerce/products/multi-storefront/'),
+      I('Headless Commerce', '/bigcommerce/products/headless-commerce/'), I('International Commerce', '/bigcommerce/products/international/'),
+      I('Data & Analytics', '/bigcommerce/products/data-analytics/'),
+    ]},
+    { title: 'Run Your Business', items: [
+      I('Checkout', '/bigcommerce/products/checkout/'), I('Payments', '/bigcommerce/products/payments/'),
+      I('Inventory', '/bigcommerce/products/inventory-management/'), I('Shipping', '/bigcommerce/products/shipping/'),
+      I('Promotions', '/bigcommerce/products/promotions/'),
+      I('Companion', '/bigcommerce/products/companion/', 'Your personal AI chat assistant to help you run your store more efficiently.', 'ai hl'),
+    ]},
+    { title: 'Developers', panel: true, items: [
+      I('Developer Docs', 'https://developer.bigcommerce.com/'), I('MCP Toolkit', 'https://docs.bigcommerce.com/developer/api-reference/mcp/overview', '', 'ai'),
+      I('Security & Compliance', 'https://security.bigcommerce.com/'), I('Hosting & Performance', '/bigcommerce/products/hosting-performance/'),
+      I('Staging Pro', '/bigcommerce/products/staging-pro/'),
+    ]},
+  ],
+};
+const FDX_PRODUCTS = {
+  hub: '/feedonomics/products/',
+  cols: [
+    { title: 'Overview', items: [
+      I('Product Overview', '/feedonomics/products/', 'Explore our core product capabilities.', '', 'cube'),
+      I('How It Works', '/feedonomics/products/how-it-works/', 'See how we optimize and sync data.', '', 'steps'),
+    ]},
+    { title: 'Products', grid: true, items: [
+      I('Advertising', '/feedonomics/products/advertising/', '', '', 'target'),
+      I('AI Data Enrichment', '/feedonomics/products/agentic-commerce/ai-data-enrichment/', '', 'ai', 'wand'),
+      I('Marketplaces', '/feedonomics/products/marketplaces/', '', '', 'nodes'),
+      I('Agentic Commerce', '/feedonomics/products/agentic-commerce/', '', 'ai', 'sparkle'),
+      I('Order Orchestration', '/feedonomics/products/order-orchestration/', '', '', 'route'),
+      I('Ecommerce Platform Sync', '/feedonomics/products/ecommerce-platform-sync/', '', '', 'sync'),
+    ]},
+  ],
+  promo: { eyebrow: 'Feedonomics Surface', title: 'Install on BigCommerce — free and ready in minutes.', desc: 'Cross-brand link: Surface lives under BigCommerce products.', cta: 'Explore Surface', h: '/bigcommerce/products/feedonomics-surface/' },
+};
+const FDX_INTEGRATIONS = {
+  hub: '/feedonomics/integrations/',
+  cols: [
+    { title: 'Overview', items: [
+      I('View All Integrations', '/feedonomics/integrations/', '', '', 'list'), I('Supported Channels', '/feedonomics/integrations/channels/', '', '', 'globe'),
+      I('Supported Platforms', '/feedonomics/integrations/platforms/', '', '', 'cart'),
+    ]},
+    { title: 'Supported Platforms', grid: true, plain: true, items: [
+      I('Shopify', '/feedonomics/integrations/platforms/shopify/'), I('BigCommerce', '/feedonomics/integrations/platforms/bigcommerce/'),
+      I('Oracle NetSuite', '/feedonomics/integrations/platforms/netsuite/'), I('Oracle Commerce', '/feedonomics/integrations/platforms/oracle/'),
+      I('Salesforce Commerce Cloud', '/feedonomics/integrations/platforms/salesforce-commerce-cloud/'), I('Adobe Commerce / Magento', '/feedonomics/integrations/platforms/magento/'),
+      I('WooCommerce', '/feedonomics/integrations/platforms/woocommerce/'), I('Custom', '/feedonomics/integrations/platforms/custom/'),
+    ]},
+  ],
+  promo: { eyebrow: 'Integrations', title: 'Your stack, upgraded.', desc: 'Connect the dots so your systems move like one engine.', cta: 'Get my plan', h: '/feedonomics/demo/' },
+};
+const CASES = {
+  hub: '/case-studies/',
+  cols: [
+    { title: 'Customer Stories', items: [
+      I('All Case Studies', '/case-studies/', 'One hub, filterable by brand.'),
+      I('BigCommerce Stories', '/case-studies/?brand=bigcommerce'), I('Feedonomics Stories', '/case-studies/?brand=feedonomics'),
+      I('Customer Showcase', '/case-studies/showcase/', 'See our featured customers.'),
+    ]},
+    { title: 'Recognition', items: [
+      I('Analyst Reports', '/resources/reports/analyst-reports/', 'Learn what experts are saying.'),
+      I('Awards', '/company/awards/', "See where we're winning."),
+    ]},
+  ],
+};
+const RESOURCES = {
+  hub: '/resources/',
+  cols: [
+    { title: 'By Type', items: [
+      I('Guides', '/resources/guides/'), I('Reports', '/resources/reports/'), I('Webinars', '/resources/webinars/'),
+      I('Podcasts', '/resources/podcasts/'), I('Events', '/resources/events/'), I('Articles', '/resources/articles/'),
+    ]},
+    { title: 'By Topic', items: [ // PLACEHOLDER topic taxonomy
+      I('Agentic Commerce & AI', '/resources/agentic-commerce/'), I('B2B Ecommerce', '/resources/b2b/'),
+      I('Omnichannel & Marketplaces', '/resources/omnichannel/'), I('Headless & Composable', '/resources/headless/'),
+      I('Migration', '/resources/migration/'),
+    ]},
+    { title: 'Company', items: [
+      I('Blog', '/blog/'), I('Press Releases', '/press/'), I('BigCommerce University', '/bigcommerce/services/university/'), I('Awards', '/company/awards/'),
+    ]},
+  ],
+  promo: { eyebrow: 'Featured report', title: 'The Global B2B Buyer Behavior Report', desc: 'This in-depth report provides actionable strategies to help you sell more online.', cta: 'Read now', h: '/resources/reports/global-b2b-buyer-behavior-report/' },
+};
+const PARTNERS = {
+  hub: '/partners/',
+  cols: [
+    { title: 'Partner With Us', items: [
+      I('Overview', '/partners/', 'Discover your partner in growth.'),
+      I('Become a Partner', '/partners/become-a-partner/', 'Join our global partner ecosystem.'),
+      I('Powered By', '/partners/powered-by/', 'Resell ecommerce with Commerce-as-a-Service.'),
+      I('Omnichannel Certified Partner Program', '/partners/feedonomics-certified/', 'Feedonomics certification for agencies and channels.'),
+    ]},
+    { title: 'Find a Partner', items: [
+      I('Find an Agency Partner', 'https://partners.bigcommerce.com/directory/', 'Get ecommerce help from certified experts.'),
+      I('Find a Technology Partner', '/bigcommerce/integrations/', 'Explore powerful integrations and apps.'),
+      I('Feedonomics Agencies', '/partners/agencies/', 'Agency partners for feed management.'),
+    ]},
+  ],
+};
+const INDUSTRIES_MENU = { hub: '/solutions/industries/', cols: [{ title: 'Industries', grid: true, items: INDUSTRIES }, { title: 'Teams', items: TEAMS }] };
+const PLATFORM_PICKS = {
+  bc:  [BC_PRODUCTS.cols[0].items[0], BC_PRODUCTS.cols[0].items[1], BC_PRODUCTS.cols[1].items[0], BC_PRODUCTS.cols[1].items[3],
+        BC_PRODUCTS.cols[1].items[4], BC_PRODUCTS.cols[2].items[0], BC_PRODUCTS.cols[2].items[1], BC_PRODUCTS.cols[0].items[3]],
+  fdx: [FDX_PRODUCTS.cols[0].items[0], ...FDX_PRODUCTS.cols[1].items, I('Integrations', '/feedonomics/integrations/')],
+};
+
+const MENUS = {
+  solutions:  { kind: 'solA', hub: '/solutions/' },
+  platforms:  { kind: 'platB', hub: '/solutions/' },
+  industries: INDUSTRIES_MENU, cases: CASES, resources: RESOURCES, partners: PARTNERS,
+  bcProducts: BC_PRODUCTS, fdxProducts: FDX_PRODUCTS, fdxIntegrations: FDX_INTEGRATIONS,
+};
+BC_PRODUCTS.brand = 'bc';
+FDX_PRODUCTS.brand = FDX_INTEGRATIONS.brand = 'fdx';
+// extra:true = dropdown only when the "extra dropdowns" control is on; otherwise a plain link to the hub.
+const PARENT = {
+  A: [{ l: 'Solutions', m: 'solutions' }, { l: 'Case Studies', m: 'cases' }, { l: 'Resources', m: 'resources' }, { l: 'Partners', m: 'partners', extra: true }],
+  B: [{ l: 'Platforms', m: 'platforms' }, { l: 'Industries', m: 'industries' }, { l: 'Case Studies', m: 'cases' }, { l: 'Resources', m: 'resources' }, { l: 'Partners', m: 'partners' }],
+};
+const SUB = {
+  bc:  [{ l: 'Products', m: 'bcProducts' }, { l: 'Services', h: '/bigcommerce/services/' }, { l: 'Integrations', h: '/bigcommerce/integrations/' }, { l: 'Pricing', h: '/bigcommerce/pricing/' }],
+  fdx: [{ l: 'Products', m: 'fdxProducts' }, { l: 'Integrations', m: 'fdxIntegrations', extra: true }, { l: 'Services', h: '/feedonomics/services/' }, { l: 'Pricing', h: '/feedonomics/pricing/' }],
+};
+const COMBOS = {
+  1: { parent: 'A', sub: 'A', cap: '<b>Parent A</b> (Solutions dropdown) + <b>Sub-brand A</b> (dual navigation)' },
+  2: { parent: 'B', sub: 'A', cap: '<b>Parent B</b> (Platforms dropdown) + <b>Sub-brand A</b> (dual navigation)' },
+  3: { parent: 'A', sub: 'B', cap: '<b>Parent A</b> (Solutions dropdown) + <b>Sub-brand B</b> (focused nav w/ parent expander)' },
+  4: { parent: 'B', sub: 'B', cap: '<b>Parent B</b> (Platforms + Industries) + <b>Sub-brand B</b> (focused nav w/ parent expander)' },
+};
+const VERSIONS = [1, 2, 3, 4];
+
+let state = { combo: 1, url: '/', title: 'Commerce', desc: '', brand: 'commerce', open: null, expanded: false, fly: 'solutions', hist: [], fwd: [] };
+
+/* ─────────────── Templates ─────────────── */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const A = (it, cls) => `<a class="${cls}" data-href="${esc(it.h)}" data-label="${esc(it.t)}" data-desc="${esc(it.d || '')}">`;
+const AI = '<span class="ai" title="AI">✦</span>';
+const itemHTML = it => `${A(it, 'mi' + (it.hl ? ' hl' : ''))}${ic(it.icon)}<span class="mi-body"><span class="mi-t">${esc(it.t)}${it.ai ? AI : ''}${it.ext ? '<span class="ext">↗</span>' : ''}</span>${it.d ? `<span class="mi-d">${esc(it.d)}</span>` : ''}</span></a>`;
+const colHTML = c => `<div class="col ${c.grid ? 'wide' : ''}">${c.title ? `<div class="col-h">${esc(c.title)}</div>` : ''}${c.grid ? `<div class="igrid">${c.items.map(itemHTML).join('')}</div>` : c.items.map(itemHTML).join('')}</div>`;
+const promoHTML = p => `${A({ h: p.h, t: p.title }, 'promo')}<div class="col-h">${esc(p.eyebrow)}</div><h5>${esc(p.title)}</h5><p>${esc(p.desc)}</p><span class="cta"><i>›</i>${esc(p.cta)}</span></a>`;
+function megaHTML(m, compact) {
+  const brand = m.brand || 'commerce';
+  const main = m.cols.filter(c => compact || !c.panel), side = compact ? [] : m.cols.filter(c => c.panel);
+  const panel = !compact && (side.length || m.promo) ? `<div class="panel">${side.map(colHTML).join('')}${m.promo ? promoHTML(m.promo) : ''}</div>` : '';
+  return `<div class="mega brand-${brand} ${compact ? 'compact' : ''}">${main.map(colHTML).join('')}${panel}</div>`;
+}
+
+const logo = (b, extra) => `<span class="logo ${b} ${extra || ''}" data-href="${BRAND[b].home}" data-label="${BRAND[b].name}">${SVG[b === 'commerce' ? 'commerce' : b]}</span>`;
+const card = b => `<div class="brand-card ${b}" data-href="${BRAND[b].home}" data-label="${BRAND[b].name}">${logo(b)}<p>${esc(BRAND[b].blurb)}</p><span class="cta"><i>›</i>Explore ${BRAND[b].name}</span></div>`;
+const solCol = (title, items, grid) => `<div class="col ${grid ? 'wide' : ''}"><div class="col-h">${title}</div>${grid ? `<div class="igrid">${items.map(itemHTML).join('')}</div>` : items.map(itemHTML).join('')}</div>`;
+// Cards | Teams | Industries (one heading, two columns)
+const solA = compact => `<div class="mega brand-commerce ${compact ? 'compact' : ''}" style="display:block"><div class="solA ${compact ? 'compact' : ''}"><div class="cards">${card('bc')}${card('fdx')}</div>${solCol('Teams', TEAMS)}${solCol('Industries', INDUSTRIES, true)}</div></div>`;
+const plat = b => `<div class="plat ${b}"><div class="plat-h" data-href="${BRAND[b].home}" data-label="${BRAND[b].name}">${logo(b)}<span class="go">Explore →</span></div><p>${esc(BRAND[b].blurb)}</p>
+  <div class="col-h">Products &amp; features</div><div class="pgrid">${PLATFORM_PICKS[b].map(it => `${A(it, '')}${esc(it.t)}${it.ai ? AI : ''}</a>`).join('')}</div></div>`;
+const platB = () => `<div class="mega brand-commerce" style="display:block"><div class="platB">${plat('bc')}${plat('fdx')}</div></div>`;
+
+function menuContent(id, compact) {
+  const m = MENUS[id];
+  if (m.kind === 'solA') return solA(compact);
+  if (m.kind === 'platB') return platB();
+  return megaHTML(m, compact);
+}
+// kind = 'parent' | 'sub' — selects which hover/click control governs the trigger
+function links(items, kind) {
+  return items.map(it => {
+    const hub = it.h || MENUS[it.m].hub;
+    const isMenu = it.m && (!it.extra || V.extraMenus);
+    return isMenu
+      ? `<button class="link" data-menu="${it.m}" data-kind="${kind}" data-href="${hub}" data-label="${esc(it.l)}">${esc(it.l)}<span class="caret">▾</span></button>`
+      : `<button class="link" data-href="${hub}" data-label="${esc(it.l)}">${esc(it.l)}</button>`;
+  }).join('');
+}
+function parentBar(variant, role) {
+  const cta = role === 'top'
+    ? `<button class="btn b-commerce js-top-cta" data-href="/demo/" data-label="Demo">${esc(V.topCta)}</button>`
+    : `<button class="btn b-commerce js-parent-cta" data-href="/demo/" data-label="Get Started">${esc(V.parentCta)}</button>`;
+  return `<div class="bar ${role === 'top' ? 'bar-top' : ''}">${logo('commerce')}<nav class="links">${links(PARENT[variant], 'parent')}</nav><span class="spacer"></span>${cta}</div>`;
+}
+function rightCluster(b) {
+  const B = BRAND[b];
+  const util = V.utilityLinks ? B.util.map(([l, h]) => `<button class="util" data-href="${h}" data-label="${esc(l)}">${esc(l)}</button>`).join('') : '';
+  return `<div class="right">${util}<button class="login" data-href="${B.login}" data-label="Log In">⇥ Log In</button>${B.trial ? `<button class="btn ghost b-${b}" data-href="${B.trial}" data-label="Free Trial">Free Trial</button>` : ''}<button class="btn b-${b}" data-href="${B.demo}" data-label="Get a Demo">Get a Demo<span class="chev">›</span></button></div>`;
+}
+const subA = b => `<div class="bar">${logo(b)}<nav class="links">${links(SUB[b], 'sub')}</nav><span class="spacer"></span>${rightCluster(b)}</div>`;
+function subB(b) {
+  const mode = V.expandMode;
+  const parentItems = PARENT[COMBOS[state.combo].parent];
+  // Logo is a home link only when the control says so; otherwise a "Home" row leads the flyout column.
+  const logoAttrs = V.logoHome ? 'data-href="/" data-label="Commerce"' : '';
+  const tile = `<div class="sb-tile" data-tile title="Commerce"><span class="sb-logo" ${logoAttrs}>${SVG.commerce}</span><span class="sb-caret">${mode === 'flyout' ? '▾' : '▸'}</span></div>`;
+  const inline = mode === 'inline' ? `<div class="sb-inline">${logo('commerce')}<nav class="links">${links(parentItems, 'parent')}</nav><span class="spacer"></span><button class="sb-collapse" data-collapse aria-label="Collapse Commerce nav">◂</button></div>` : '';
+  const flyLink = (l, h, cls) => `<div class="fly-item fly-link ${cls || ''}" data-href="${h}" data-label="${l}">${l}<span>→</span></div>`;
+  const flyItems = parentItems.filter(it => it.m).map(it => [it.l, it.m]);
+  if (!flyItems.some(([, id]) => id === state.fly)) state.fly = flyItems[0][1];
+  const fly = mode === 'flyout' ? `<div class="fly"><div class="fly-col">${V.logoHome ? '' : flyLink('Home', '/')}${flyItems.map(([l, id]) => `<div class="fly-item ${state.fly === id ? 'active' : ''}" data-fly="${id}" data-href="${MENUS[id].hub}" data-label="${l}">${l}<span>▶</span></div>`).join('')}${flyLink(esc(V.parentCta), '/demo/', 'fly-cta')}</div><div class="fly-content">${menuContent(state.fly, true)}</div></div>` : '';
+  // V3 only: brand-filtered Case Studies sits just before Integrations (the parent hub lives in the "C" dropdown).
+  const items = SUB[b].slice();
+  items.splice(items.findIndex(i => i.l === 'Integrations'), 0, { l: 'Case Studies', h: `/case-studies/?brand=${b === 'bc' ? 'bigcommerce' : 'feedonomics'}` });
+  return `<div class="bar bar-sb mode-${mode} ${state.expanded ? 'expanded' : ''}"><div class="sb-left">${tile}${logo(b)}<nav class="links">${links(items, 'sub')}</nav>${inline}</div>${rightCluster(b)}${fly}</div>`;
+}
+
+/* ─────────────── Render ─────────────── */
+const site = document.getElementById('site');
+const brandOf = u => u.startsWith('/bigcommerce') ? 'bc' : u.startsWith('/feedonomics') ? 'fdx' : 'commerce';
+
+function renderHeader() {
+  const c = COMBOS[state.combo], b = state.brand;
+  let html;
+  if (b === 'commerce') html = parentBar(c.parent, 'parent');
+  else if (c.sub === 'B') html = subB(b);
+  else html = `<div class="pbar-wrap">${parentBar(c.parent, 'top')}</div>${subA(b)}`;
+  site.innerHTML = html + '<div class="dd" id="dd"><div class="dd-inner"></div></div>';
+  state.open = null;
+  sizeTile();
+  checkScroll();
+}
+// Sub-brand B: size the expanded Commerce tile (and its flyout column) to exactly cover the brand logo, as in the Figma.
+// Measured synchronously (forces one layout) so it is correct before any hover/expand can happen.
+function sizeTile() {
+  const sb = site.querySelector('.bar-sb'), bl = sb && sb.querySelector('.sb-left > .logo');
+  if (!sb || !bl) return;
+  const w = bl.offsetLeft + bl.offsetWidth + 14;
+  if (w > 100) sb.style.setProperty('--tile-w', w + 'px');
+}
+function renderAddr() {
+  const ext = /^https?:/.test(state.url);
+  const shown = ext ? state.url.replace(/^https?:\/\//, '') : 'commerce.com' + state.url;
+  const [host, ...rest] = shown.split('/');
+  document.getElementById('addr').innerHTML = `
+    <button data-nav="back" ${state.hist.length ? '' : 'disabled'} aria-label="Back">←</button>
+    <button data-nav="fwd" ${state.fwd.length ? '' : 'disabled'} aria-label="Forward">→</button>
+    <div class="url"><span class="lock">🔒</span><span class="host">${esc(host)}</span><span class="path">/${esc(rest.join('/'))}</span></div>`;
+}
+function renderPage() {
+  // Blank wireframe: page name + generic marketing-page skeleton (hero, feature cards, split sections, logo row, CTA band, footer).
+  const line = w => `<div class="wf-line" style="width:${w}%"></div>`;
+  const card = () => `<div class="wf-card"><div class="wf-img sm"></div>${line(70)}${line(100)}${line(85)}</div>`;
+  document.getElementById('page').innerHTML = `
+    <section class="wf-hero">
+      <div><h1>${esc(state.title)}</h1>${line(90)}${line(75)}${line(60)}<div class="wf-btns"><div class="wf-btn"></div><div class="wf-btn ghost"></div></div></div>
+      <div class="wf-img"></div>
+    </section>
+    <section class="wf-logos">${'<div class="wf-logo"></div>'.repeat(6)}</section>
+    <section class="wf-grid">${card()}${card()}${card()}</section>
+    <section class="wf-split"><div class="wf-img"></div><div>${line(45)}${line(100)}${line(95)}${line(70)}<div class="wf-btns"><div class="wf-btn"></div></div></div></section>
+    <section class="wf-split rev"><div>${line(45)}${line(100)}${line(95)}${line(70)}<div class="wf-btns"><div class="wf-btn"></div></div></div><div class="wf-img"></div></section>
+    <section class="wf-band">${line(40)}${line(60)}<div class="wf-btns center"><div class="wf-btn"></div></div></section>
+    <footer class="wf-footer">${'<div>' + line(50) + line(70) + line(60) + line(65) + line(55) + '</div>'.repeat(4)}</footer>`;
+}
+function renderProto() {
+  document.getElementById('proto').innerHTML = `
+    <div class="proto-row"><span class="proto-label">Version</span><div class="seg">${VERSIONS.map(n => `<button data-combo="${n}" class="${state.combo === n ? 'on' : ''}">${n}</button>`).join('')}</div></div>
+    <div class="status" id="status"></div>`;
+}
+function renderAll() { renderHeader(); renderAddr(); renderPage(); renderProto(); rendered = true; }
+
+/* ─────────────── Routing ─────────────── */
+function titleFor(url, label) {
+  if (label && !/^(Overview|Explore|Learn more|Read now|Get my plan)/i.test(label)) return label;
+  if (url === '/') return 'Commerce';
+  const segs = url.split(/[?#]/)[0].split('/').filter(Boolean);
+  if (segs[0] === 'bigcommerce' && segs.length === 1) return 'BigCommerce';
+  if (segs[0] === 'feedonomics' && segs.length === 1) return 'Feedonomics';
+  return segs[segs.length - 1].replace(/[-_]+/g, ' ').replace(/\b\w/g, ch => ch.toUpperCase());
+}
+function navigate(href, label, desc, opts) {
+  if (!href) return;
+  if (!opts || !opts.noHist) { state.hist.push({ url: state.url, title: state.title, desc: state.desc, brand: state.brand }); state.fwd = []; }
+  state.url = href;
+  state.brand = /^https?:/.test(href) ? state.brand : brandOf(href);
+  state.title = titleFor(href, label);
+  state.desc = desc || '';
+  state.expanded = false;
+  renderAll();
+  window.scrollTo(0, 0);
+}
+function restore(s) { Object.assign(state, s, { expanded: false }); renderAll(); window.scrollTo(0, 0); }
+
+/* ─────────────── Interaction ─────────────── */
+let openTimer, closeTimer;
+function openMenu(id, trigger) {
+  if (state.expanded && V.expandMode === 'flyout') setExpanded(false, true);
+  const dd = document.getElementById('dd'), inner = dd.querySelector('.dd-inner');
+  state.open = id;
+  state.openHover = trigger ? menuHover(trigger) : false;
+  inner.innerHTML = menuContent(id, false);
+  // Drop the layer directly under the bar that owns the trigger (so top-bar menus overlay the sub-brand bar).
+  const bar = trigger ? trigger.closest('.bar') : null;
+  dd.style.top = bar ? (bar.offsetTop + bar.offsetHeight) + 'px' : '100%';
+  site.querySelectorAll('[data-menu]').forEach(el => el.classList.toggle('active', el === trigger));
+  dd.classList.add('open');
+}
+function closeMenu() {
+  state.open = null;
+  const dd = document.getElementById('dd');
+  if (dd) dd.classList.remove('open');
+  site.querySelectorAll('[data-menu].active').forEach(el => el.classList.remove('active'));
+}
+function setExpanded(x, keepMenu) {
+  if (x) sizeTile();
+  state.expanded = x;
+  const bar = site.querySelector('.bar-sb');
+  if (bar) bar.classList.toggle('expanded', x);
+  if (!keepMenu) closeMenu();
+}
+function setFly(id) {
+  if (state.fly === id) return;
+  state.fly = id;
+  const fc = site.querySelector('.fly-content');
+  if (fc) fc.innerHTML = menuContent(id, true);
+  site.querySelectorAll('[data-fly]').forEach(el => el.classList.toggle('active', el.dataset.fly === id));
+}
+
+// Which control governs a given trigger
+const menuHover = m => (m.dataset.kind === 'sub' ? V.trigSub : V.trigParent) === 'hover';
+const anyHover = () => [V.trigParent, V.trigSub, V.trigTile, V.trigFly].includes('hover');
+
+site.addEventListener('mouseover', e => {
+  if (!anyHover()) return;
+  clearTimeout(closeTimer);
+  const m = e.target.closest('[data-menu]');
+  if (m) {
+    clearTimeout(openTimer);
+    if (!menuHover(m)) return;
+    if (state.open === m.dataset.menu) return;
+    openTimer = setTimeout(() => openMenu(m.dataset.menu, m), V.hoverDelay); return;
+  }
+  const t = e.target.closest('[data-tile]');
+  if (t) { clearTimeout(openTimer); if (V.trigTile === 'hover' && !state.expanded) openTimer = setTimeout(() => setExpanded(true), V.hoverDelay); return; }
+  const f = e.target.closest('[data-fly]');
+  if (f) { if (V.trigFly === 'hover') setFly(f.dataset.fly); return; }
+  if (e.target.closest('.link, .logo, .right') && !e.target.closest('.dd, .fly, .sb-inline')) {
+    clearTimeout(openTimer);
+    if (state.open && state.openHover) closeMenu();
+  }
+});
+site.addEventListener('mouseleave', () => {
+  clearTimeout(openTimer);
+  closeTimer = setTimeout(() => {
+    if (state.open && state.openHover) closeMenu();
+    if (state.expanded && V.trigTile === 'hover') setExpanded(false, true);
+  }, 240);
+});
+site.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+
+function go(el) { navigate(el.dataset.href, el.dataset.label, el.dataset.desc); }
+
+site.addEventListener('click', e => {
+  e.stopPropagation(); // header re-renders on navigate; keep the document handler from seeing a detached target
+  const tile = e.target.closest('[data-tile]');
+  if (tile) {
+    clearTimeout(openTimer);
+    const inner = e.target.closest('[data-href]');
+    if (!state.expanded) return setExpanded(true);
+    if (inner && inner !== tile && tile.contains(inner)) return go(inner);
+    return setExpanded(false);
+  }
+  if (e.target.closest('[data-collapse]')) return setExpanded(false);
+  const f = e.target.closest('[data-fly]');
+  if (f) { if (state.fly === f.dataset.fly) return go(f); return setFly(f.dataset.fly); }
+  const m = e.target.closest('[data-menu]');
+  if (m) {
+    clearTimeout(openTimer);
+    if (menuHover(m)) return go(m);                         // hover opens, click goes to the hub page
+    if (state.open === m.dataset.menu) closeMenu(); else openMenu(m.dataset.menu, m);
+    return;
+  }
+  const a = e.target.closest('[data-href]');
+  if (a) go(a);
+});
+
+document.addEventListener('click', e => {
+  if (site.contains(e.target)) return;
+  const cb = e.target.closest('[data-combo]'), pb = e.target.closest('[data-page]'), nv = e.target.closest('[data-nav]');
+  if (cb) { state.combo = +cb.dataset.combo; navigate('/', 'Commerce'); return; }   // version change always restarts on the Commerce nav
+  if (pb) { navigate(BRAND[pb.dataset.page].home, BRAND[pb.dataset.page].name); return; }
+  if (nv) {
+    if (nv.dataset.nav === 'back' && state.hist.length) { state.fwd.push({ url: state.url, title: state.title, desc: state.desc, brand: state.brand }); restore(state.hist.pop()); }
+    if (nv.dataset.nav === 'fwd' && state.fwd.length) { state.hist.push({ url: state.url, title: state.title, desc: state.desc, brand: state.brand }); restore(state.fwd.pop()); }
+    return;
+  }
+  const a = e.target.closest('[data-href]');
+  if (a && !e.target.closest('.acp-root')) { go(a); return; }
+  closeMenu(); setExpanded(false);
+});
+document.addEventListener('mouseover', e => {
+  if (!(e.target instanceof Element)) return;
+  const a = e.target.closest('[data-href]'), s = document.getElementById('status');
+  if (!s) return;
+  if (!a) { s.textContent = ''; return; }
+  const h = a.dataset.href;
+  s.textContent = /^https?:/.test(h) ? h : 'commerce.com' + h;
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); setExpanded(false); } });
+
+// Dual nav: collapse the parent strip after scrolling down past a threshold; re-open on a deliberate upward scroll.
+// Direction + hysteresis + a short lock during the animation prevent the feedback loop (collapse shifts layout →
+// scroll event → re-open → …) that made the header shake.
+let lastY = window.scrollY, scrollLock = false;
+function setCollapsed(x) {
+  if (site.classList.contains('scrolled') === x) return;
+  site.classList.toggle('scrolled', x);
+  scrollLock = true;
+  const lockY = window.scrollY;
+  // When the animation finishes, settle on whatever direction the user moved in the meantime.
+  setTimeout(() => { scrollLock = false; decide(window.scrollY - lockY); }, V.ddMs + 80);
+}
+function decide(dy) {
+  const y = window.scrollY, collapsed = site.classList.contains('scrolled');
+  if (!collapsed && dy > 0 && y > 80) setCollapsed(true);
+  else if (collapsed && (dy < -6 || y < 10)) setCollapsed(false);
+}
+function checkScroll() {
+  const y = window.scrollY, dy = y - lastY; lastY = y;
+  if (!V.collapseOnScroll || !site.querySelector('.pbar-wrap')) { site.classList.remove('scrolled'); return; }
+  if (scrollLock) return;
+  decide(dy);
+}
+window.addEventListener('scroll', checkScroll, { passive: true });
+
+renderAll();
+</script>
+
+<style>
+.acp-root, .acp-root * { box-sizing: border-box; }
+.acp-root {
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+  line-height: 1.4;
+}
+.acp-tab {
+  position: fixed; bottom: 16px; right: 16px; z-index: 2147483000;
+  width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid #e2e8f0; border-radius: 9999px; background: #fff; color: #475569;
+  box-shadow: 0 4px 14px rgba(0,0,0,.14); cursor: pointer; padding: 0;
+  transition: transform .3s ease, opacity .3s ease, color .2s ease;
+}
+.acp-tab:hover { color: #0f172a; }
+.acp-tab svg { transition: transform .3s ease; }
+.acp-tab.is-open svg { transform: rotate(90deg); }
+.acp-tab.is-open { transform: translateX(calc(-1 * (min(320px, 85vw) + 12px))); }
+.acp-badge {
+  position: absolute; top: -2px; right: -2px; min-width: 16px; height: 16px; padding: 0 4px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 9999px; background: #3b82f6; color: #fff;
+  font-size: 10px; font-weight: 600;
+}
+.acp-panel {
+  position: fixed; top: 0; right: 0; z-index: 2147482999;
+  width: 320px; max-width: 85vw; height: 100%;
+  display: flex; flex-direction: column;
+  background: #fff; border-left: 1px solid #e2e8f0;
+  box-shadow: -8px 0 30px rgba(0,0,0,.12);
+  transform: translateX(100%); transition: transform .3s ease;
+}
+.acp-panel.is-open { transform: translateX(0); }
+.acp-head, .acp-foot { flex-shrink: 0; padding: 12px 16px; }
+.acp-head { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0; }
+.acp-foot { border-top: 1px solid #e2e8f0; }
+.acp-title { margin: 0; font-size: 14px; font-weight: 600; }
+.acp-count { margin-left: 8px; font-size: 12px; color: #94a3b8; }
+.acp-x { border: 0; background: none; color: #94a3b8; cursor: pointer; padding: 0; display: flex; }
+.acp-x:hover { color: #334155; }
+.acp-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 12px 16px; }
+.acp-group { margin-bottom: 20px; }
+.acp-group:last-child { margin-bottom: 0; }
+.acp-glabel {
+  display: flex; align-items: center; gap: 6px; margin: 0 0 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: .06em;
+  text-transform: uppercase; color: #94a3b8;
+}
+.acp-row { margin-bottom: 14px; }
+.acp-row:last-child { margin-bottom: 0; }
+.acp-rlabel { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 12px; font-weight: 500; color: #334155; }
+.acp-dot { width: 6px; height: 6px; border-radius: 9999px; background: #3b82f6; flex-shrink: 0; display: none; }
+.acp-dot.on { display: block; }
+.acp-reset { margin-left: auto; border: 0; background: none; padding: 0; font-size: 11px; color: #94a3b8; cursor: pointer; display: none; }
+.acp-reset.on { display: block; }
+.acp-reset:hover { color: #334155; }
+.acp-input, .acp-root select.acp-input, .acp-root textarea.acp-input {
+  width: 100%; font: inherit; font-size: 13px;
+  padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 6px;
+  background: #fff; color: #0f172a;
+}
+.acp-input:focus { outline: 2px solid #3b82f6; outline-offset: -1px; }
+.acp-input[type=range] { padding: 0; border: 0; accent-color: #3b82f6; flex: 1; }
+.acp-input[type=color] { width: 40px; height: 32px; flex-shrink: 0; padding: 2px; cursor: pointer; }
+.acp-inline { display: flex; align-items: center; gap: 8px; }
+.acp-num { width: 56px; flex-shrink: 0; text-align: right; font-size: 12px; color: #64748b; font-variant-numeric: tabular-nums; }
+.acp-toggle { position: relative; width: 44px; height: 24px; border: 0; border-radius: 9999px; background: #cbd5e1; cursor: pointer; padding: 0; transition: background .2s; }
+.acp-toggle.on { background: #3b82f6; }
+.acp-knob { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 9999px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: left .2s; }
+.acp-toggle.on .acp-knob { left: 22px; }
+.acp-copy {
+  width: 100%; padding: 8px 12px; border: 0; border-radius: 6px;
+  background: #0f172a; color: #fff; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
+  transition: background .2s;
+}
+.acp-copy:hover:not(:disabled) { background: #334155; }
+.acp-copy:disabled { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; }
+.acp-resetall { width: 100%; margin-top: 8px; border: 0; background: none; font: inherit; font-size: 12px; color: #94a3b8; cursor: pointer; }
+.acp-resetall:hover:not(:disabled) { color: #334155; }
+.acp-resetall:disabled { cursor: not-allowed; }
+</style>
+
+<script>
+/* ═══════════ CONTROL PANEL — delete from here to ship ═══════════ */
+function initControlPanel(schema, apply, opts) {
+  var closeOnOutsideClick = !opts || opts.closeOnOutsideClick !== false;
+  var defaults = {}, v = {};
+  schema.forEach(function (c) { defaults[c.id] = c.value; v[c.id] = c.value; });
+
+  var GEAR = '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+
+  var root = document.createElement('div');
+  root.className = 'acp-root';
+  document.body.appendChild(root);
+
+  var tab = document.createElement('button');
+  tab.className = 'acp-tab';
+  tab.setAttribute('aria-label', 'Open controls');
+  tab.innerHTML = GEAR + '<span class="acp-badge" style="display:none"></span>';
+  root.appendChild(tab);
+
+  var panel = document.createElement('aside');
+  panel.className = 'acp-panel';
+  panel.innerHTML =
+    '<div class="acp-head"><div style="display:flex;align-items:center">' +
+      '<h2 class="acp-title">Controls</h2><span class="acp-count"></span></div>' +
+      '<button class="acp-x" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
+    '</div><div class="acp-body"></div>' +
+    '<div class="acp-foot"><button class="acp-copy" disabled>No changes yet</button>' +
+      '<button class="acp-resetall" disabled>Reset all</button></div>';
+  root.appendChild(panel);
+
+  var body = panel.querySelector('.acp-body');
+  var countEl = panel.querySelector('.acp-count');
+  var copyBtn = panel.querySelector('.acp-copy');
+  var resetAllBtn = panel.querySelector('.acp-resetall');
+  var badge = tab.querySelector('.acp-badge');
+  var refs = {};
+
+  // Build rows, grouped
+  var groups = [];
+  schema.forEach(function (c) {
+    var g = c.group || 'Controls';
+    if (groups.indexOf(g) === -1) groups.push(g);
+  });
+
+  groups.forEach(function (g) {
+    var sec = document.createElement('section');
+    sec.className = 'acp-group';
+    sec.innerHTML = '<h3 class="acp-glabel">' + g + '<span class="acp-dot"></span></h3>';
+    var gdot = sec.querySelector('.acp-dot');
+
+    schema.filter(function (c) { return (c.group || 'Controls') === g; }).forEach(function (c) {
+      var row = document.createElement('div');
+      row.className = 'acp-row';
+      row.innerHTML = '<div class="acp-rlabel"><span></span><span class="acp-dot"></span>' +
+        '<button class="acp-reset">reset</button></div>';
+      row.querySelector('.acp-rlabel span').textContent = c.label;
+      var dot = row.querySelector('.acp-dot');
+      var resetBtn = row.querySelector('.acp-reset');
+      var control = buildField(c);
+      row.appendChild(control.el);
+      resetBtn.addEventListener('click', function () { control.setValue(defaults[c.id]); update(c.id, defaults[c.id]); });
+      refs[c.id] = { dot: dot, reset: resetBtn, gdot: gdot, group: g, control: control };
+      sec.appendChild(row);
+    });
+    body.appendChild(sec);
+  });
+
+  function buildField(c) {
+    var el, setValue, node;
+    function emit(val) { update(c.id, val); }
+
+    if (c.type === 'textarea') {
+      node = document.createElement('textarea');
+      node.className = 'acp-input'; node.rows = 3; node.value = c.value;
+      node.addEventListener('input', function () { emit(node.value); });
+      el = node; setValue = function (x) { node.value = x; };
+
+    } else if (c.type === 'range') {
+      el = document.createElement('div'); el.className = 'acp-inline';
+      node = document.createElement('input');
+      node.type = 'range'; node.className = 'acp-input';
+      node.min = c.min; node.max = c.max; node.step = c.step; node.value = c.value;
+      var out = document.createElement('span');
+      out.className = 'acp-num'; out.textContent = c.value + (c.unit || '');
+      node.addEventListener('input', function () {
+        out.textContent = node.value + (c.unit || '');
+        emit(Number(node.value));
+      });
+      el.appendChild(node); el.appendChild(out);
+      setValue = function (x) { node.value = x; out.textContent = x + (c.unit || ''); };
+
+    } else if (c.type === 'color') {
+      el = document.createElement('div'); el.className = 'acp-inline';
+      node = document.createElement('input');
+      node.type = 'color'; node.className = 'acp-input'; node.value = c.value;
+      var hex = document.createElement('input');
+      hex.type = 'text'; hex.className = 'acp-input'; hex.value = c.value;
+      node.addEventListener('input', function () { hex.value = node.value; emit(node.value); });
+      hex.addEventListener('input', function () {
+        if (/^#[0-9a-f]{6}$/i.test(hex.value)) { node.value = hex.value; emit(hex.value); }
+      });
+      el.appendChild(node); el.appendChild(hex);
+      setValue = function (x) { node.value = x; hex.value = x; };
+
+    } else if (c.type === 'toggle') {
+      node = document.createElement('button');
+      node.type = 'button'; node.className = 'acp-toggle' + (c.value ? ' on' : '');
+      node.setAttribute('role', 'switch');
+      node.innerHTML = '<span class="acp-knob"></span>';
+      node.addEventListener('click', function () {
+        var next = !node.classList.contains('on');
+        node.classList.toggle('on', next); emit(next);
+      });
+      el = node; setValue = function (x) { node.classList.toggle('on', !!x); };
+
+    } else if (c.type === 'select') {
+      node = document.createElement('select');
+      node.className = 'acp-input';
+      c.options.forEach(function (o) {
+        var opt = document.createElement('option');
+        opt.value = typeof o === 'string' ? o : o.value;
+        opt.textContent = typeof o === 'string' ? o : o.label;
+        node.appendChild(opt);
+      });
+      node.value = c.value;
+      node.addEventListener('change', function () { emit(node.value); });
+      el = node; setValue = function (x) { node.value = x; };
+
+    } else {
+      node = document.createElement('input');
+      node.type = c.type === 'number' ? 'number' : 'text';
+      node.className = 'acp-input'; node.value = c.value;
+      if (c.type === 'number') { node.min = c.min; node.max = c.max; node.step = c.step; }
+      node.addEventListener('input', function () {
+        emit(c.type === 'number' ? Number(node.value) : node.value);
+      });
+      el = node; setValue = function (x) { node.value = x; };
+    }
+    return { el: el, setValue: setValue };
+  }
+
+  function changedIds() {
+    return schema.filter(function (c) { return v[c.id] !== defaults[c.id]; }).map(function (c) { return c.id; });
+  }
+
+  function update(id, val) {
+    v[id] = val;
+    apply(v);
+    var changed = changedIds();
+    schema.forEach(function (c) {
+      var on = changed.indexOf(c.id) !== -1;
+      refs[c.id].dot.classList.toggle('on', on);
+      refs[c.id].reset.classList.toggle('on', on);
+    });
+    groups.forEach(function (g) {
+      var any = schema.some(function (c) {
+        return (c.group || 'Controls') === g && changed.indexOf(c.id) !== -1;
+      });
+      var one = schema.filter(function (c) { return (c.group || 'Controls') === g; })[0];
+      refs[one.id].gdot.classList.toggle('on', any);
+    });
+    var n = changed.length;
+    countEl.textContent = n ? n + ' changed' : '';
+    badge.textContent = n;
+    badge.style.display = n && !panel.classList.contains('is-open') ? 'flex' : 'none';
+    copyBtn.disabled = resetAllBtn.disabled = n === 0;
+    copyBtn.textContent = n === 0 ? 'No changes yet' : 'Copy ' + n + ' change' + (n === 1 ? '' : 's');
+  }
+
+  function fmt(c, val) {
+    if (c.type === 'toggle') return val ? 'on' : 'off';
+    if (c.type === 'text' || c.type === 'textarea') return '"' + val + '"';
+    if (c.type === 'range' || c.type === 'number') return val + (c.unit || '');
+    if (c.type === 'select' && c.options) {
+      for (var i = 0; i < c.options.length; i++) {
+        var o = c.options[i];
+        if (typeof o !== 'string' && o.value === val) return o.label;
+      }
+    }
+    return String(val);
+  }
+
+  function report() {
+    var lines = changedIds().map(function (id) {
+      var c = schema.filter(function (x) { return x.id === id; })[0];
+      return '- ' + c.label + ': ' + fmt(c, defaults[id]) + ' → ' + fmt(c, v[id]);
+    });
+    return 'Update the artifact with these control panel changes:\n\n' + lines.join('\n') +
+      '\n\nApply these as the new default values in the CONTROLS config block.';
+  }
+
+  copyBtn.addEventListener('click', function () {
+    var text = report();
+    var done = function () {
+      var prev = copyBtn.textContent;
+      copyBtn.textContent = 'Copied';
+      setTimeout(function () { copyBtn.textContent = prev; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else { fallback(text, done); }
+  });
+
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { if (document.execCommand('copy')) done(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  resetAllBtn.addEventListener('click', function () {
+    schema.forEach(function (c) { refs[c.id].control.setValue(defaults[c.id]); v[c.id] = defaults[c.id]; });
+    update(schema[0].id, defaults[schema[0].id]);
+  });
+
+  function setOpen(open) {
+    panel.classList.toggle('is-open', open);
+    tab.classList.toggle('is-open', open);
+    tab.setAttribute('aria-label', open ? 'Close controls' : 'Open controls');
+    badge.style.display = !open && changedIds().length ? 'flex' : 'none';
+  }
+  tab.addEventListener('click', function () { setOpen(!panel.classList.contains('is-open')); });
+  panel.querySelector('.acp-x').addEventListener('click', function () { setOpen(false); });
+  document.addEventListener('mousedown', function (e) {
+    if (!closeOnOutsideClick) return;
+    if (!panel.classList.contains('is-open')) return;
+    if (panel.contains(e.target) || tab.contains(e.target)) return;
+    setOpen(false);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+
+  apply(v);
+  return { get values() { return v; } };
+}
+/* ═══════════ CONTROL PANEL — delete to here ═══════════ */
+</script>
+
+<script>
+// Panel stays open while you click through nav menus (close via gear or Esc).
+initControlPanel(CONTROLS, function (v) { apply(v); renderProto(); }, { closeOnOutsideClick: false });
+// ← strip line: apply(Object.fromEntries(CONTROLS.map(c => [c.id, c.value])));
+</script>
+</body>
+</html>
