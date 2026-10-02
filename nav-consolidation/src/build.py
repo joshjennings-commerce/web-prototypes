@@ -1,12 +1,12 @@
 """Inline the brand logos into the template and write the publishable page.
 
-    python3 src/nav-consolidation/build.py      (run from the repo root)
+    python3 nav-consolidation/src/build.py      (from the repo root, or run it from anywhere)
 
-Edit nav-prototype.template.html, not docs/nav-consolidation/index.html — the latter is generated.
+Edit nav-prototype.template.html, not ../index.html — the latter is generated.
 """
 import re, pathlib
 HERE = pathlib.Path(__file__).parent
-OUT = HERE.parent.parent / 'docs' / 'nav-consolidation' / 'index.html'
+OUT = HERE.parent / 'index.html'
 L = HERE / 'logos'
 
 def strip_dims(tag):
@@ -36,4 +36,4 @@ out = t.replace('{{SVG_COMMERCE}}', c).replace('{{SVG_BC}}', b).replace('{{SVG_F
 assert '{{SVG_' not in out
 OUT.parent.mkdir(parents=True, exist_ok=True)
 OUT.write_text(out)
-print(f'wrote {OUT.relative_to(HERE.parent.parent)} ({len(out):,} bytes)')
+print(f'wrote {OUT} ({len(out):,} bytes)')
