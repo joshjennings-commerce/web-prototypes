@@ -28,3 +28,14 @@ python3 nav-consolidation/src/build.py
 ```
 
 The gear at the bottom-right of the page opens a control panel; "Copy changes" produces a change list that can be applied back to the `CONTROLS` block in the template.
+
+**Versions and variations.** The bottom-left toolbar has a Version dropdown and Variation buttons. Versions are defined in the `VERSIONS` object in the template; each version holds numbered variations.
+
+| Version | Variations | What changed |
+|---|---|---|
+| 1.0 | 1–4 | Original combos: Parent A/B (Solutions vs. Platforms dropdown) × Sub-brand A/B (dual nav vs. focused nav with "C" expander) |
+| 2.0 | 1–2 | Post-CMO-review: Solutions (brand panels) + Industries top-level, Resources → Learning, sub-brand Resources dropdown, brand-grouped Get Started CTA. Var 1 = CTA dropdown, Var 2 = CTA modal |
+
+Deep links: `#v2.0-1`, `#v1.0-3`, etc. Append `-review` to open with Review mode on.
+
+**Review mode.** The Review toggle in the toolbar outlines flagged nav items in amber with numbered markers (hover or click a marker for the note) and lists all open questions. Flags live in the `FLAGS` object in the template, keyed by version; add or remove entries there.

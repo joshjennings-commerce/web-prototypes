@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Commerce Consolidated Nav – Combo Prototypes v2</title>
+<title>Commerce Consolidated Nav – Prototypes</title>
 <style>
 :root{
   --nav-h:64px; --dd-ms:220ms; --ease:cubic-bezier(.2,.7,.2,1);
@@ -60,6 +60,8 @@ a{color:inherit;text-decoration:none}
 .btn:hover{background:#333;border-color:#333}
 .btn.ghost:hover{background:#f3f3f3;border-color:#1a1a1a}
 .btn .chev{display:none;font-size:15px;line-height:1}
+.btn .caret{color:inherit;opacity:.85}
+.btn.active .caret{transform:rotate(180deg)}
 body.brand-cta .btn.b-fdx:not(.ghost){background:#f2a585;border-color:#f2a585;color:#1a1a1a}
 body.brand-cta .btn.b-fdx:not(.ghost):hover{background:#ee9570;border-color:#ee9570}
 body.brand-cta .btn.b-fdx .chev{display:inline}
@@ -147,6 +149,45 @@ body.dark-alt .plat.bc .col-h{color:#9a9aa6;border-color:#2e2e36}
 .pgrid a{font-size:15px;padding:9px 8px;border-radius:6px;cursor:pointer;display:flex;gap:8px;align-items:center}
 .pgrid a:hover{background:rgba(0,0,0,.05)}
 
+/* v2.0 – Get started (CTA dropdown + modal share this block) */
+.gs{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin-left:auto}
+.gs-h{grid-column:1/-1;font-size:20px;font-weight:600;margin:0 0 2px;letter-spacing:-.01em}
+.gs-col{border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.gs-col.bc{background:var(--bc-card)} .gs-col.fdx{background:var(--fdx-card)}
+.gs-col .logo svg{height:22px} .gs-col .logo.bc svg{height:26px}
+.gs-col p{margin:2px 0 8px;font-size:13px;color:#333;line-height:1.45}
+.gs-opt,.gs-sales{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s}
+.gs-opt{background:#fff;border-radius:8px;padding:12px 14px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.gs-opt:hover{box-shadow:0 6px 16px -10px rgba(0,0,0,.35);transform:translateY(-1px)}
+.gs-opt b,.gs-sales b{font-size:14.5px;font-weight:600;display:block}
+.gs-opt small,.gs-sales small{font-size:12.5px;color:#666;display:block;margin-top:2px}
+.gs-opt i,.gs-sales i{width:26px;height:26px;border-radius:50%;background:#1a1a1a;color:#fff;display:grid;place-items:center;font-style:normal;font-size:12px;flex-shrink:0}
+.gs-sales{grid-column:1/-1;padding:14px 18px;border:1.5px solid var(--line);border-radius:10px}
+.gs-sales:hover{border-color:#1a1a1a}
+.modal-bg{position:fixed;inset:0;z-index:55;background:rgba(10,10,20,.45);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity var(--dd-ms) var(--ease)}
+.modal-bg.open{opacity:1;pointer-events:auto}
+.modal{background:#fff;border-radius:16px;width:min(780px,100%);padding:32px 32px 28px;position:relative;transform:translateY(12px) scale(.98);transition:transform var(--dd-ms) var(--ease);box-shadow:0 30px 80px -20px rgba(0,0,0,.45)}
+.modal-bg.open .modal{transform:none}
+.modal-x{position:absolute;top:14px;right:14px;border:0;background:none;font-size:18px;cursor:pointer;width:34px;height:34px;border-radius:50%;color:#555}
+.modal-x:hover{background:#f0f0f3}
+.modal .gs{max-width:none;margin:0}
+
+/* ── Review mode: flagged items get an amber outline + numbered marker ── */
+.rv{outline:2px solid #f59e0b;outline-offset:3px;border-radius:6px;position:relative}
+.rv-mark{position:absolute;top:-10px;right:-10px;width:20px;height:20px;border-radius:50%;background:#f59e0b;color:#111;font:700 11px/20px ui-sans-serif,system-ui,sans-serif;text-align:center;cursor:help;z-index:6;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.rv-mark:hover{transform:scale(1.12)}
+.rv-pop{position:fixed;z-index:70;width:300px;background:#1a1a1a;color:#eee;border-radius:10px;padding:12px 14px;font-size:12.5px;line-height:1.45;box-shadow:0 12px 30px rgba(0,0,0,.35);display:none}
+.rv-pop.show{display:block}
+.rv-pop b{display:block;color:#fbbf24;margin-bottom:4px;font-size:12px}
+.rv-legend{position:fixed;left:16px;z-index:60;width:400px;max-width:calc(100vw - 90px);background:#111;color:#ddd;border-radius:12px;padding:12px 14px;font-size:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);display:none;max-height:50vh;overflow:auto}
+.rv-legend.show{display:block}
+.rv-legend h4{margin:0 0 8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#fbbf24;font-weight:600}
+.rv-legend ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.rv-legend li{display:flex;gap:10px;align-items:flex-start;line-height:1.4}
+.rv-legend li i{flex:0 0 18px;height:18px;border-radius:50%;background:#f59e0b;color:#111;font:700 10.5px/18px ui-sans-serif,system-ui,sans-serif;text-align:center;font-style:normal;margin-top:1px}
+.rv-legend li b{color:#fff;font-weight:600}
+.rv-legend li span{color:#aaa}
+
 /* ── Sub-brand B (focused nav + parent expander) ── */
 .bar-sb{padding-left:0}
 .sb-left{flex:1;align-self:stretch;display:flex;align-items:center;gap:22px;position:relative;padding-left:calc(var(--nav-h) + 22px)}
@@ -208,10 +249,13 @@ h1{font-size:48px;letter-spacing:-.03em;margin:0 0 22px;line-height:1.05}
 .wf-footer{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-top:40px;border-top:1.5px solid var(--wf)}
 
 /* ── Prototype toolbar ── */
-.proto{position:fixed;left:16px;bottom:16px;z-index:60;background:#111;color:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:12px;width:360px;max-width:calc(100vw - 90px)}
+.proto{position:fixed;left:16px;bottom:16px;z-index:60;background:#111;color:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:12px;width:400px;max-width:calc(100vw - 90px)}
 .proto-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .proto-row + .proto-row{margin-top:8px}
 .proto-label{color:#888}
+.proto-sel{font:inherit;font-size:12px;background:#2a2a2a;color:#fff;border:0;border-radius:8px;padding:5px 8px;cursor:pointer}
+.rv-toggle{margin-left:auto;border:1px solid #444;background:none;color:#bbb;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px}
+.rv-toggle.on{background:#f59e0b;border-color:#f59e0b;color:#111;font-weight:600}
 .seg{display:flex;background:#2a2a2a;border-radius:8px;padding:2px}
 .seg button{border:0;background:none;color:#bbb;padding:5px 10px;border-radius:6px;cursor:pointer;font-size:12px}
 .seg button.on{background:#fff;color:#111;font-weight:600}
@@ -228,6 +272,9 @@ h1{font-size:48px;letter-spacing:-.03em;margin:0 0 22px;line-height:1.05}
   <header class="site" id="site"></header>
 </div>
 <main id="page"></main>
+<div class="modal-bg" id="modal"></div>
+<div class="rv-legend" id="rvlegend"></div>
+<div class="rv-pop" id="rvpop"></div>
 <div class="proto" id="proto"></div>
 
 <script>
@@ -238,18 +285,20 @@ h1{font-size:48px;letter-spacing:-.03em;margin:0 0 22px;line-height:1.05}
 // ═══════════════════════════════════════════════════════════════
 const CONTROLS = [
   { id: 'parentCta',  label: 'Parent nav CTA',            type: 'text',   value: 'Get Started', group: 'Content' },
-  { id: 'topCta',     label: 'Dual-nav parent bar CTA',   type: 'text',   value: "Let's Talk",  group: 'Content' },
+  { id: 'topCta',     label: 'v1.0: dual-nav parent bar CTA', type: 'text', value: "Let's Talk",  group: 'Content' },
+  { id: 'ctaHeading', label: 'v2.0: Get Started heading', type: 'text',   value: 'How would you like to get started?', group: 'Content' },
+  { id: 'salesLabel', label: 'v2.0: Contact Sales label', type: 'text',   value: 'Contact Sales', group: 'Content' },
   { id: 'showPage',   label: 'Show in-page placeholder content', type: 'toggle', value: true, group: 'Content' },
   { id: 'trigParent', label: 'Parent nav items open on',  type: 'select', value: 'click', options: [{ value: 'hover', label: 'Hover (click goes to hub page)' }, { value: 'click', label: 'Click to toggle' }], group: 'Behavior' },
   { id: 'trigSub',    label: 'Sub-brand nav items open on', type: 'select', value: 'click', options: [{ value: 'hover', label: 'Hover (click goes to hub page)' }, { value: 'click', label: 'Click to toggle' }], group: 'Behavior' },
-  { id: 'trigTile',   label: 'V3: "C" opener expands on', type: 'select', value: 'click', options: [{ value: 'hover', label: 'Hover' }, { value: 'click', label: 'Click' }], group: 'Behavior' },
-  { id: 'trigFly',    label: 'V3: "C" dropdown items switch on', type: 'select', value: 'hover', options: [{ value: 'hover', label: 'Hover (click goes to hub page)' }, { value: 'click', label: 'Click (second click goes to hub page)' }], group: 'Behavior' },
-  { id: 'logoHome',   label: 'V3: Commerce logo in "C" tile links home (off = "Home" row in dropdown)', type: 'toggle', value: false, group: 'Behavior' },
-  { id: 'flyArrows',  label: 'V3: show arrows on Home / Get Started rows', type: 'toggle', value: false, group: 'Style' },
+  { id: 'trigTile',   label: 'v1.0 var 3–4: "C" opener expands on', type: 'select', value: 'click', options: [{ value: 'hover', label: 'Hover' }, { value: 'click', label: 'Click' }], group: 'Behavior' },
+  { id: 'trigFly',    label: 'v1.0 var 3–4: "C" dropdown items switch on', type: 'select', value: 'hover', options: [{ value: 'hover', label: 'Hover (click goes to hub page)' }, { value: 'click', label: 'Click (second click goes to hub page)' }], group: 'Behavior' },
+  { id: 'logoHome',   label: 'v1.0 var 3–4: Commerce logo in "C" tile links home (off = "Home" row in dropdown)', type: 'toggle', value: false, group: 'Behavior' },
+  { id: 'flyArrows',  label: 'v1.0 var 3–4: show arrows on Home / Get Started rows', type: 'toggle', value: false, group: 'Style' },
   { id: 'hoverDelay', label: 'Hover intent delay',        type: 'range',  value: 120, min: 0, max: 600, step: 20, unit: 'ms', group: 'Behavior' },
-  { id: 'expandMode', label: 'Sub-brand B expander',      type: 'select', value: 'flyout', options: [{ value: 'flyout', label: 'Flyout panel' }, { value: 'inline', label: 'Inline slide-over' }], group: 'Behavior' },
+  { id: 'expandMode', label: 'v1.0 var 3–4: sub-brand expander', type: 'select', value: 'flyout', options: [{ value: 'flyout', label: 'Flyout panel' }, { value: 'inline', label: 'Inline slide-over' }], group: 'Behavior' },
   { id: 'extraMenus', label: 'Extra dropdowns beyond Figma (Partners, Feedo Integrations)', type: 'toggle', value: true, group: 'Behavior' },
-  { id: 'utilityLinks', label: 'Show Help Center / Dev Center utility links', type: 'toggle', value: false, group: 'Behavior' },
+  { id: 'utilityLinks', label: 'v1.0: show Help Center / Dev Center utility links', type: 'toggle', value: false, group: 'Behavior' },
   { id: 'collapseOnScroll', label: 'Dual nav: hide parent bar on scroll', type: 'toggle', value: true, group: 'Behavior' },
   { id: 'ddMs',       label: 'Menu animation duration',   type: 'range',  value: 300, min: 0, max: 800, step: 20, unit: 'ms', group: 'Animation' },
   { id: 'navH',       label: 'Nav bar height',            type: 'range',  value: 72, min: 48, max: 96, step: 2, unit: 'px', group: 'Style' },
@@ -259,7 +308,7 @@ const CONTROLS = [
   { id: 'accent',     label: 'Accent color',              type: 'color',  value: '#6058ff', group: 'Style' },
   { id: 'bcCard',     label: 'BigCommerce card color',    type: 'color',  value: '#e8ddff', group: 'Style' },
   { id: 'fdxCard',    label: 'Feedonomics card color',    type: 'color',  value: '#d7ebfb', group: 'Style' },
-  { id: 'darkAlt',    label: 'Parent B: dark BigCommerce panel', type: 'toggle', value: false, group: 'Style' },
+  { id: 'darkAlt',    label: 'Platforms / Solutions dropdown: dark BigCommerce panel', type: 'toggle', value: false, group: 'Style' },
 ];
 
 let V = Object.fromEntries(CONTROLS.map(c => [c.id, c.value]));
@@ -279,9 +328,9 @@ function apply(v) {
   document.body.classList.toggle('brand-cta', !!v.brandCta);
   document.body.classList.toggle('no-page', !v.showPage);
   document.body.classList.toggle('no-fly-arrows', !v.flyArrows);
-  document.querySelectorAll('.js-parent-cta').forEach(el => el.textContent = v.parentCta);
-  document.querySelectorAll('.js-top-cta').forEach(el => el.textContent = v.topCta);
-  const k = [v.expandMode, v.extraMenus, v.utilityLinks, v.logoHome, v.parentCta].join('|');
+  // v1.0 keeps a separate strip CTA ("Let's Talk"); v2.0 uses one Get Started CTA everywhere.
+  document.querySelectorAll('.js-cta-text').forEach(el => el.textContent = el.dataset.ctl === 'top' ? v.topCta : v.parentCta);
+  const k = [v.expandMode, v.extraMenus, v.utilityLinks, v.logoHome, v.parentCta, v.ctaHeading, v.salesLabel].join('|');
   if (rendered && k !== structKey) { state.expanded = false; renderHeader(); }
   structKey = k;
   checkScroll();
@@ -351,8 +400,8 @@ const ICONS = {
 };
 const ic = n => n && ICONS[n] ? `<span class="mi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[n]}</svg></span>` : '';
 
-// I(title, href, description, flags: 'ai' | 'hl' | 'ai hl', icon)
-const I = (t, h, d, f, icon) => ({ t, h, d, ai: /\bai\b/.test(f || ''), hl: /\bhl\b/.test(f || ''), icon, ext: /^https?:/.test(h) });
+// I(title, href, description, flags: 'ai' | 'hl' | 'ph' (placeholder, no real source yet), icon)
+const I = (t, h, d, f, icon) => ({ t, h, d, ai: /\bai\b/.test(f || ''), hl: /\bhl\b/.test(f || ''), ph: /\bph\b/.test(f || ''), icon, ext: /^https?:/.test(h) });
 
 const INDUSTRIES = [ // first three from Figma; rest PLACEHOLDER
   I('Automotive', '/solutions/industries/automotive/'), I('Sports & Outdoors', '/solutions/industries/sports-outdoors/'),
@@ -476,6 +525,74 @@ const PARTNERS = {
     ]},
   ],
 };
+/* ── v2.0 content ── */
+// "Resources" in the parent nav becomes "Learning" (editorial content). URL assumed /learning/ to match the label.
+const LEARNING = {
+  hub: '/learning/',
+  cols: [
+    { title: 'Read', items: [
+      I('Blog', '/blog/', 'News, trends, and ideas from across Commerce.'), I('Articles', '/learning/articles/'),
+      I('Guides', '/learning/guides/'), I('Reports', '/learning/reports/'),
+    ]},
+    { title: 'Watch & Listen', items: [
+      I('Webinars', '/learning/webinars/'), I('Podcasts', '/learning/podcasts/'), I('Events', '/learning/events/'),
+    ]},
+    { title: 'By Topic', items: [ // PLACEHOLDER topic taxonomy
+      I('Agentic Commerce & AI', '/learning/agentic-commerce/'), I('B2B Ecommerce', '/learning/b2b/'),
+      I('Omnichannel & Marketplaces', '/learning/omnichannel/'), I('Headless & Composable', '/learning/headless/'),
+      I('Migration', '/learning/migration/'),
+    ]},
+  ],
+  promo: { eyebrow: 'Featured report', title: 'The Global B2B Buyer Behavior Report', desc: 'This in-depth report provides actionable strategies to help you sell more online.', cta: 'Read now', h: '/learning/reports/global-b2b-buyer-behavior-report/' },
+};
+// Sub-brand "Resources": product/platform-specific help. Items marked 'ph' have no public source today.
+const BC_RESOURCES = {
+  hub: '/bigcommerce/resources/', brand: 'bc',
+  cols: [
+    { title: 'Learn', items: [
+      I('BigCommerce University', '/bigcommerce/services/university/', 'Courses and certifications.', '', 'steps'),
+      I('Guides & Playbooks', '/bigcommerce/resources/guides/', 'How-tos for launching and growing.', '', 'doc'),
+      I('Case Studies', '/case-studies/?brand=bigcommerce', 'Brands growing on BigCommerce.', '', 'target'),
+    ]},
+    { title: 'Get Help', items: [
+      I('Help Center', 'https://support.bigcommerce.com/', 'Knowledge base and support articles.', '', 'chat'),
+      I('Community', 'https://support.bigcommerce.com/s/group/', 'Ask questions, share answers.', '', 'globe'), // URL PLACEHOLDER
+      I('Contact Support', '/bigcommerce/support/', '', '', 'shield'),
+      I('System Status', 'https://status.bigcommerce.com/', '', '', 'server'),
+    ]},
+    { title: 'Build', panel: true, items: [
+      I('Developer Docs', 'https://developer.bigcommerce.com/'), I('API Reference', 'https://developer.bigcommerce.com/docs/api'),
+      I('MCP Toolkit', 'https://docs.bigcommerce.com/developer/api-reference/mcp/overview', '', 'ai'),
+      I('Apps Marketplace', 'https://www.bigcommerce.com/apps/'), I('Partner Directory', 'https://partners.bigcommerce.com/directory/'),
+    ]},
+  ],
+};
+const FDX_RESOURCES = {
+  hub: '/feedonomics/resources/', brand: 'fdx',
+  cols: [
+    { title: 'Learn', items: [
+      I('Feed Management Guides', '/feedonomics/resources/guides/', 'Fundamentals of feed optimization.', 'ph', 'doc'),
+      I('Case Studies', '/case-studies/?brand=feedonomics', 'Brands scaling with Feedonomics.', '', 'target'),
+      I('Webinars', '/feedonomics/resources/webinars/', '', 'ph', 'steps'),
+    ]},
+    { title: 'Get Help', items: [
+      I('FeedSupport™', 'https://meta.feedonomics.com/app/', '24/7 support from feed specialists.', '', 'chat'),
+      I('Help Center', '/feedonomics/resources/help-center/', '', 'ph', 'globe'),
+      I('Contact', '/feedonomics/contact/', '', '', 'shield'),
+    ]},
+    { title: 'Build', panel: true, items: [
+      I('Developer Docs', '/feedonomics/resources/developers/', '', 'ph'), I('API Reference', '/feedonomics/resources/api/', '', 'ph'),
+      I('Supported Integrations', '/feedonomics/integrations/'),
+    ]},
+  ],
+};
+// Parent CTA, grouped by brand. Feedonomics has no self-serve trial.
+const GET_STARTED = {
+  bc:  [{ t: 'Start a Trial', h: '/bigcommerce/free-trial/', d: 'Free for 15 days. No credit card.' }, { t: 'Get a Demo', h: '/bigcommerce/demo/', d: 'See the platform with a product expert.' }],
+  fdx: [{ t: 'Get a Demo', h: '/feedonomics/demo/', d: 'See how we optimize and sync your feeds.' }],
+  sales: { h: '/contact-sales/', d: 'Not sure where to start? Talk to us about which solution fits.' },
+};
+
 const INDUSTRIES_MENU = { hub: '/solutions/industries/', cols: [{ title: 'Industries', grid: true, items: INDUSTRIES }, { title: 'Teams', items: TEAMS }] };
 const PLATFORM_PICKS = {
   bc:  [BC_PRODUCTS.cols[0].items[0], BC_PRODUCTS.cols[0].items[1], BC_PRODUCTS.cols[1].items[0], BC_PRODUCTS.cols[1].items[3],
@@ -486,8 +603,11 @@ const PLATFORM_PICKS = {
 const MENUS = {
   solutions:  { kind: 'solA', hub: '/solutions/' },
   platforms:  { kind: 'platB', hub: '/solutions/' },
-  industries: INDUSTRIES_MENU, cases: CASES, resources: RESOURCES, partners: PARTNERS,
+  solutions2: { kind: 'platB', hub: '/solutions/' },   // v2.0: the brand-panel dropdown, labelled "Solutions"
+  getStarted: { kind: 'gs', hub: '/get-started/' },    // v2.0: parent CTA dropdown
+  industries: INDUSTRIES_MENU, cases: CASES, resources: RESOURCES, learning: LEARNING, partners: PARTNERS,
   bcProducts: BC_PRODUCTS, fdxProducts: FDX_PRODUCTS, fdxIntegrations: FDX_INTEGRATIONS,
+  bcResources: BC_RESOURCES, fdxResources: FDX_RESOURCES,
 };
 BC_PRODUCTS.brand = 'bc';
 FDX_PRODUCTS.brand = FDX_INTEGRATIONS.brand = 'fdx';
@@ -495,27 +615,69 @@ FDX_PRODUCTS.brand = FDX_INTEGRATIONS.brand = 'fdx';
 const PARENT = {
   A: [{ l: 'Solutions', m: 'solutions' }, { l: 'Case Studies', m: 'cases' }, { l: 'Resources', m: 'resources' }, { l: 'Partners', m: 'partners', extra: true }],
   B: [{ l: 'Platforms', m: 'platforms' }, { l: 'Industries', m: 'industries' }, { l: 'Case Studies', m: 'cases' }, { l: 'Resources', m: 'resources' }, { l: 'Partners', m: 'partners' }],
+  C: [{ l: 'Solutions', m: 'solutions2' }, { l: 'Industries', m: 'industries' }, { l: 'Case Studies', m: 'cases' }, { l: 'Learning', m: 'learning' }, { l: 'Partners', m: 'partners' }],
 };
 const SUB = {
   bc:  [{ l: 'Products', m: 'bcProducts' }, { l: 'Services', h: '/bigcommerce/services/' }, { l: 'Integrations', h: '/bigcommerce/integrations/' }, { l: 'Pricing', h: '/bigcommerce/pricing/' }],
   fdx: [{ l: 'Products', m: 'fdxProducts' }, { l: 'Integrations', m: 'fdxIntegrations', extra: true }, { l: 'Services', h: '/feedonomics/services/' }, { l: 'Pricing', h: '/feedonomics/pricing/' }],
 };
-const COMBOS = {
-  1: { parent: 'A', sub: 'A', cap: '<b>Parent A</b> (Solutions dropdown) + <b>Sub-brand A</b> (dual navigation)' },
-  2: { parent: 'B', sub: 'A', cap: '<b>Parent B</b> (Platforms dropdown) + <b>Sub-brand A</b> (dual navigation)' },
-  3: { parent: 'A', sub: 'B', cap: '<b>Parent A</b> (Solutions dropdown) + <b>Sub-brand B</b> (focused nav w/ parent expander)' },
-  4: { parent: 'B', sub: 'B', cap: '<b>Parent B</b> (Platforms + Industries) + <b>Sub-brand B</b> (focused nav w/ parent expander)' },
+const SUB2 = { // v2.0: + Resources dropdown
+  bc:  [...SUB.bc, { l: 'Resources', m: 'bcResources' }],
+  fdx: [...SUB.fdx, { l: 'Resources', m: 'fdxResources' }],
 };
-const VERSIONS = [1, 2, 3, 4];
+const subItems = b => (state.ver === '2.0' ? SUB2 : SUB)[b];
 
-let state = { combo: 1, url: '/', title: 'Commerce', desc: '', brand: 'commerce', open: null, expanded: false, fly: 'solutions', hist: [], fwd: [] };
+/* Versions hold variations. parent = PARENT key, sub = 'A' (dual nav) | 'B' (focused nav + expander),
+   cta = how the v2.0 Get Started CTA opens ('menu' dropdown | 'modal' popup). */
+const VERSIONS = {
+  '1.0': {
+    1: { parent: 'A', sub: 'A' },
+    2: { parent: 'B', sub: 'A' },
+    3: { parent: 'A', sub: 'B' },
+    4: { parent: 'B', sub: 'B' },
+  },
+  '2.0': {
+    1: { parent: 'C', sub: 'A', cta: 'menu' },
+    2: { parent: 'C', sub: 'A', cta: 'modal' },
+  },
+};
+const DEFAULT_VER = '2.0';
+
+/* Review mode: open questions per version. `where` is a selector; every match gets an amber outline + numbered marker. */
+const FLAGS = {
+  '2.0': [
+    { n: 1, where: '.col[data-col="Teams"]', title: 'Teams under Industries',
+      note: 'Teams (Marketing, Developers, Ecommerce, IT & Security) is an audience grouping sitting inside a vertical grouping. Explore a separate home for it, e.g. a "By team" section under Solutions.' },
+    { n: 2, where: '.gs-col.fdx', title: 'Feedonomics CTA column is lopsided',
+      note: 'Feedonomics has no self-serve trial, so its column has one option next to BigCommerce’s two. Options: a second Feedonomics action (e.g. a free feed audit), or a single-column list.' },
+    { n: 3, where: '[data-menu="learning"], [data-menu="bcResources"], [data-menu="fdxResources"]', title: 'Learning vs. Resources overlap',
+      note: 'BigCommerce University, product guides, and webinars could live in either menu. Decide the split (editorial vs. product help) and whether the labels make that split obvious.' },
+    { n: 4, where: '.bar [data-menu="cases"], .bar [data-menu="partners"]', title: 'Case Studies & Partners are parent-level only',
+      note: 'On sub-brand pages the only route to Case Studies and Partners is the Commerce strip, which hides on scroll. Review whether the sub-brand Resources menu should link to brand-filtered views.' },
+    { n: 5, where: '.mi[data-ph]', title: 'Feedonomics resource placeholders',
+      note: 'Feedonomics has no public equivalent today for several BigCommerce resources (developer docs, API reference, help center, guides). These items are placeholders pending a content inventory.' },
+  ],
+};
+
+let state = { ver: DEFAULT_VER, combo: 1, review: false, url: '/', title: 'Commerce', desc: '', brand: 'commerce', open: null, expanded: false, fly: 'solutions', hist: [], fwd: [] };
+const combo = () => VERSIONS[state.ver][state.combo];
+
+/* Deep link: #v2.0-1 (append -review to open with review mode on). */
+function readHash() {
+  const m = /^#v(\d+\.\d+)-(\d+)(-review)?$/.exec(location.hash || '');
+  if (m && VERSIONS[m[1]] && VERSIONS[m[1]][m[2]]) { state.ver = m[1]; state.combo = +m[2]; state.review = !!m[3]; }
+}
+function writeHash() {
+  const h = `#v${state.ver}-${state.combo}${state.review ? '-review' : ''}`;
+  try { if (location.hash !== h) history.replaceState(null, '', h); } catch (e) {}
+}
 
 /* ─────────────── Templates ─────────────── */
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const A = (it, cls) => `<a class="${cls}" data-href="${esc(it.h)}" data-label="${esc(it.t)}" data-desc="${esc(it.d || '')}">`;
+const A = (it, cls) => `<a class="${cls}" ${it.ph ? 'data-ph' : ''} data-href="${esc(it.h)}" data-label="${esc(it.t)}" data-desc="${esc(it.d || '')}">`;
 const AI = '<span class="ai" title="AI">✦</span>';
 const itemHTML = it => `${A(it, 'mi' + (it.hl ? ' hl' : ''))}${ic(it.icon)}<span class="mi-body"><span class="mi-t">${esc(it.t)}${it.ai ? AI : ''}${it.ext ? '<span class="ext">↗</span>' : ''}</span>${it.d ? `<span class="mi-d">${esc(it.d)}</span>` : ''}</span></a>`;
-const colHTML = c => `<div class="col ${c.grid ? 'wide' : ''}">${c.title ? `<div class="col-h">${esc(c.title)}</div>` : ''}${c.grid ? `<div class="igrid">${c.items.map(itemHTML).join('')}</div>` : c.items.map(itemHTML).join('')}</div>`;
+const colHTML = c => `<div class="col ${c.grid ? 'wide' : ''}" data-col="${esc(c.title || '')}">${c.title ? `<div class="col-h">${esc(c.title)}</div>` : ''}${c.grid ? `<div class="igrid">${c.items.map(itemHTML).join('')}</div>` : c.items.map(itemHTML).join('')}</div>`;
 const promoHTML = p => `${A({ h: p.h, t: p.title }, 'promo')}<div class="col-h">${esc(p.eyebrow)}</div><h5>${esc(p.title)}</h5><p>${esc(p.desc)}</p><span class="cta"><i>›</i>${esc(p.cta)}</span></a>`;
 function megaHTML(m, compact) {
   const brand = m.brand || 'commerce';
@@ -532,11 +694,16 @@ const solA = compact => `<div class="mega brand-commerce ${compact ? 'compact' :
 const plat = b => `<div class="plat ${b}"><div class="plat-h" data-href="${BRAND[b].home}" data-label="${BRAND[b].name}">${logo(b)}<span class="go">Explore →</span></div><p>${esc(BRAND[b].blurb)}</p>
   <div class="col-h">Products &amp; features</div><div class="pgrid">${PLATFORM_PICKS[b].map(it => `${A(it, '')}${esc(it.t)}${it.ai ? AI : ''}</a>`).join('')}</div></div>`;
 const platB = () => `<div class="mega brand-commerce" style="display:block"><div class="platB">${plat('bc')}${plat('fdx')}</div></div>`;
+// v2.0 Get Started: BigCommerce column (Trial, Demo) | Feedonomics column (Demo), Contact Sales across the bottom.
+const gsOpt = o => `<div class="gs-opt" data-href="${o.h}" data-label="${esc(o.t)}"><span><b>${esc(o.t)}</b>${o.d ? `<small>${esc(o.d)}</small>` : ''}</span><i>›</i></div>`;
+const gsCol = b => `<div class="gs-col ${b}">${logo(b)}<p>${esc(BRAND[b].blurb)}</p>${GET_STARTED[b].map(gsOpt).join('')}</div>`;
+const gsHTML = () => `<div class="gs"><h4 class="gs-h">${esc(V.ctaHeading)}</h4>${gsCol('bc')}${gsCol('fdx')}<div class="gs-sales" data-href="${GET_STARTED.sales.h}" data-label="${esc(V.salesLabel)}"><span><b>${esc(V.salesLabel)}</b><small>${esc(GET_STARTED.sales.d)}</small></span><i>›</i></div></div>`;
 
 function menuContent(id, compact) {
   const m = MENUS[id];
   if (m.kind === 'solA') return solA(compact);
   if (m.kind === 'platB') return platB();
+  if (m.kind === 'gs') return `<div class="mega brand-commerce" style="display:block">${gsHTML()}</div>`;
   return megaHTML(m, compact);
 }
 // kind = 'parent' | 'sub' — selects which hover/click control governs the trigger
@@ -549,21 +716,28 @@ function links(items, kind) {
       : `<button class="link" data-href="${hub}" data-label="${esc(it.l)}">${esc(it.l)}</button>`;
   }).join('');
 }
+// Parent CTA. v1.0: plain link (strip has its own "Let's Talk"). v2.0: one Get Started CTA that opens a dropdown or a modal.
+function ctaButton(role) {
+  const c = combo(), cls = `btn b-commerce ${role === 'top' ? 'js-top-cta' : 'js-parent-cta'}`;
+  if (c.cta === 'menu') return `<button class="${cls}" data-menu="getStarted" data-kind="parent" data-href="/get-started/" data-label="Get Started"><span class="js-cta-text">${esc(V.parentCta)}</span><span class="caret">▾</span></button>`;
+  if (c.cta === 'modal') return `<button class="${cls}" data-modal data-label="Get Started"><span class="js-cta-text">${esc(V.parentCta)}</span></button>`;
+  return role === 'top'
+    ? `<button class="${cls}" data-href="/demo/" data-label="Demo"><span class="js-cta-text" data-ctl="top">${esc(V.topCta)}</span></button>`
+    : `<button class="${cls}" data-href="/demo/" data-label="Get Started"><span class="js-cta-text">${esc(V.parentCta)}</span></button>`;
+}
 function parentBar(variant, role) {
-  const cta = role === 'top'
-    ? `<button class="btn b-commerce js-top-cta" data-href="/demo/" data-label="Demo">${esc(V.topCta)}</button>`
-    : `<button class="btn b-commerce js-parent-cta" data-href="/demo/" data-label="Get Started">${esc(V.parentCta)}</button>`;
-  return `<div class="bar ${role === 'top' ? 'bar-top' : ''}">${logo('commerce')}<nav class="links">${links(PARENT[variant], 'parent')}</nav><span class="spacer"></span>${cta}</div>`;
+  return `<div class="bar ${role === 'top' ? 'bar-top' : ''}">${logo('commerce')}<nav class="links">${links(PARENT[variant], 'parent')}</nav><span class="spacer"></span>${ctaButton(role)}</div>`;
 }
 function rightCluster(b) {
   const B = BRAND[b];
-  const util = V.utilityLinks ? B.util.map(([l, h]) => `<button class="util" data-href="${h}" data-label="${esc(l)}">${esc(l)}</button>`).join('') : '';
+  // v2.0 moves Help Center / Dev Center into the Resources dropdown, so the utility links are v1.0-only.
+  const util = V.utilityLinks && state.ver === '1.0' ? B.util.map(([l, h]) => `<button class="util" data-href="${h}" data-label="${esc(l)}">${esc(l)}</button>`).join('') : '';
   return `<div class="right">${util}<button class="login" data-href="${B.login}" data-label="Log In">⇥ Log In</button>${B.trial ? `<button class="btn ghost b-${b}" data-href="${B.trial}" data-label="Free Trial">Free Trial</button>` : ''}<button class="btn b-${b}" data-href="${B.demo}" data-label="Get a Demo">Get a Demo<span class="chev">›</span></button></div>`;
 }
-const subA = b => `<div class="bar">${logo(b)}<nav class="links">${links(SUB[b], 'sub')}</nav><span class="spacer"></span>${rightCluster(b)}</div>`;
+const subA = b => `<div class="bar">${logo(b)}<nav class="links">${links(subItems(b), 'sub')}</nav><span class="spacer"></span>${rightCluster(b)}</div>`;
 function subB(b) {
   const mode = V.expandMode;
-  const parentItems = PARENT[COMBOS[state.combo].parent];
+  const parentItems = PARENT[combo().parent];
   // Logo is a home link only when the control says so; otherwise a "Home" row leads the flyout column.
   const logoAttrs = V.logoHome ? 'data-href="/" data-label="Commerce"' : '';
   const tile = `<div class="sb-tile" data-tile title="Commerce"><span class="sb-logo" ${logoAttrs}>${SVG.commerce}</span><span class="sb-caret">${mode === 'flyout' ? '▾' : '▸'}</span></div>`;
@@ -583,7 +757,7 @@ const site = document.getElementById('site');
 const brandOf = u => u.startsWith('/bigcommerce') ? 'bc' : u.startsWith('/feedonomics') ? 'fdx' : 'commerce';
 
 function renderHeader() {
-  const c = COMBOS[state.combo], b = state.brand;
+  const c = combo(), b = state.brand;
   let html;
   if (b === 'commerce') html = parentBar(c.parent, 'parent');
   else if (c.sub === 'B') html = subB(b);
@@ -627,11 +801,79 @@ function renderPage() {
     <footer class="wf-footer">${'<div>' + line(50) + line(70) + line(60) + line(65) + line(55) + '</div>'.repeat(4)}</footer>`;
 }
 function renderProto() {
+  const vers = Object.keys(VERSIONS), vars = Object.keys(VERSIONS[state.ver]);
   document.getElementById('proto').innerHTML = `
-    <div class="proto-row"><span class="proto-label">Version</span><div class="seg">${VERSIONS.map(n => `<button data-combo="${n}" class="${state.combo === n ? 'on' : ''}">${n}</button>`).join('')}</div></div>
+    <div class="proto-row">
+      <span class="proto-label">Version</span><select class="proto-sel" data-ver aria-label="Version">${vers.map(v => `<option value="${v}" ${state.ver === v ? 'selected' : ''}>${v}</option>`).join('')}</select>
+      <span class="proto-label">Variation</span><div class="seg">${vars.map(n => `<button data-combo="${n}" class="${state.combo === +n ? 'on' : ''}">${n}</button>`).join('')}</div>
+      <button class="rv-toggle ${state.review ? 'on' : ''}" data-review aria-pressed="${state.review}">Review</button>
+    </div>
     <div class="status" id="status"></div>`;
+  renderLegend();
+  writeHash();
 }
-function renderAll() { renderHeader(); renderAddr(); renderPage(); renderProto(); rendered = true; }
+function renderLegend() {
+  const el = document.getElementById('rvlegend'), flags = FLAGS[state.ver] || [];
+  el.classList.toggle('show', state.review);
+  el.innerHTML = `<h4>Open for review · v${esc(state.ver)}</h4>` + (flags.length
+    ? `<ol>${flags.map(f => `<li><i>${f.n}</i><div><b>${esc(f.title)}</b><br><span>${esc(f.note)}</span></div></li>`).join('')}</ol>`
+    : '<span>No open items for this version.</span>');
+  el.style.bottom = (document.getElementById('proto').offsetHeight + 28) + 'px';
+}
+function renderAll() { renderHeader(); renderAddr(); renderPage(); renderProto(); rendered = true; closeModal(); applyFlags(); }
+
+/* ─────────────── Modal (v2.0 variation 2) ─────────────── */
+const modal = document.getElementById('modal');
+function openModal() {
+  modal.innerHTML = `<div class="modal" role="dialog" aria-modal="true"><button class="modal-x" data-modal-close aria-label="Close">✕</button>${gsHTML()}</div>`;
+  modal.classList.add('open');
+  applyFlags();
+}
+function closeModal() { if (modal.classList.contains('open')) { modal.classList.remove('open'); modal.innerHTML = ''; } }
+modal.addEventListener('click', e => {
+  if (e.target === modal || e.target.closest('[data-modal-close]')) { e.stopPropagation(); closeModal(); }
+});
+
+/* ─────────────── Review mode ─────────────── */
+const rvpop = document.getElementById('rvpop');
+let rvPinned = null;
+function applyFlags() {
+  document.querySelectorAll('.rv-mark').forEach(m => m.remove());
+  document.querySelectorAll('.rv').forEach(el => el.classList.remove('rv'));
+  if (!state.review) { hidePop(); return; }
+  (FLAGS[state.ver] || []).forEach(f => {
+    document.querySelectorAll(f.where).forEach(el => {
+      if (el.closest('.rv-legend, .rv-pop')) return;
+      el.classList.add('rv');
+      el.insertAdjacentHTML('beforeend', `<span class="rv-mark" data-rv="${f.n}" aria-label="Review note ${f.n}">${f.n}</span>`);
+    });
+  });
+}
+function showPop(mark) {
+  const f = (FLAGS[state.ver] || []).find(x => x.n === +mark.dataset.rv);
+  if (!f) return;
+  rvpop.innerHTML = `<b>${f.n} · ${esc(f.title)}</b>${esc(f.note)}`;
+  rvpop.classList.add('show');
+  const r = mark.getBoundingClientRect(), w = 300, h = rvpop.offsetHeight;
+  let x = r.right + 10, y = r.top - 8;
+  if (x + w > window.innerWidth - 12) x = r.left - w - 10;
+  if (y + h > window.innerHeight - 12) y = window.innerHeight - h - 12;
+  rvpop.style.left = Math.max(12, x) + 'px'; rvpop.style.top = Math.max(12, y) + 'px';
+}
+function hidePop() { rvpop.classList.remove('show'); rvPinned = null; }
+// Any re-render of nav content (menus, flyouts, modal) re-applies the markers. Our own marker edits are filtered out.
+const rvObserver = new MutationObserver(muts => {
+  if (!state.review) return;
+  const ours = muts.every(m => [...m.addedNodes, ...m.removedNodes].every(n => n.nodeType === 1 && n.classList.contains('rv-mark')));
+  if (!ours) applyFlags();
+});
+rvObserver.observe(site, { childList: true, subtree: true });
+rvObserver.observe(modal, { childList: true, subtree: true });
+document.addEventListener('mouseover', e => {
+  if (!(e.target instanceof Element)) return;
+  const m = e.target.closest('.rv-mark');
+  if (m) showPop(m); else if (!rvPinned && !e.target.closest('.rv-pop')) hidePop();
+});
 
 /* ─────────────── Routing ─────────────── */
 function titleFor(url, label) {
@@ -724,8 +966,16 @@ site.addEventListener('mouseenter', () => clearTimeout(closeTimer));
 
 function go(el) { navigate(el.dataset.href, el.dataset.label, el.dataset.desc); }
 
+function toggleMark(mark) {
+  if (rvPinned === mark.dataset.rv) { hidePop(); return; }
+  showPop(mark); rvPinned = mark.dataset.rv;
+}
+
 site.addEventListener('click', e => {
   e.stopPropagation(); // header re-renders on navigate; keep the document handler from seeing a detached target
+  const mk = e.target.closest('.rv-mark');
+  if (mk) return toggleMark(mk);
+  if (e.target.closest('[data-modal]')) { closeMenu(); setExpanded(false); return openModal(); }
   const tile = e.target.closest('[data-tile]');
   if (tile) {
     clearTimeout(openTimer);
@@ -748,10 +998,30 @@ site.addEventListener('click', e => {
   if (a) go(a);
 });
 
+function setVersion(ver, variation) {
+  if (!VERSIONS[ver]) return;
+  state.ver = ver; state.combo = VERSIONS[ver][variation] ? +variation : 1; state.fly = 'solutions';
+  navigate('/', 'Commerce');   // version / variation change always restarts on the Commerce nav
+}
+document.addEventListener('change', e => { if (e.target.matches('[data-ver]')) setVersion(e.target.value, 1); });
+
 document.addEventListener('click', e => {
   if (site.contains(e.target)) return;
-  const cb = e.target.closest('[data-combo]'), pb = e.target.closest('[data-page]'), nv = e.target.closest('[data-nav]');
-  if (cb) { state.combo = +cb.dataset.combo; navigate('/', 'Commerce'); return; }   // version change always restarts on the Commerce nav
+  const mk = e.target.closest('.rv-mark');
+  if (mk) return toggleMark(mk);
+  if (e.target.closest('.rv-pop')) return;
+  if (e.target.closest('#proto, #rvlegend')) {           // prototype chrome: never closes the menu you're inspecting
+    const cb = e.target.closest('[data-combo]'), rv = e.target.closest('[data-review]');
+    if (cb) setVersion(state.ver, cb.dataset.combo);
+    if (rv) { state.review = !state.review; renderProto(); applyFlags(); }
+    return;
+  }
+  if (modal.contains(e.target)) {                        // modal items navigate; anything else inside is handled by the modal itself
+    const a = e.target.closest('[data-href]');
+    if (a) go(a);
+    return;
+  }
+  const pb = e.target.closest('[data-page]'), nv = e.target.closest('[data-nav]');
   if (pb) { navigate(BRAND[pb.dataset.page].home, BRAND[pb.dataset.page].name); return; }
   if (nv) {
     if (nv.dataset.nav === 'back' && state.hist.length) { state.fwd.push({ url: state.url, title: state.title, desc: state.desc, brand: state.brand }); restore(state.hist.pop()); }
@@ -770,7 +1040,7 @@ document.addEventListener('mouseover', e => {
   const h = a.dataset.href;
   s.textContent = /^https?:/.test(h) ? h : 'commerce.com' + h;
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); setExpanded(false); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); setExpanded(false); closeModal(); hidePop(); } });
 
 // Dual nav: collapse the parent strip after scrolling down past a threshold; re-open on a deliberate upward scroll.
 // Direction + hysteresis + a short lock during the animation prevent the feedback loop (collapse shifts layout →
@@ -797,6 +1067,7 @@ function checkScroll() {
 }
 window.addEventListener('scroll', checkScroll, { passive: true });
 
+readHash();
 renderAll();
 </script>
 
