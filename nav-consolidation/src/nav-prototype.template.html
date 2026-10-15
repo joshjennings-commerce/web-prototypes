@@ -6,7 +6,7 @@
 <title>Commerce Consolidated Nav – Prototypes</title>
 <style>
 :root{
-  --nav-h:64px; --dd-ms:220ms; --ease:cubic-bezier(.2,.7,.2,1);
+  --nav-h:64px; --nav-max:1440px; --dd-ms:220ms; --ease:cubic-bezier(.2,.7,.2,1);
   --accent:#6058ff; --bc-card:#e8ddff; --fdx-card:#d7ebfb; --line:#e3e3e8; --ink:#1a1a1a; --muted:#666;
 }
 *{box-sizing:border-box}
@@ -28,7 +28,7 @@ a{color:inherit;text-decoration:none}
 .site{background:#fff;box-shadow:0 1px 0 var(--line);position:relative}
 
 /* ── Bars ── */
-.bar{height:var(--nav-h);display:flex;align-items:center;gap:26px;padding:0 32px;background:#fff;position:relative}
+.bar{height:var(--nav-h);display:flex;align-items:center;gap:26px;padding:0 max(32px, calc((100% - var(--nav-max)) / 2));background:#fff;position:relative}
 .bar + .bar, .pbar-wrap + .bar{border-top:1px solid var(--line)}
 /* Dual nav: the Commerce parent bar is a compact strip above the sub-brand bar. */
 .bar-top{height:var(--top-h,40px);gap:18px}
@@ -76,7 +76,7 @@ body.brand-cta .btn.b-commerce:not(.ghost):hover{filter:brightness(.92)}
 .dd{position:absolute;left:0;right:0;top:100%;z-index:5;background:#fff;border-bottom:1px solid var(--line);border-top:1px solid #e5e5e5;box-shadow:0 24px 40px -24px rgba(0,0,0,.3);
   opacity:0;transform:translateY(-6px);pointer-events:none;transition:opacity var(--dd-ms) var(--ease),transform var(--dd-ms) var(--ease)}
 .dd.open{opacity:1;transform:none;pointer-events:auto}
-.dd-inner{padding:36px 32px 40px;overflow:hidden}
+.dd-inner{padding:36px max(32px, calc((100% - var(--nav-max)) / 2)) 40px;overflow:hidden}
 
 /* Mega menu primitives (layout modeled on the live BC / Feedonomics menus) */
 .mega{display:flex;gap:40px;align-items:stretch;--panel:#f3f4f7;--icon:var(--accent);--cta2:var(--accent);--hl:#eef0ff}
@@ -141,6 +141,16 @@ body.dark-alt .plat.bc{background:#17171c;color:#fff}
 body.dark-alt .plat.bc .pgrid a:hover{background:rgba(255,255,255,.08)}
 body.dark-alt .plat.bc p{color:#cfcfd6}
 body.dark-alt .plat.bc .col-h{color:#9a9aa6;border-color:#2e2e36}
+.ailabs{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:16px 22px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;transition:border-color .15s}
+.ailabs:hover{border-color:#1a1a1a}
+.al-ic{flex:0 0 44px;height:44px;border-radius:10px;background:#e4e7ff;color:#4b50e6;display:grid;place-items:center}
+.al-ic .mi-ic{margin:0;color:inherit;flex:0 0 24px;height:24px}
+.al-ic .mi-ic svg{width:24px;height:24px}
+.al-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+.al-body b{font-size:15px;font-weight:600}
+.al-body small{font-size:13px;color:#666;line-height:1.4}
+.al-btn{margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;background:#1a1a1a;color:#fff}
+.al-btn i{font-style:normal}
 .plat-h{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
 .plat-h .logo svg{height:24px}
 .plat-h .go{font-size:14px;font-weight:600}
@@ -228,7 +238,7 @@ body.no-fly-arrows .fly-link span{display:none}
 .sb-collapse:hover{background:#e8e8e8}
 
 /* ── Page body: blank wireframe ── */
-main{max-width:1200px;margin:0 auto;padding:64px 24px 160px;--wf:#dcdce2;--wf-light:#ececf0}
+main{max-width:calc(var(--nav-max) + 64px);margin:0 auto;padding:64px 32px 160px;--wf:#dcdce2;--wf-light:#ececf0}
 main section,main footer{margin-bottom:72px}
 h1{font-size:48px;letter-spacing:-.03em;margin:0 0 22px;line-height:1.05}
 .wf-line{height:12px;border-radius:6px;background:var(--wf);margin:0 0 12px}
@@ -383,6 +393,7 @@ const ICONS = {
   chat:    '<path d="M4 5h16v10.5H9.5L4.5 20z"/>',
   bolt:    '<path d="M13 2.5 4.5 14h7l-1 7.5L19.5 10h-7z"/>',
   tag:     '<path d="M3.5 12.5V4.5h8l9 9-8 8zM8 8h.01"/>',
+  flask:   '<path d="M9.5 3.5h5M10.5 3.5v6L5 19a1.5 1.5 0 0 0 1.3 2.2h11.4A1.5 1.5 0 0 0 19 19l-5.5-9.5v-6M7.8 15h8.4"/>',
   trend:   '<path d="M3.5 17 9 11.5l4 4 7.5-8M15 7.5h5.5V13"/>',
   gift:    '<path d="M4 9h16v4H4zM5.5 13v7.5h13V13M12 9v11.5M12 9c-1-3.5-5-4-5-1.5C7 9 9.5 9 12 9zm0 0c1-3.5 5-4 5-1.5C17 9 14.5 9 12 9z"/>',
   code:    '<rect x="3" y="4" width="18" height="12.5" rx="1.5"/><path d="M9 20.5h6M12 16.5v4M10 8.5 7.5 10.5 10 12.5M14 8.5l2.5 2-2.5 2"/>',
@@ -394,6 +405,8 @@ const ic = n => n && ICONS[n] ? `<span class="mi-ic"><svg viewBox="0 0 24 24" fi
 
 // I(title, href, description, flags: 'ai' | 'hl' | 'ph' (placeholder, no real source yet), icon)
 const I = (t, h, d, f, icon) => ({ t, h, d, ai: /\bai\b/.test(f || ''), nw: /\bnew\b/.test(f || ''), hl: /\bhl\b/.test(f || ''), ph: /\bph\b/.test(f || ''), icon, ext: /^https?:/.test(h) });
+
+const AI_LABS = { t: 'AI Labs', d: 'Experiments and early access to what we’re building in agentic commerce.', h: '/ai-labs/', cta: 'Learn More' };
 
 const INDUSTRIES = [ // first three from Figma; rest PLACEHOLDER
   I('Automotive', '/solutions/industries/automotive/'), I('Sports & Outdoors', '/solutions/industries/sports-outdoors/'),
@@ -533,6 +546,9 @@ const LEARNING = {
       I('Guides', '/learning/guides/'), I('Podcasts', '/learning/podcasts/'), I('Reports', '/learning/reports/'),
       I('Webinars', '/learning/webinars/'), I('Events', '/learning/events/'),
     ]},
+    { title: 'Press', items: [
+      I('Press Releases', '/press/releases/'), I('News', '/press/news/'),
+    ]},
   ],
 };
 // Sub-brand "Resources": product/platform-specific help. Items marked 'ph' have no public source today.
@@ -605,7 +621,7 @@ FDX_PRODUCTS.brand = FDX_INTEGRATIONS.brand = 'fdx';
 const PARENT = {
   A: [{ l: 'Solutions', m: 'solutions' }, { l: 'Case Studies', m: 'cases' }, { l: 'Resources', m: 'resources' }, { l: 'Partners', m: 'partners', extra: true }],
   B: [{ l: 'Platforms', m: 'platforms' }, { l: 'Industries', m: 'industries' }, { l: 'Case Studies', m: 'cases' }, { l: 'Resources', m: 'resources' }, { l: 'Partners', m: 'partners' }],
-  C: [{ l: 'Solutions', m: 'solutions2' }, { l: 'Industries', m: 'industries' }, { l: 'Learning', m: 'learning' }, { l: 'Customers', h: '/case-studies/' }, { l: 'Partners', h: '/partners/' }],
+  C: [{ l: 'Solutions', m: 'solutions2' }, { l: 'Industries', m: 'industries' }, { l: 'Learning', m: 'learning' }, { l: 'Customers', h: '/case-studies/' }, { l: 'Company', h: '/about/' }, { l: 'Partners', h: '/partners/' }],
 };
 const SUB = {
   bc:  [{ l: 'Products', m: 'bcProducts' }, { l: 'Services', h: '/bigcommerce/services/' }, { l: 'Integrations', h: '/bigcommerce/integrations/' }, { l: 'Pricing', h: '/bigcommerce/pricing/' }],
@@ -683,7 +699,9 @@ const solCol = (title, items, grid) => `<div class="col ${grid ? 'wide' : ''}"><
 const solA = compact => `<div class="mega brand-commerce ${compact ? 'compact' : ''}" style="display:block"><div class="solA ${compact ? 'compact' : ''}"><div class="cards">${card('bc')}${card('fdx')}</div>${solCol('Teams', TEAMS)}${solCol('Industries', INDUSTRIES, true)}</div></div>`;
 const plat = b => `<div class="plat ${b}"><div class="plat-h" data-href="${BRAND[b].home}" data-label="${BRAND[b].name}">${logo(b)}<span class="go">Explore →</span></div><p>${esc(BRAND[b].blurb)}</p>
   <div class="col-h">Products &amp; features</div><div class="pgrid">${PLATFORM_PICKS[b].map(it => `${A(it, '')}${esc(it.t)}${it.ai ? AI : ''}</a>`).join('')}</div></div>`;
-const platB = () => `<div class="mega brand-commerce" style="display:block"><div class="platB">${plat('bc')}${plat('fdx')}</div></div>`;
+// v2.0 Solutions only: AI Labs strip spans both brand panels.
+const aiLabs = () => `<div class="ailabs" data-href="${AI_LABS.h}" data-label="${AI_LABS.t}"><span class="al-ic">${ic('flask')}</span><span class="al-body"><b>${AI_LABS.t}</b><small>${esc(AI_LABS.d)}</small></span><span class="al-btn">${AI_LABS.cta} <i>›</i></span></div>`;
+const platB = withLabs => `<div class="mega brand-commerce" style="display:block"><div class="platB">${plat('bc')}${plat('fdx')}${withLabs ? aiLabs() : ''}</div></div>`;
 // v2.0 Get Started: BigCommerce column (Trial, Demo) | Feedonomics column (Demo), Contact Sales across the bottom.
 const gsOpt = o => `<div class="gs-opt" data-href="${o.h}" data-label="${esc(o.t)}"><span><b>${esc(o.t)}</b>${o.d ? `<small>${esc(o.d)}</small>` : ''}</span><i>›</i></div>`;
 const gsCol = b => `<div class="gs-col ${b}">${logo(b)}<p>${esc(BRAND[b].blurb)}</p>${GET_STARTED[b].map(gsOpt).join('')}</div>`;
@@ -692,7 +710,7 @@ const gsHTML = () => `<div class="gs"><h4 class="gs-h">${esc(V.ctaHeading)}</h4>
 function menuContent(id, compact) {
   const m = MENUS[id];
   if (m.kind === 'solA') return solA(compact);
-  if (m.kind === 'platB') return platB();
+  if (m.kind === 'platB') return platB(id === 'solutions2');
   if (m.kind === 'gs') return `<div class="mega brand-commerce" style="display:block">${gsHTML()}</div>`;
   return megaHTML(m, compact);
 }
