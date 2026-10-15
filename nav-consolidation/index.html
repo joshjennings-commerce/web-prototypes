@@ -99,6 +99,7 @@ body.brand-cta .btn.b-commerce:not(.ghost):hover{filter:brightness(.92)}
 .mi.hl:hover{background:#e6e9ff}
 .ai{width:18px;height:18px;border-radius:50%;background:#e4e7ff;color:#4b50e6;display:inline-grid;place-items:center;font-size:11px;line-height:1}
 .ext{font-size:12px;color:#777}
+.new-pill{font-size:11px;font-weight:500;line-height:1;color:#0d52ff;background:#0d52ff14;border:1px solid #0d52ff4d;border-radius:999px;padding:3px 8px}
 .panel{flex:0 0 320px;background:var(--panel);margin:-36px -32px -40px auto;padding:36px 32px 40px 32px;display:flex;flex-direction:column;gap:28px}
 .panel .col{min-width:0}
 .promo{background:#fff;border-radius:10px;padding:22px 22px 20px;display:flex;flex-direction:column;gap:8px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05)}
@@ -396,12 +397,17 @@ const ICONS = {
   chat:    '<path d="M4 5h16v10.5H9.5L4.5 20z"/>',
   bolt:    '<path d="M13 2.5 4.5 14h7l-1 7.5L19.5 10h-7z"/>',
   tag:     '<path d="M3.5 12.5V4.5h8l9 9-8 8zM8 8h.01"/>',
+  trend:   '<path d="M3.5 17 9 11.5l4 4 7.5-8M15 7.5h5.5V13"/>',
+  gift:    '<path d="M4 9h16v4H4zM5.5 13v7.5h13V13M12 9v11.5M12 9c-1-3.5-5-4-5-1.5C7 9 9.5 9 12 9zm0 0c1-3.5 5-4 5-1.5C17 9 14.5 9 12 9z"/>',
+  code:    '<rect x="3" y="4" width="18" height="12.5" rx="1.5"/><path d="M9 20.5h6M12 16.5v4M10 8.5 7.5 10.5 10 12.5M14 8.5l2.5 2-2.5 2"/>',
+  building:'<path d="M5 20.5V4.5h9v16M14 9.5h5v11M3.5 20.5h17M8 8h3M8 12h3M8 16h3"/>',
+  windows: '<rect x="3.5" y="5" width="13" height="10.5" rx="1.5"/><path d="M7.5 19h13V9.5M3.5 9h13"/>',
   cart:    '<path d="M3.5 4h2.5l2.2 11h10.3l2-7H7"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17.5" cy="19.5" r="1.3"/>',
 };
 const ic = n => n && ICONS[n] ? `<span class="mi-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[n]}</svg></span>` : '';
 
 // I(title, href, description, flags: 'ai' | 'hl' | 'ph' (placeholder, no real source yet), icon)
-const I = (t, h, d, f, icon) => ({ t, h, d, ai: /\bai\b/.test(f || ''), hl: /\bhl\b/.test(f || ''), ph: /\bph\b/.test(f || ''), icon, ext: /^https?:/.test(h) });
+const I = (t, h, d, f, icon) => ({ t, h, d, ai: /\bai\b/.test(f || ''), nw: /\bnew\b/.test(f || ''), hl: /\bhl\b/.test(f || ''), ph: /\bph\b/.test(f || ''), icon, ext: /^https?:/.test(h) });
 
 const INDUSTRIES = [ // first three from Figma; rest PLACEHOLDER
   I('Automotive', '/solutions/industries/automotive/'), I('Sports & Outdoors', '/solutions/industries/sports-outdoors/'),
@@ -530,35 +536,33 @@ const PARTNERS = {
 const LEARNING = {
   hub: '/learning/',
   cols: [
-    { title: 'Read', items: [
-      I('Blog', '/blog/', 'News, trends, and ideas from across Commerce.'), I('Articles', '/learning/articles/'),
-      I('Guides', '/learning/guides/'), I('Reports', '/learning/reports/'),
+    { title: 'Learning Resources', grid: true, items: [
+      I('Commerce Growth', '/learning/commerce-growth/', '', '', 'steps'), I('B2B Ecommerce', '/learning/b2b-ecommerce/', '', '', 'building'),
+      I('Agentic Commerce', '/learning/agentic-commerce/', '', 'new', 'sparkle'), I('Channels & Marketplaces', '/learning/channels-marketplaces/', '', '', 'windows'),
+      I('Commerce Trends', '/learning/commerce-trends/', '', '', 'trend'), I('Holiday Commerce', '/learning/holiday-commerce/', '', '', 'gift'),
+      I('Developer Blog', '/learning/developer-blog/', '', '', 'code'),
     ]},
-    { title: 'Watch & Listen', items: [
-      I('Webinars', '/learning/webinars/'), I('Podcasts', '/learning/podcasts/'), I('Events', '/learning/events/'),
-    ]},
-    { title: 'By Topic', items: [ // PLACEHOLDER topic taxonomy
-      I('Agentic Commerce & AI', '/learning/agentic-commerce/'), I('B2B Ecommerce', '/learning/b2b/'),
-      I('Omnichannel & Marketplaces', '/learning/omnichannel/'), I('Headless & Composable', '/learning/headless/'),
-      I('Migration', '/learning/migration/'),
+    { title: 'Browse by Type', grid: true, items: [
+      I('All Resources', '/learning/'), I('Articles', '/learning/articles/'), I('Blog', '/learning/blog/'),
+      I('Guides', '/learning/guides/'), I('Podcasts', '/learning/podcasts/'), I('Reports', '/learning/reports/'),
+      I('Webinars', '/learning/webinars/'), I('Events', '/learning/events/'),
     ]},
   ],
-  promo: { eyebrow: 'Featured report', title: 'The Global B2B Buyer Behavior Report', desc: 'This in-depth report provides actionable strategies to help you sell more online.', cta: 'Read now', h: '/learning/reports/global-b2b-buyer-behavior-report/' },
 };
 // Sub-brand "Resources": product/platform-specific help. Items marked 'ph' have no public source today.
 const BC_RESOURCES = {
   hub: '/bigcommerce/resources/', brand: 'bc',
   cols: [
-    { title: 'Learn', items: [
-      I('BigCommerce University', '/bigcommerce/services/university/', 'Courses and certifications.', '', 'steps'),
-      I('Guides & Playbooks', '/bigcommerce/resources/guides/', 'How-tos for launching and growing.', '', 'doc'),
-      I('Case Studies', '/case-studies/?brand=bigcommerce', 'Brands growing on BigCommerce.', '', 'target'),
+    { title: 'Product Info', items: [
+      I('Basics of BigCommerce', '/bigcommerce/basics/', 'A quick video tour of the platform.', '', 'steps'),
+      I('Product Releases', '/blog/category/product-info-updates/', 'What’s new and what just shipped.', '', 'bolt'),
+      I('Help Center', 'https://support.bigcommerce.com/s/', 'Docs, how-tos, and support.', '', 'chat'),
+      I('BigCommerce University', '/bigcommerce/services/university/', 'Courses and certifications.', '', 'doc'),
     ]},
-    { title: 'Get Help', items: [
-      I('Help Center', 'https://support.bigcommerce.com/', 'Knowledge base and support articles.', '', 'chat'),
-      I('Community', 'https://support.bigcommerce.com/s/group/', 'Ask questions, share answers.', '', 'globe'), // URL PLACEHOLDER
-      I('Contact Support', '/bigcommerce/support/', '', '', 'shield'),
-      I('System Status', 'https://status.bigcommerce.com/', '', '', 'server'),
+    { title: 'Community', items: [
+      I('Case Studies', '/case-studies/?brand=bigcommerce', 'Brands growing on BigCommerce.', '', 'target'),
+      I('Customer Showcase', '/case-studies/showcase/', '', '', 'layers'),
+      I('Community Q&A', 'https://support.bigcommerce.com/s/qa?language=en_US', 'Ask questions, share answers.', '', 'globe'),
     ]},
     { title: 'Build', panel: true, items: [
       I('Developer Docs', 'https://developer.bigcommerce.com/'), I('API Reference', 'https://developer.bigcommerce.com/docs/api'),
@@ -615,7 +619,7 @@ FDX_PRODUCTS.brand = FDX_INTEGRATIONS.brand = 'fdx';
 const PARENT = {
   A: [{ l: 'Solutions', m: 'solutions' }, { l: 'Case Studies', m: 'cases' }, { l: 'Resources', m: 'resources' }, { l: 'Partners', m: 'partners', extra: true }],
   B: [{ l: 'Platforms', m: 'platforms' }, { l: 'Industries', m: 'industries' }, { l: 'Case Studies', m: 'cases' }, { l: 'Resources', m: 'resources' }, { l: 'Partners', m: 'partners' }],
-  C: [{ l: 'Solutions', m: 'solutions2' }, { l: 'Industries', m: 'industries' }, { l: 'Case Studies', m: 'cases' }, { l: 'Learning', m: 'learning' }, { l: 'Partners', m: 'partners' }],
+  C: [{ l: 'Solutions', m: 'solutions2' }, { l: 'Industries', m: 'industries' }, { l: 'Learning', m: 'learning' }, { l: 'Customers', h: '/case-studies/' }, { l: 'Partners', h: '/partners/' }],
 };
 const SUB = {
   bc:  [{ l: 'Products', m: 'bcProducts' }, { l: 'Services', h: '/bigcommerce/services/' }, { l: 'Integrations', h: '/bigcommerce/integrations/' }, { l: 'Pricing', h: '/bigcommerce/pricing/' }],
@@ -651,9 +655,9 @@ const FLAGS = {
     { n: 2, where: '.gs-col.fdx', title: 'Feedonomics CTA column is lopsided',
       note: 'Feedonomics has no self-serve trial, so its column has one option next to BigCommerce’s two. Options: a second Feedonomics action (e.g. a free feed audit), or a single-column list.' },
     { n: 3, where: '[data-menu="learning"], [data-menu="bcResources"], [data-menu="fdxResources"]', title: 'Learning vs. Resources overlap',
-      note: 'BigCommerce University, product guides, and webinars could live in either menu. Decide the split (editorial vs. product help) and whether the labels make that split obvious.' },
-    { n: 4, where: '.bar [data-menu="cases"], .bar [data-menu="partners"]', title: 'Case Studies & Partners are parent-level only',
-      note: 'On sub-brand pages the only route to Case Studies and Partners is the Commerce strip, which hides on scroll. Review whether the sub-brand Resources menu should link to brand-filtered views.' },
+      note: 'Split follows the updated BigCommerce resource nav: topics and content types in Learning, product info, help and community in Resources. Open: Contact Support and System Status were not placed by the update; Events is in Learning for now.' },
+    { n: 4, where: '.bar .link[data-label="Customers"], .bar .link[data-label="Partners"]', title: 'Customers & Partners are parent-level only',
+      note: 'Both are now plain links (no dropdown). On sub-brand pages the only route to Customers and Partners is the Commerce strip, which hides on scroll. Review whether the sub-brand Resources menu should link to brand-filtered views.' },
     { n: 5, where: '.mi[data-ph]', title: 'Feedonomics resource placeholders',
       note: 'Feedonomics has no public equivalent today for several BigCommerce resources (developer docs, API reference, help center, guides). These items are placeholders pending a content inventory.' },
   ],
@@ -676,7 +680,7 @@ function writeHash() {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const A = (it, cls) => `<a class="${cls}" ${it.ph ? 'data-ph' : ''} data-href="${esc(it.h)}" data-label="${esc(it.t)}" data-desc="${esc(it.d || '')}">`;
 const AI = '<span class="ai" title="AI">✦</span>';
-const itemHTML = it => `${A(it, 'mi' + (it.hl ? ' hl' : ''))}${ic(it.icon)}<span class="mi-body"><span class="mi-t">${esc(it.t)}${it.ai ? AI : ''}${it.ext ? '<span class="ext">↗</span>' : ''}</span>${it.d ? `<span class="mi-d">${esc(it.d)}</span>` : ''}</span></a>`;
+const itemHTML = it => `${A(it, 'mi' + (it.hl ? ' hl' : ''))}${ic(it.icon)}<span class="mi-body"><span class="mi-t">${esc(it.t)}${it.ai ? AI : ''}${it.nw ? '<span class="new-pill">New</span>' : ''}${it.ext ? '<span class="ext">↗</span>' : ''}</span>${it.d ? `<span class="mi-d">${esc(it.d)}</span>` : ''}</span></a>`;
 const colHTML = c => `<div class="col ${c.grid ? 'wide' : ''}" data-col="${esc(c.title || '')}">${c.title ? `<div class="col-h">${esc(c.title)}</div>` : ''}${c.grid ? `<div class="igrid">${c.items.map(itemHTML).join('')}</div>` : c.items.map(itemHTML).join('')}</div>`;
 const promoHTML = p => `${A({ h: p.h, t: p.title }, 'promo')}<div class="col-h">${esc(p.eyebrow)}</div><h5>${esc(p.title)}</h5><p>${esc(p.desc)}</p><span class="cta"><i>›</i>${esc(p.cta)}</span></a>`;
 function megaHTML(m, compact) {
@@ -801,7 +805,7 @@ function renderPage() {
     <footer class="wf-footer">${'<div>' + line(50) + line(70) + line(60) + line(65) + line(55) + '</div>'.repeat(4)}</footer>`;
 }
 function renderProto() {
-  const vers = Object.keys(VERSIONS), vars = Object.keys(VERSIONS[state.ver]);
+  const vers = Object.keys(VERSIONS).sort((a, b) => parseFloat(b) - parseFloat(a)), vars = Object.keys(VERSIONS[state.ver]);
   document.getElementById('proto').innerHTML = `
     <div class="proto-row">
       <span class="proto-label">Version</span><select class="proto-sel" data-ver aria-label="Version">${vers.map(v => `<option value="${v}" ${state.ver === v ? 'selected' : ''}>${v}</option>`).join('')}</select>
