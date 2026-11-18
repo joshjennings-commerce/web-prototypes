@@ -12,6 +12,7 @@ Each prototype is self-contained in its own folder:
 | Prototype | Folder |
 |---|---|
 | Consolidated navigation concepts | `nav-consolidation/` |
+| Commerce Gap Report 2026 (concept) | `commerce-gap-report/` |
 
 ## Adding a prototype
 
@@ -39,3 +40,13 @@ The gear at the bottom-right of the page opens a control panel; "Copy changes" p
 Deep links: `#v2.0-1`, `#v1.0-3`, etc. Append `-review` to open with Review mode on.
 
 **Review mode.** The Review toggle in the toolbar outlines flagged nav items in amber with numbered markers (hover or click a marker for the note) and lists all open questions. Flags live in the `FLAGS` object in the template, keyed by version; add or remove entries there.
+
+## commerce-gap-report
+
+`commerce-gap-report/index.html` is generated. Edit `commerce-gap-report/src/report.html`, then run:
+
+```
+python3 commerce-gap-report/src/build.py
+```
+
+`src/report.html` has no `<html>/<head>/<body>` wrapper because it is also published as a claude.ai artifact, which adds its own; the build script adds the wrapper for Pages. Chart animations can be turned off for everyone with `ANIMATE_CHARTS = false` near the top of the script. Review notes are hidden by default; the footer link shows them.

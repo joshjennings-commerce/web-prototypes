@@ -1,0 +1,1304 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Commerce Gap Report 2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="The Commerce Gap Report 2026: a benchmark study of 141 senior ecommerce decision-makers on readiness, AI, product data, channels and checkout.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap">
+<style>
+@font-face{font-family:"Aeonik Pro";src:url("fonts/aeonik-medium.otf") format("opentype");font-weight:500;font-style:normal;font-display:swap}
+
+/* Layout: a long editorial scroll on Pearl. Each finding pairs a sticky headline column with a figure column; one dark band carries the headline chart; the single Neon highlight lives in the hero. */
+:root{
+  --bg:#F5F3F2;          /* Pearl */
+  --surface:#FFFFFF;
+  --tint:#DFDFFF;        /* Lilac */
+  --ink:#170245;         /* Indigo */
+  --ink-2:#344054;
+  --ink-3:#5F6779;
+  --line:#E4E7EC;
+  --line-2:#B1B8C5;
+  --accent:#6058FF;      /* Iris */
+  --on-accent:#FFFFFF;
+  --focus:#6058FF;
+  --hl:#B3FF3D;          /* Neon highlighter */
+  --hl-ink:#170245;
+  --band-bg:#170245;
+
+  /* chart: activity/intent vs foundations in place */
+  --say:#6058FF; --on-say:#FFFFFF;
+  --gap:#EA3BA7; --on-gap:#170245;
+  --na:#C9CED8;  --on-na:#170245;
+  /* sequential (Iris) */
+  --s1:#D4D2FF; --on-s1:#170245;
+  --s2:#ABA6FF; --on-s2:#170245;
+  --s3:#837CFF; --on-s3:#170245;
+  --s4:#6058FF; --on-s4:#FFFFFF;
+  --s5:#2D2D83; --on-s5:#FFFFFF;
+  /* diverging manual (Punch) to automated (Iris) */
+  --d1:#EA3BA7; --on-d1:#170245;
+  --d2:#F49ACF; --on-d2:#170245;
+  --d3:#C9CED8; --on-d3:#170245;
+  --d4:#ABA6FF; --on-d4:#170245;
+  --d5:#6058FF; --on-d5:#FFFFFF;
+  /* severity (Punch) */
+  --v0:#C9CED8; --on-v0:#170245;
+  --v1:#F8CBE6; --on-v1:#170245;
+  --v2:#F28BCB; --on-v2:#170245;
+  --v3:#EA3BA7; --on-v3:#170245;
+  --v4:#A3146C; --on-v4:#FFFFFF;
+
+  --f-display:"Aeonik Pro","DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  --r-sm:8px; --r-md:16px; --r-lg:24px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#170245; --surface:#200C56; --tint:#2D2D83; --ink:#FFFFFF; --ink-2:#D0D5DD; --ink-3:#A9B0BF;
+    --line:#33236E; --line-2:#4D3F8C; --accent:#A5A0FF; --on-accent:#170245; --focus:#B3FF3D; --band-bg:#0D0128;
+    --say:#7F78FF; --on-say:#170245; --gap:#E64FB2; --on-gap:#170245; --na:#4E5668; --on-na:#FFFFFF;
+    --s1:#3A2F8F; --on-s1:#FFFFFF; --s2:#5852C8; --on-s2:#FFFFFF; --s3:#7F78FF; --on-s3:#170245; --s4:#ABA6FF; --on-s4:#170245; --s5:#E2E0FF; --on-s5:#170245;
+    --d1:#E64FB2; --on-d1:#170245; --d2:#9E3C82; --on-d2:#FFFFFF; --d3:#4E5668; --on-d3:#FFFFFF; --d4:#5852C8; --on-d4:#FFFFFF; --d5:#9D98FF; --on-d5:#170245;
+    --v0:#4E5668; --on-v0:#FFFFFF; --v1:#5E2552; --on-v1:#FFFFFF; --v2:#9E3C82; --on-v2:#FFFFFF; --v3:#E64FB2; --on-v3:#170245; --v4:#FF9AD6; --on-v4:#170245;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#170245; --surface:#200C56; --tint:#2D2D83; --ink:#FFFFFF; --ink-2:#D0D5DD; --ink-3:#A9B0BF;
+  --line:#33236E; --line-2:#4D3F8C; --accent:#A5A0FF; --on-accent:#170245; --focus:#B3FF3D; --band-bg:#0D0128;
+  --say:#7F78FF; --on-say:#170245; --gap:#E64FB2; --on-gap:#170245; --na:#4E5668; --on-na:#FFFFFF;
+  --s1:#3A2F8F; --on-s1:#FFFFFF; --s2:#5852C8; --on-s2:#FFFFFF; --s3:#7F78FF; --on-s3:#170245; --s4:#ABA6FF; --on-s4:#170245; --s5:#E2E0FF; --on-s5:#170245;
+  --d1:#E64FB2; --on-d1:#170245; --d2:#9E3C82; --on-d2:#FFFFFF; --d3:#4E5668; --on-d3:#FFFFFF; --d4:#5852C8; --on-d4:#FFFFFF; --d5:#9D98FF; --on-d5:#170245;
+  --v0:#4E5668; --on-v0:#FFFFFF; --v1:#5E2552; --on-v1:#FFFFFF; --v2:#9E3C82; --on-v2:#FFFFFF; --v3:#E64FB2; --on-v3:#170245; --v4:#FF9AD6; --on-v4:#170245;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top, 0px))}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;letter-spacing:-0.005em;-webkit-font-smoothing:antialiased}
+@media (min-width:900px){body{font-size:19px}}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:500;margin:0;text-wrap:balance;letter-spacing:-0.02em;color:var(--ink)}
+p{margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+@media (min-width:900px){.wrap{padding-left:max(48px, env(safe-area-inset-left, 0px));padding-right:max(48px, env(safe-area-inset-right, 0px))}}
+.eyebrow{font-family:var(--f-display);font-weight:500;font-size:14px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--ink-3)}
+.prose{max-width:62ch;display:grid;gap:18px;color:var(--ink-2)}
+.prose strong{color:var(--ink);font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:68px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink);flex-shrink:0}
+.brand img{height:30px;width:auto;display:block}
+.brand .logo-w{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand .logo-p{display:none}:root:not([data-theme="light"]) .brand .logo-w{display:block}}
+:root[data-theme="dark"] .brand .logo-p{display:none}
+:root[data-theme="dark"] .brand .logo-w{display:block}
+.brand-rule{width:1px;height:24px;background:var(--line-2)}
+.brand-name{font-family:var(--f-display);font-weight:500;font-size:16px;letter-spacing:-0.01em;white-space:nowrap}
+.nav{display:none;gap:4px;margin-left:auto}
+@media (min-width:1080px){.theme-btn{margin-left:8px}}
+.nav a{font-size:15px;color:var(--ink-2);text-decoration:none;padding:8px 12px;border-radius:999px}
+.nav a:hover{background:var(--tint);color:var(--ink)}
+@media (min-width:1080px){.nav{display:flex}}
+.theme-btn{margin-left:auto;flex-shrink:0;position:relative;width:68px;height:36px;padding:0 9px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-3);display:inline-flex;align-items:center;justify-content:space-between;cursor:pointer}
+.theme-btn:hover{border-color:var(--ink)}
+.theme-btn svg{width:16px;height:16px;position:relative;z-index:1;transition:color .2s}
+.theme-btn .i-sun{order:-1;color:var(--on-accent)}
+.theme-btn .knob{position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:var(--accent);transition:transform .25s ease}
+.theme-btn.is-dark .knob{transform:translateX(32px)}
+.theme-btn.is-dark .i-sun{color:var(--ink-3)}
+.theme-btn.is-dark .i-moon{color:var(--on-accent)}
+.utility{background:var(--tint);color:var(--ink-2);font-size:12px;line-height:1}
+.utility .wrap{display:flex;align-items:center;justify-content:flex-end;min-height:30px}
+.motion-btn{display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:6px 0;font:400 12px/1 var(--f-body);color:var(--ink-2);cursor:pointer}
+.motion-btn:hover{color:var(--ink)}
+.motion-btn .mini{width:22px;height:12px;border-radius:999px;background:var(--line-2);position:relative;transition:background .2s}
+.motion-btn .mini::after{content:"";position:absolute;top:2px;left:2px;width:8px;height:8px;border-radius:50%;background:var(--surface);transition:transform .2s}
+.motion-btn[aria-checked="true"] .mini{background:var(--accent)}
+.motion-btn[aria-checked="true"] .mini::after{transform:translateX(10px)}
+.motion-btn[hidden]{display:none}
+
+/* chart motion: only active while the root has .anim; charts wait in .anim-pending until scrolled into view */
+.anim .hb-bar,.anim .bm-bar{transform-origin:left center;transition:transform .75s cubic-bezier(.22,.8,.26,1) calc(var(--k,0) * 45ms),width .4s ease}
+.anim-pending .hb-bar,.anim-pending .bm-bar{transform:scaleX(0)}
+.anim .st-bar{transition:clip-path .9s cubic-bezier(.22,.8,.26,1) calc(var(--k,0) * 90ms)}
+.anim-pending .st-bar{clip-path:inset(0 100% 0 0)}
+.anim .col-bar{transform-origin:center bottom;transition:transform .75s cubic-bezier(.22,.8,.26,1) calc(var(--k,0) * 50ms)}
+.anim-pending .col-bar{transform:scaleY(0)}
+.anim .col-val{transition:opacity .3s ease calc(var(--k,0) * 50ms + .45s)}
+.anim-pending .col-val{opacity:0}
+.anim .db-line{transform-origin:center;transition:transform 1.12s cubic-bezier(.5,0,0,1) .05s}
+.anim-pending .db-line{transform:scaleX(0)}
+.anim .db-dot,.anim .db-val{transition:left 1.12s cubic-bezier(.5,0,0,1) .05s}
+.anim-pending .db-dot,.anim-pending .db-val{left:var(--mid)!important}
+.anim .fn-fill{transition:width .85s cubic-bezier(.22,.8,.26,1) calc(var(--k,0) * 430ms + .15s)}
+.anim-pending .fn-fill{width:calc(var(--prev) * 1%)}
+.anim-pending .fn-base .fn-fill{width:100%}
+.anim .fn-prev{transition:opacity .45s ease calc(var(--k,0) * 430ms)}
+.anim-pending .fn-prev{opacity:0}
+.anim .fn-meta em{transition:opacity .35s ease calc(var(--k,0) * 430ms + .85s)}
+.anim-pending .fn-meta em{opacity:0}
+.anim .fn-cap{transition:opacity .5s ease 2.4s}
+.anim-pending + .fn-cap{opacity:0}
+.rv-toggle{font:400 13px/1.2 var(--f-body);color:var(--ink-3);background:none;border:0;padding:6px 0;cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
+.rv-toggle:hover{text-decoration-color:currentColor}
+@media (max-width:420px){.brand-rule,.brand-name{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(48px,7vw,104px) clamp(56px,7vw,96px)}
+.hero-grid{display:grid;gap:56px;align-items:center}
+@media (min-width:1000px){.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px}}
+.hero h1{font-size:clamp(31px,4.35vw,59px);line-height:1.06;margin-top:20px}
+.hl{background:linear-gradient(180deg,transparent 10%,var(--hl) 10%,var(--hl) 94%,transparent 94%);color:var(--hl-ink);padding:0 .06em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero .deck{font-size:clamp(18px,1.6vw,22px);line-height:1.5;color:var(--ink-2);margin-top:28px;max-width:34em}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:500 16px/1 var(--f-body);padding:14px 22px;border-radius:999px;text-decoration:none;border:1px solid transparent;cursor:pointer}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-ghost{border-color:var(--line-2);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink)}
+
+.funnel-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(20px,3vw,32px);display:grid;gap:18px}
+.funnel-card .legend{margin:0}
+.fn-drop-sw{background:repeating-linear-gradient(135deg,var(--gap) 0 2px,transparent 2px 5px);box-shadow:inset 0 0 0 1px var(--gap)}
+.funnel{list-style:none;margin:0;padding:0;display:grid;gap:12px;cursor:default}
+.fn-row{display:grid;gap:6px}
+.fn-bar{display:grid;height:36px}
+.fn-bar > span{grid-area:1/1;justify-self:center;height:100%;border-radius:4px}
+.fn-prev{width:calc(var(--prev) * 1%);background:repeating-linear-gradient(135deg,var(--gap) 0 2px,transparent 2px 7px);box-shadow:inset 0 0 0 1px var(--gap);opacity:.55}
+.fn-fill{position:relative;z-index:1;width:calc(var(--w) * 1%);background:var(--say);color:var(--on-say);display:flex;align-items:center;justify-content:center;font:500 17px/1 var(--f-display);min-width:44px;box-shadow:0 0 0 2px var(--surface)}
+.fn-base .fn-fill{background:var(--s1);color:var(--on-s1)}
+.fn-last .fn-fill{background:var(--s5);color:var(--on-s5)}
+.fn-meta{display:flex;justify-content:space-between;align-items:baseline;gap:4px 14px;flex-wrap:wrap;font-size:14px;line-height:1.35;color:var(--ink-2)}
+.fn-meta em{font-style:normal;color:var(--ink-3);font-size:13px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.fn-meta em::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--gap);display:inline-block}
+.fn-cap{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center;border-top:1px solid var(--line);padding-top:16px}
+.fn-cap .big{font:500 clamp(48px,5vw,64px)/1 var(--f-display);letter-spacing:-0.03em}
+.fn-cap p{color:var(--ink-2);font-size:16px;line-height:1.45}
+
+.facts{border-block:1px solid var(--line)}
+.facts ul{list-style:none;margin:0;padding:18px 0;display:flex;flex-wrap:wrap;gap:10px 32px;font-size:15px;color:var(--ink-2)}
+.facts b{font-weight:600;color:var(--ink)}
+
+/* ---------- sections ---------- */
+.sec{padding-block:clamp(72px,9vw,128px)}
+.sec-head{display:grid;gap:18px;max-width:880px;margin-bottom:clamp(40px,5vw,64px)}
+.sec-head h2{font-size:clamp(34px,4.2vw,55px);line-height:1.06}
+.sec-head p{color:var(--ink-2);max-width:60ch}
+
+.five{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.five li{display:grid;grid-template-columns:minmax(0,1fr);gap:6px 40px;padding:26px 0;border-bottom:1px solid var(--line);align-items:baseline}
+@media (min-width:760px){.five li{grid-template-columns:200px minmax(0,1fr) auto}}
+.five .n{font:500 clamp(56px,6vw,76px)/1 var(--f-display);letter-spacing:-0.03em}
+.five .t{font-size:clamp(19px,1.8vw,24px);line-height:1.4;color:var(--ink)}
+.five .t small{display:block;font-size:14px;color:var(--ink-3);margin-top:6px}
+.five a{font-size:15px;white-space:nowrap}
+
+/* dark band */
+.band{background:var(--band-bg);color:#FFFFFF;--ink:#FFFFFF;--ink-2:#D0D5DD;--ink-3:#A9B0BF;--line:#33236E;--line-2:#4D3F8C;--accent:#A5A0FF;--say:#7F78FF;--gap:#E64FB2;--surface:#200C56;--focus:#B3FF3D}
+
+/* ---------- charts ---------- */
+.fig{margin:0;display:grid;gap:18px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:clamp(18px,2.4vw,28px)}
+.fig > *{min-width:0}
+.band .fig{background:none;border:0;border-radius:0;padding:0}
+.chart,.bm-rows,.funnel{cursor:default}
+.fig figcaption{font-family:var(--f-display);font-weight:500;font-size:18px;line-height:1.35;color:var(--ink)}
+.fig figcaption b{font-weight:500;color:var(--ink-3);margin-right:6px}
+.src{font-size:13px;line-height:1.45;color:var(--ink-3)}
+.chart{min-width:0}
+
+.legend{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--ink-2)}
+.legend li{display:inline-flex;align-items:center;gap:8px}
+.legend b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block;flex-shrink:0}
+
+.c-say{background:var(--say);color:var(--on-say)} .c-gap{background:var(--gap);color:var(--on-gap)} .c-na{background:var(--na);color:var(--on-na)}
+.c-s1{background:var(--s1);color:var(--on-s1)} .c-s2{background:var(--s2);color:var(--on-s2)} .c-s3{background:var(--s3);color:var(--on-s3)} .c-s4{background:var(--s4);color:var(--on-s4)} .c-s5{background:var(--s5);color:var(--on-s5)}
+.c-d1{background:var(--d1);color:var(--on-d1)} .c-d2{background:var(--d2);color:var(--on-d2)} .c-d3{background:var(--d3);color:var(--on-d3)} .c-d4{background:var(--d4);color:var(--on-d4)} .c-d5{background:var(--d5);color:var(--on-d5)}
+.c-v0{background:var(--v0);color:var(--on-v0)} .c-v1{background:var(--v1);color:var(--on-v1)} .c-v2{background:var(--v2);color:var(--on-v2)} .c-v3{background:var(--v3);color:var(--on-v3)} .c-v4{background:var(--v4);color:var(--on-v4)}
+.c-hatch{background:repeating-linear-gradient(135deg,var(--na) 0 3px,transparent 3px 7px);color:var(--ink);box-shadow:inset 0 0 0 1px var(--na)}
+
+/* horizontal bars */
+.hb{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.hb-sec{display:grid;gap:10px}
+.hb.grouped .hb-sec{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px 16px}
+.hb-row{display:grid;grid-template-columns:minmax(0,1fr) 48px;grid-template-areas:"l l" "t v";gap:4px 12px;align-items:center}
+@media (min-width:700px){.hb-row{grid-template-columns:minmax(0,15em) minmax(0,1fr) 48px;grid-template-areas:"l t v"}}
+.hb-label{grid-area:l;font-size:15px;line-height:1.3;color:var(--ink-2)}
+.hb-track{grid-area:t;height:16px;position:relative;background:linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/25% 100%;border-left:1px solid var(--line-2)}
+.hb-bar{position:absolute;left:0;top:2px;bottom:2px;border-radius:0 4px 4px 0;min-width:2px}
+.hb-val{grid-area:v;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink);text-align:right}
+.hb-group{display:flex;justify-content:space-between;gap:12px;font-family:var(--f-display);font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--line)}
+.hb-group span{color:var(--ink-3);letter-spacing:0;text-transform:none;font-family:var(--f-body);font-weight:400}
+.hb-axis{display:grid;grid-template-columns:minmax(0,1fr) 48px;gap:12px;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+@media (min-width:700px){.hb-axis{grid-template-columns:minmax(0,15em) minmax(0,1fr) 48px}.hb-axis::before{content:""}}
+.hb-axis .ticks{position:relative;height:16px}
+.hb-axis .ticks span{position:absolute;transform:translateX(-50%)}
+.hb-axis .ticks span:first-child{transform:none}
+.hb-axis .ticks span:last-child{transform:translateX(-100%)}
+
+/* 100% stacked bars */
+.st{display:grid;gap:14px}
+.st-row{display:grid;gap:6px}
+.st-label{font-size:15px;color:var(--ink-2)}
+.st-bar{display:flex;gap:2px;height:34px}
+.seg{flex-basis:0;min-width:3px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;font-variant-numeric:tabular-nums;overflow:hidden;white-space:nowrap}
+.seg:first-child{border-radius:4px 0 0 4px}
+.seg:last-child{border-radius:0 4px 4px 0}
+.seg:only-child{border-radius:4px}
+@media (max-width:640px){.seg.sm span{display:none}}
+
+/* columns */
+.cols{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;align-items:end;height:220px;border-bottom:1px solid var(--line-2);background:linear-gradient(0deg,var(--line) 1px,transparent 1px) 0 100%/100% 25%}
+.col{display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;height:100%;gap:6px}
+.col-bar{border-radius:4px 4px 0 0;min-height:2px}
+.col-val{font-size:14px;font-weight:600;text-align:center;font-variant-numeric:tabular-nums}
+.col-labels{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-top:8px;font-size:13px;line-height:1.25;color:var(--ink-3);text-align:center}
+
+/* dumbbell */
+.db{display:grid;gap:30px}
+.db-row{display:grid;gap:10px}
+.db-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.db-theme{font-family:var(--f-display);font-weight:500;font-size:clamp(19px,1.8vw,23px);line-height:1.25}
+.db-gap{font-family:var(--f-display);font-weight:500;font-size:clamp(19px,1.8vw,23px);color:var(--gap);white-space:nowrap;font-variant-numeric:tabular-nums}
+.db-track{position:relative;height:40px;margin-top:20px;background:linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/25% 100%;border-right:1px solid var(--line)}
+.db-line{position:absolute;top:50%;height:2px;margin-top:-1px;background:repeating-linear-gradient(90deg,var(--ink-3) 0 6px,transparent 6px 10px)}
+.db-dot{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;box-shadow:0 0 0 3px var(--band-bg)}
+.db-dot.hi{background:var(--say)} .db-dot.lo{background:var(--gap)}
+.db-val{position:absolute;top:-6px;transform:translate(-50%,-100%);font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.db-desc{display:flex;flex-wrap:wrap;gap:4px 22px;font-size:15px;color:var(--ink-2)}
+.db-desc span{display:inline-flex;align-items:center;gap:8px}
+.db-desc i{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+.db-axis{position:relative;height:16px;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.db-axis span{position:absolute;transform:translateX(-50%)}
+.db-axis span:first-child{transform:none} .db-axis span:last-child{transform:translateX(-100%)}
+.db-legend{display:flex;flex-wrap:wrap;gap:10px 28px;font-size:15px;color:var(--ink-2)}
+.db-legend span{display:inline-flex;align-items:center;gap:10px}
+.db-legend i{width:14px;height:14px;border-radius:50%;display:inline-block}
+
+/* two-panel small multiples */
+.sm2{display:grid;gap:10px}
+.sm2-head,.sm2-row{display:grid;grid-template-columns:minmax(0,1fr);gap:4px 20px;align-items:center}
+@media (min-width:700px){.sm2-head,.sm2-row{grid-template-columns:minmax(0,12em) minmax(0,1fr) minmax(0,1fr)}}
+.sm2-head{font-size:13px;color:var(--ink-3);font-family:var(--f-display);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+@media (max-width:699px){.sm2-head{display:none}}
+.sm2-label{font-size:15px;color:var(--ink-2)}
+.sm2-cell{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:10px;align-items:center}
+.sm2-cell .hb-track{height:14px}
+.sm2-cell .hb-track,.sm2-cell .hb-val{grid-area:auto}
+.sm2-cell .tag{display:none;font-size:12px;color:var(--ink-3)}
+@media (max-width:699px){.sm2-cell{grid-template-columns:88px minmax(0,1fr) 44px}.sm2-cell .tag{display:block}}
+
+/* data tables */
+details.data{font-size:14px;min-width:0;max-width:100%}
+details.data summary{cursor:pointer;color:var(--ink-3);width:max-content;max-width:100%}
+details.data summary:hover{color:var(--ink)}
+.tbl-wrap{width:100%;max-width:100%;overflow:auto;max-height:240px;margin-top:10px;border:1px solid var(--line);border-radius:10px;padding:0 12px;overscroll-behavior:contain}
+.tbl-wrap thead th{position:sticky;top:0;background:var(--surface);z-index:1}
+.tbl-wrap table{border-collapse:collapse;min-width:100%;font-variant-numeric:tabular-nums}
+.tbl-wrap th,.tbl-wrap td{padding:6px 12px 6px 0;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+.tbl-wrap th:first-child,.tbl-wrap td:first-child{white-space:normal;min-width:11em}
+.tbl-wrap th{font-weight:600;color:var(--ink)}
+.tbl-wrap td{color:var(--ink-2)}
+.tbl-wrap td.r,.tbl-wrap th.r{text-align:right}
+
+/* ---------- findings ---------- */
+.f-index{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.f-index a{display:inline-flex;align-items:baseline;gap:8px;text-decoration:none;color:var(--ink-2);font-size:14px;border:1px solid var(--line-2);border-radius:999px;padding:8px 14px}
+.f-index a b{font-family:var(--f-display);font-weight:500;color:var(--ink)}
+.f-index a:hover{border-color:var(--ink);color:var(--ink)}
+.finding{display:grid;grid-template-columns:minmax(0,1fr);gap:36px 72px;padding-block:clamp(56px,7vw,96px);border-top:1px solid var(--line)}
+@media (min-width:1000px){.finding{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}.f-head{position:sticky;top:calc(100px + env(safe-area-inset-top, 0px));align-self:start}}
+.f-head{display:grid;gap:18px;align-content:start}
+.f-head h3{font-size:clamp(30px,3.3vw,42px);line-height:1.1}
+.f-stat{display:grid;gap:8px;margin-top:8px}
+.f-stat .n{font:500 clamp(72px,8vw,101px)/.92 var(--f-display);letter-spacing:-0.035em}
+.f-stat p{font-size:17px;line-height:1.45;color:var(--ink-2);max-width:26em}
+.f-body{display:grid;gap:36px;min-width:0}
+.why{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:10px}
+.why h4{font-size:18px;letter-spacing:-0.01em}
+.why p{color:var(--ink-2)}
+.callout{background:var(--tint);border-radius:var(--r-md);padding:24px 28px;display:grid;gap:6px}
+.callout .n{font:500 40px/1 var(--f-display);letter-spacing:-0.02em}
+.callout p{color:var(--ink-2);font-size:16px;line-height:1.5}
+.caveat{font-size:15px;color:var(--ink-3);font-style:italic}
+
+/* review notes */
+.rn{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:var(--ink-2);background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--r-sm);padding:10px 12px}
+.rn-tag{flex-shrink:0;font:600 11px/1.6 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--on-accent);background:var(--accent);border-radius:4px;padding:0 6px;margin-top:1px}
+.rn{display:none}
+#notes{display:none}
+.notes-on .rn{display:flex}
+.notes-on #notes{display:block}
+
+/* ---------- benchmarks ---------- */
+.bm{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(20px,3vw,40px);display:grid;gap:28px}
+.seg-ctl{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:14px;background:var(--bg);border:1px solid var(--line)}
+.seg-ctl button{font:500 14px/1 var(--f-body);color:var(--ink-2);background:transparent;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+.seg-ctl button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.bm-ctls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.bm-rows{display:grid;gap:18px}
+.bm-row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"l v" "t t";gap:6px 16px;align-items:center}
+@media (min-width:820px){.bm-row{grid-template-columns:minmax(0,18em) minmax(0,1fr) 120px;grid-template-areas:"l t v"}}
+.bm-label{grid-area:l;font-size:15px;line-height:1.3;color:var(--ink)}
+.bm-label small{display:block;color:var(--ink-3);font-size:12px;margin-top:2px}
+.bm-track{grid-area:t;position:relative;height:22px;background:linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/25% 100%;border-left:1px solid var(--line-2)}
+.bm-bar{position:absolute;left:0;top:4px;bottom:4px;background:var(--say);border-radius:0 4px 4px 0}
+.bm-tick{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--ink);transition:left .4s ease}
+.bm-val{grid-area:v;text-align:right;font-variant-numeric:tabular-nums;font-size:15px;white-space:nowrap}
+.bm-val b{font-weight:600}
+.bm-val span{color:var(--ink-3);font-size:13px;margin-left:8px}
+.bm-key{display:flex;flex-wrap:wrap;gap:10px 24px;font-size:14px;color:var(--ink-2)}
+.bm-key span{display:inline-flex;align-items:center;gap:8px}
+.bm-key i{display:inline-block}
+.bm-key i.bar{width:18px;height:10px;border-radius:2px;background:var(--say)}
+.bm-key i.tick{width:2px;height:16px;background:var(--ink)}
+
+/* ---------- voices ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chips button{font:500 14px/1 var(--f-body);color:var(--ink-2);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:10px 14px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.quotes{columns:1;column-gap:20px}
+@media (min-width:720px){.quotes{columns:2}}
+@media (min-width:1100px){.quotes{columns:3}}
+.q{break-inside:avoid;margin:0 0 20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:28px;display:grid;gap:16px}
+.q blockquote{margin:0;font-size:18px;line-height:1.5;color:var(--ink)}
+.q blockquote::before{content:"\201C";display:block;font:500 48px/0.6 var(--f-display);color:var(--accent);margin-bottom:8px;height:20px}
+.q figcaption{font-size:13px;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:4px 10px}
+.q figcaption .th{color:var(--ink-2)}
+
+/* ---------- actions ---------- */
+.acts{display:grid;gap:20px}
+@media (min-width:820px){.acts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1180px){.acts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.act{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:32px;display:grid;gap:14px;align-content:start}
+.act .why-stat{font-size:14px;color:var(--ink-3)}
+.act .why-stat b{font-family:var(--f-display);font-weight:500;color:var(--gap);font-size:18px;margin-right:4px}
+.act h3{font-size:23px;line-height:1.25}
+.act p{color:var(--ink-2);font-size:16px;line-height:1.55}
+.act .links{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:15px;margin-top:4px}
+
+/* ---------- cite ---------- */
+.cite{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.cite li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:start;padding:18px 0;border-bottom:1px solid var(--line)}
+.cite p{font-size:17px;line-height:1.5}
+.cite p span{display:block;font-size:13px;color:var(--ink-3);margin-top:4px}
+.copy{font:500 14px/1 var(--f-body);color:var(--ink);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:9px 14px;cursor:pointer;white-space:nowrap}
+.copy:hover{border-color:var(--ink)}
+.copy.done{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+/* ---------- method ---------- */
+.method{display:grid;gap:48px}
+@media (min-width:1000px){.method{grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:80px}}
+.method ul{margin:0;padding-left:20px;display:grid;gap:10px;color:var(--ink-2)}
+.prof{display:grid;gap:20px}
+.prof > div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:20px 22px}
+.prof h4{font-size:16px;margin-bottom:12px;letter-spacing:-0.01em}
+.ladder{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px}
+.ladder .legend{margin:0}
+
+/* notes */
+#notes .notes-card{background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--r-lg);padding:clamp(24px,3vw,40px);display:grid;gap:18px}
+#notes ul{margin:0;padding-left:20px;display:grid;gap:12px;color:var(--ink-2);max-width:72ch}
+#notes h3{font-size:26px}
+
+/* footer */
+.foot{padding-block:56px}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between;font-size:14px;color:var(--ink-2)}
+.foot img{height:30px;width:auto;display:block}
+
+/* tooltip */
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;line-height:1.35;padding:7px 10px;border-radius:6px;max-width:260px;opacity:0;transition:opacity .12s}
+#tip.on{opacity:1}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:14px;padding:10px 16px;border-radius:999px;z-index:60;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+
+<div class="utility">
+  <div class="wrap">
+    <button class="motion-btn" id="motionBtn" type="button" role="switch" aria-checked="true">Animations <span class="mini" aria-hidden="true"></span></button>
+  </div>
+</div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Commerce Gap Report 2026, back to top">
+      <img class="logo-p" src="logos/commerce-primary.svg" alt="Commerce" width="154" height="30">
+      <img class="logo-w" src="logos/commerce-white.svg" alt="Commerce" width="154" height="30">
+      <span class="brand-rule" aria-hidden="true"></span>
+      <span class="brand-name">Gap Report 2026</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#gap">The gap</a>
+      <a href="#findings">Findings</a>
+      <a href="#benchmarks">Benchmarks</a>
+      <a href="#voices">Voices</a>
+      <a href="#action">Take action</a>
+      <a href="#method">Method</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" role="switch" aria-checked="false" aria-label="Dark mode"><span class="knob" aria-hidden="true"></span>
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">The Commerce Gap Report 2026</div>
+        <h1>Leaders are ready to grow. Their systems are <span class="hl">still catching up.</span></h1>
+        <p class="deck">We asked 141 senior ecommerce decision-makers how ready they are for the next 12 to 18 months. Then we asked how their operations actually run. Three in four ecommerce leaders say they're ready. Their answers about feeds, product data, checkout and AI search tell a different story.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#findings">Read the findings</a>
+          <a class="btn btn-ghost" href="#benchmarks">See how you compare</a>
+        </div>
+      </div>
+
+      <div class="funnel-card" aria-labelledby="fnTitle">
+        <div class="eyebrow" id="fnTitle">The readiness funnel</div>
+        <ul class="legend"><li><span class="sw c-say"></span><span>Still in the group</span></li><li><span class="sw fn-drop-sw"></span><span>Drops out at this step</span></li></ul>
+        <ol class="funnel">
+          <li class="fn-row fn-base" style="--w:100;--prev:100" data-tip="All ecommerce leaders surveyed: 141">
+            <div class="fn-bar"><span class="fn-fill"><span>141</span></span></div>
+            <div class="fn-meta"><span>ecommerce leaders surveyed</span></div>
+          </li>
+          <li class="fn-row" style="--w:75.2;--prev:100" data-tip="Say they're ready to grow: 106 (75%)">
+            <div class="fn-bar"><span class="fn-prev"></span><span class="fn-fill"><span>106</span></span></div>
+            <div class="fn-meta"><span>say they're ready to grow</span><em>−35 don't feel ready</em></div>
+          </li>
+          <li class="fn-row" style="--w:46.8;--prev:75.2" data-tip="…and feeds at least partly automated: 66">
+            <div class="fn-bar"><span class="fn-prev"></span><span class="fn-fill"><span>66</span></span></div>
+            <div class="fn-meta"><span>…and have feeds at least partly automated</span><em>−40 run feeds by hand</em></div>
+          </li>
+          <li class="fn-row" style="--w:29.1;--prev:46.8" data-tip="…and have audited their feeds: 41">
+            <div class="fn-bar"><span class="fn-prev"></span><span class="fn-fill"><span>41</span></span></div>
+            <div class="fn-meta"><span>…and have audited their feeds</span><em>−25 never audited</em></div>
+          </li>
+          <li class="fn-row fn-last" style="--w:17.7;--prev:29.1" data-tip="…and track checkout abandonment: 25 (18% of all)">
+            <div class="fn-bar"><span class="fn-prev"></span><span class="fn-fill"><span>25</span></span></div>
+            <div class="fn-meta"><span>…and track checkout abandonment</span><em>−16 don't track it</em></div>
+          </li>
+        </ol>
+        <div class="fn-cap"><span class="big num">25</span><p>of the 106 ecommerce leaders who say they're ready to grow have all three basics in place. That's 18% of everyone surveyed.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="facts">
+    <div class="wrap">
+      <ul>
+        <li><b>141</b> senior decision-makers</li>
+        <li>Fielded <b>Sept 15–Oct 29, 2026</b></li>
+        <li><b>AMER</b> 58% · <b>EMEA</b> 24% · <b>APAC</b> 18%</li>
+        <li><b>Small</b> 23% · <b>Mid-market</b> 50% · <b>Enterprise</b> 28%</li>
+        <li><b>99%</b> make or shape platform decisions</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FIVE NUMBERS -->
+  <section class="sec" id="summary">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Executive summary</div>
+        <h2>The gap in five numbers.</h2>
+        <p>Ecommerce leaders are confident across company sizes and regions. The operational basics underneath that confidence are uneven, and the newest demands, from AI targeting to agentic checkout, are barely started.</p>
+      </div>
+      <ol class="five">
+        <li><span class="n num">75%</span><span class="t">rate their organization ready to grow over the next 12 to 18 months.<small>Moderately, very or completely ready</small></span><a href="#gap">See the gap →</a></li>
+        <li><span class="n num">39%</span><span class="t">still manage product feeds manually or mostly by hand.</span><a href="#feeds">Finding 05 →</a></li>
+        <li><span class="n num">23%</span><span class="t">don't track their checkout abandonment rate at all.</span><a href="#checkout">Finding 07 →</a></li>
+        <li><span class="n num">11%</span><span class="t">are very or completely confident their product data meets AI targeting requirements.<small>For AI-powered targeting and bidding on retail media</small></span><a href="#ai">Finding 01 →</a></li>
+        <li><span class="n num">9%</span><span class="t">have made real changes to prepare for agentic shopping.<small>Structured data, agent-accessible checkout or APIs</small></span><a href="#ai-search">Finding 03 →</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- THE GAP (band) -->
+  <section class="sec band" id="gap">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">The gap</div>
+        <h2>Ready vs. really ready.</h2>
+        <p>In six areas we compared how many ecommerce leaders are active or confident against how many have the foundations in place. The distance between the dots is the gap.</p>
+      </div>
+      <figure class="fig">
+        <figcaption data-cap>The readiness gap, by area.</figcaption>
+        <div class="db-legend"><span><i style="background:var(--say)"></i>Activity, intent or confidence</span><span><i style="background:var(--gap)"></i>Foundations in place</span></div>
+        <div class="chart" data-fig="gap"></div>
+        <p class="src">Base: all respondents (n=141).</p>
+      </figure>
+    </div>
+  </section>
+
+  <!-- FINDINGS -->
+  <section class="sec" id="findings">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Findings</div>
+        <h2>Nine findings.</h2>
+        <p>Where ecommerce leaders stand on AI, search, product data, channels, checkout, integrations and investment, and how far confidence runs ahead of readiness in each.</p>
+      </div>
+      <nav class="f-index" aria-label="Findings">
+        <a href="#ai"><b>01</b> AI adoption · 90%</a>
+        <a href="#trust"><b>02</b> Trust · 24%</a>
+        <a href="#ai-search"><b>03</b> AI search · 18%</a>
+        <a href="#data"><b>04</b> Product data · 28%</a>
+        <a href="#feeds"><b>05</b> Feeds · 39%</a>
+        <a href="#channels"><b>06</b> Channels · 5.4</a>
+        <a href="#checkout"><b>07</b> Checkout · 23%</a>
+        <a href="#integrations"><b>08</b> Integrations · 54%</a>
+        <a href="#leadership"><b>09</b> Leadership · 40%</a>
+      </nav>
+
+      <!-- 01 -->
+      <article class="finding" id="ai">
+        <div class="f-head">
+          <div class="eyebrow">Finding 01 · AI adoption</div>
+          <h3>Nearly everyone uses AI. Few let it near the money.</h3>
+          <div class="f-stat"><span class="n num">90%</span><p>of ecommerce leaders say their organization uses AI somewhere in its operation. Only 8% use it in checkout or payments.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>Most AI use sits behind the scenes. The single most common job is writing product content such as titles, descriptions and attributes (52%). Three in four use some back-end AI; 60% use something customer-facing.</p>
+            <p>Use thins out where money changes hands. 16% use AI to set prices and 8% use it in checkout or payments. And only <strong>11%</strong> are very or completely confident their product data meets the requirements of AI-powered targeting and bidding on retail media.</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>Where AI is deployed today.</figcaption>
+            <div class="chart" data-fig="ai"></div>
+            <p class="src">“Where is AI currently deployed in your ecommerce operations?” Base: all respondents (n=141). Multiple answers allowed.</p>
+          </figure>
+          <div class="why"><h4>💡 Why it matters</h4><p>A 90% adoption rate overstates how far most teams have gone. The low-risk, invisible work is done. The trust-sensitive work that agentic checkout will demand is still ahead, and it runs on product data few teams trust yet.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q12, Q13. Report strand: both. Researcher confidence: high. The 11% (Q13) sits here as the data side of AI adoption; it could also lead the product data finding.</span></p>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="finding" id="trust">
+        <div class="f-head">
+          <div class="eyebrow">Finding 02 · Trust in AI</div>
+          <h3>Trust drops the closer AI gets to a payment.</h3>
+          <div class="f-stat"><span class="n num">24%</span><p>believe customers have moderate or high trust in AI-driven personalized pricing, against 81% for AI search results.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>We asked ecommerce leaders how much they think their customers trust five AI experiences. Search and recommendations score well. Chatbots split the room. Payments and pricing score lowest, and more than a third of respondents either don't use AI there or can't say.</p>
+            <p class="caveat">This is what merchants believe about their customers, not what customers told us.</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>Perceived customer trust, by AI experience.</figcaption>
+            <div class="chart" data-fig="trust"></div>
+            <p class="src">“How much do you think your customers trust AI-driven experiences in the following areas?” Leaders' view of their customers. Base: all respondents (n=141).</p>
+          </figure>
+          <div class="why"><h4>💡 Why it matters</h4><p>Shoppers will let AI suggest things long before they let it pay for them. As agentic checkout rolls out, the brands that earn trust at the payment step will set the pace for everyone else.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q14. Report strand: BigCommerce. Researcher confidence: medium-high. Keep the "merchants believe" framing in every reuse of this stat.</span></p>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="finding" id="ai-search">
+        <div class="f-head">
+          <div class="eyebrow">Finding 03 · AI search and agentic shopping</div>
+          <h3>AI search is wide open. Few have a real plan for it.</h3>
+          <div class="f-stat"><span class="n num">18%</span><p>have a formal answer engine optimization (AEO/GEO) strategy with dedicated time or budget. 64% are doing something about it.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>Agentic shopping is further behind. <strong>9%</strong> have made real changes such as structured product data, agent-accessible checkout or APIs. 23% have taken no action.</p>
+            <p>Measurement lags too. 32% either don't track traffic from AI assistants like ChatGPT and Perplexity or can't measure any. And one in five can't say whether organic search traffic changed after AI Overviews launched.</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>Two readiness ladders: AI search and agentic shopping.</figcaption>
+            <div class="chart" data-fig="ladders"></div>
+            <p class="src">“Is your team actively optimizing for AI search (AEO/GEO)?” and “Are you preparing for agentic shopping, AI agents that browse or complete purchases on a customer's behalf?” Base: all respondents (n=141).</p>
+          </figure>
+          <figure class="fig">
+            <figcaption data-cap>Organic search traffic since AI Overviews launched.</figcaption>
+            <div class="chart" data-fig="organic"></div>
+            <p class="src">“Have you seen your organic search traffic change since AI Overviews/AI Mode rolled out?” Base: all respondents (n=141).</p>
+          </figure>
+          <div class="why"><h4>💡 Why it matters</h4><p>Awareness is close to universal and action is rare. That leaves an early-mover window open for brands that do the structural work now.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q15–Q18. Feeds the AEO content strand. Check: the 32% includes "None that we can measure" (8%), which may mean zero traffic. "Don't track or can't measure" alone is 24%.</span></p>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="finding" id="data">
+        <div class="f-head">
+          <div class="eyebrow">Finding 04 · Product data</div>
+          <h3>Leaders trust their product data more than they check it.</h3>
+          <div class="f-stat"><span class="n num">28%</span><p>of ecommerce leaders are very or completely confident their product data is complete and accurate across channels.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>Of that confident group, <strong>38%</strong> have never audited their feeds or don't know if anyone has. Across all respondents, 41% have never run a formal feed audit and only 13% audit on a defined schedule.</p>
+            <p>Listing problems go unseen too. 37% either don't track how often channels reject or suppress their listings, or say they aren't aware of any rejections.</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>Feed audits, all respondents vs. the most confident.</figcaption>
+            <div class="chart" data-fig="audit"></div>
+            <p class="src">“Has your organization ever conducted a formal audit of your product feed quality across your active channels?” Base: all respondents (n=141) and those very or completely confident in their product data (n=39).</p>
+          </figure>
+          <div class="why"><h4>💡 Why it matters</h4><p>Confidence that hasn't been tested is a guess. Disapproved and suppressed listings cost reach quietly, and you only find them if you look.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q31, Q32, Q35. Report strand: Feedonomics headline. Researcher confidence: high. The 87% with no regular audit (doc, Part 2) matches the export.</span></p>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="finding" id="feeds">
+        <div class="f-head">
+          <div class="eyebrow">Finding 05 · Feed management</div>
+          <h3>Product feeds still run on manual effort.</h3>
+          <div class="f-stat"><span class="n num">39%</span><p>manage product feeds manually or mostly by hand. 13% are mostly or fully automated.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>The hours add up. <strong>23%</strong> of teams spend 11 or more hours a week on manual product-data tasks, more than a full working day.</p>
+            <p>Manual feeds follow company size. Half of small businesses (50%) and nearly half of mid-market brands (47%) run them by hand, compared with 15% of large enterprises.</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>How teams manage feed updates and channel distribution.</figcaption>
+            <div class="chart" data-fig="feeds"></div>
+            <p class="src">“How are you currently managing product feed updates and channel distribution?” Base: all respondents (n=141).</p>
+          </figure>
+          <figure class="fig">
+            <figcaption data-cap>Hours per week spent on manual product-data tasks.</figcaption>
+            <div class="chart" data-fig="hours"></div>
+            <p class="src">“Approximately how many hours per week does your team spend on manual product data tasks?” Base: all respondents (n=141).</p>
+          </figure>
+          <div class="why"><h4>💡 Why it matters</h4><p>These teams already sell on five or more channels. Every channel multiplies the upkeep, and the hours go to maintenance instead of growth.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q33, Q34. Report strand: Feedonomics. Researcher confidence: high on the what. The survey doesn't say why teams haven't automated; flagged as a follow-up question for next year.</span></p>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="finding" id="channels">
+        <div class="f-head">
+          <div class="eyebrow">Finding 06 · Channels</div>
+          <h3>Multichannel is already the norm.</h3>
+          <div class="f-stat"><span class="n num">5.4</span><p>of eight major channels are active for the average brand. 82% sell on four or more.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>Only 6% sell on two channels or fewer. Own websites are close to universal (97%), and most brands also run Meta, Google Shopping and a B2B or wholesale portal.</p>
+            <p>TikTok Shop is the least adopted channel (41%), but it has the steadiest growth among brands that use it: 67% grew revenue there and just 3% saw a decline, the lowest decline rate of any channel.</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>Number of active channels per brand.</figcaption>
+            <div class="chart" data-fig="chancount"></div>
+            <p class="src">Count of channels each brand is active on, out of eight listed. Base: all respondents (n=141).</p>
+          </figure>
+          <figure class="fig">
+            <figcaption data-cap>Who's on each channel, and who grew there.</figcaption>
+            <div class="chart" data-fig="channels"></div>
+            <p class="src">“How has your revenue changed across each channel over the past 12 months?” Growth is the share of brands active on a channel that report slight or significant revenue growth there. Base: all respondents (n=141).</p>
+          </figure>
+          <div class="why"><h4>💡 Why it matters</h4><p>Brands already have the channels. The pressure now is running all of them on the same manual tooling.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q23. Report strand: BigCommerce. New cut: the per-channel growth view (and the TikTok Shop line) isn't in the findings doc yet. Needs a researcher check before it's used.</span></p>
+        </div>
+      </article>
+
+      <!-- 07 -->
+      <article class="finding" id="checkout">
+        <div class="f-head">
+          <div class="eyebrow">Finding 07 · Checkout</div>
+          <h3>Nearly a quarter don't measure checkout abandonment.</h3>
+          <div class="f-stat"><span class="n num">23%</span><p>don't know or don't track their checkout abandonment rate.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>The blind spot holds even among the most confident. <strong>30%</strong> of ecommerce leaders who call their organization very or completely ready to grow don't track abandonment.</p>
+            <p>Among those who do measure it, most say it's flat or improving. The top factors limiting checkout conversion are poor mobile checkout (28%), complex or lengthy flows (25%) and no buy-now-pay-later option (20%).</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>Current checkout abandonment rate.</figcaption>
+            <div class="chart" data-fig="abandon"></div>
+            <p class="src">“What is your current checkout abandonment rate?” Base: all respondents (n=141).</p>
+          </figure>
+          <figure class="fig">
+            <figcaption data-cap>Checkout and payment factors limiting conversion.</figcaption>
+            <div class="chart" data-fig="checkout"></div>
+            <p class="src">“Which of the following checkout and payment factors are most limiting your conversion rate?” Base: all respondents (n=141). Up to three answers.</p>
+          </figure>
+          <div class="why"><h4>💡 Why it matters</h4><p>You can't fix what you don't measure. Abandonment is the most direct read on checkout health, and nearly one in four brands is planning growth without it.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q24–Q26. Report strand: BigCommerce. Researcher call: lead with the blind spot, not the trend. The planned "abandonment is getting worse" angle didn't hold.</span></p>
+        </div>
+      </article>
+
+      <!-- 08 -->
+      <article class="finding" id="integrations">
+        <div class="f-head">
+          <div class="eyebrow">Finding 08 · Integrations</div>
+          <h3>Broken integrations cost more than half of brands.</h3>
+          <div class="f-stat"><span class="n num">54%</span><p>had an integration failure hurt sales or operations in the past 12 months. 12% called it very or extremely significant.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>An integration is any hand-off between systems: orders into shipping, inventory into marketplaces, checkout into payments. When one breaks, orders, stock or payments stop flowing correctly.</p>
+            <p>The same worry shapes platform decisions. Asked about changing platforms, 74% expect data migration to be hard, followed by integrations (59%) and budget or hidden costs (52%).</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>Impact of integration failures in the past 12 months.</figcaption>
+            <div class="chart" data-fig="integ"></div>
+            <p class="src">“In the past 12 months, has an integration failure affected your sales or operations? If yes, how significant was the impact?” Base: all respondents (n=141).</p>
+          </figure>
+          <figure class="fig">
+            <figcaption data-cap>Expected challenges when migrating platforms.</figcaption>
+            <div class="chart" data-fig="migration"></div>
+            <p class="src">“When considering migrating to a new ecommerce platform, what would you expect to be the biggest challenges?” Base: all respondents (n=141). Multiple answers allowed.</p>
+          </figure>
+          <div class="why"><h4>💡 Why it matters</h4><p>Every hand-off is another place for the business to break. Fewer, native connections reduce the risk and the cost of the next move.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q29, Q30. Report strand: BigCommerce. Researcher confidence: medium-high. Cite the survey's 54% separately from the 71% in the plan's desk research.</span></p>
+        </div>
+      </article>
+
+      <!-- 09 -->
+      <article class="finding" id="leadership">
+        <div class="f-head">
+          <div class="eyebrow">Finding 09 · Leadership and budget</div>
+          <h3>Leadership is bought in. Budget hasn't followed.</h3>
+          <div class="f-stat"><span class="n num">40%</span><p>of ecommerce leaders say their leadership team understands the commercial impact of ecommerce infrastructure, but investment lags.</p></div>
+        </div>
+        <div class="f-body">
+          <div class="prose">
+            <p>72% describe leadership as mostly or fully aligned, and only one respondent said it isn't aligned at all. But just 32% say ecommerce infrastructure is a stated priority with dedicated budget and ownership.</p>
+            <p>Planned spend leans toward media. Paid social (52%), AI personalization (49%) and Google Shopping (47%) top the list for the next 12 months. Product data and feed management comes fourth (31%).</p>
+          </div>
+          <figure class="fig">
+            <figcaption data-cap>How aligned leadership is on ecommerce infrastructure.</figcaption>
+            <div class="chart" data-fig="lead"></div>
+            <p class="src">“How aligned is your leadership on the commercial impact of ecommerce infrastructure: platform capability, data quality, and channel readiness?” Base: all respondents (n=141).</p>
+          </figure>
+          <figure class="fig">
+            <figcaption data-cap>Where brands plan to increase investment.</figcaption>
+            <div class="chart" data-fig="invest"></div>
+            <p class="src">“Where are you planning to increase investment over the next 12 months?” Base: all respondents (n=141). Up to three answers.</p>
+          </figure>
+          <div class="callout">
+            <span class="n num">10%</span>
+            <p>of the 40 brands planning more retail media spend are very or completely confident their product data meets AI targeting requirements. 45% of them have never audited their feeds.</p>
+          </div>
+          <div class="why"><h4>💡 Why it matters</h4><p>The case for investment is already made at the top. What's missing is budget for the plumbing, and the brands spending more on media are often the ones whose data can't yet support it.</p></div>
+          <p class="rn"><span class="rn-tag">Review</span><span>SM Q11, Q20, Q13, Q35. Report strand: both. New cut: retail-media investors × data readiness was flagged as a to-do in the findings doc. Needs a researcher check.</span></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- BENCHMARKS -->
+  <section class="sec" id="benchmarks" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Benchmarks</div>
+        <h2>Where do you stand?</h2>
+        <p>Pick the group closest to yours. The bar shows that group; the line shows all 141 ecommerce leaders. Maturity scales with company size more clearly than with anything else in the data.</p>
+      </div>
+      <div class="bm">
+        <div class="bm-ctls">
+          <div class="seg-ctl" id="bmDim" role="group" aria-label="Compare by"></div>
+          <div class="seg-ctl" id="bmSeg" role="group" aria-label="Group"></div>
+        </div>
+        <div class="bm-key"><span><i class="bar"></i><span id="bmKeyLabel">Mid-market</span></span><span><i class="tick"></i>All respondents</span></div>
+        <div class="bm-rows" id="bmRows"></div>
+        <p class="src" id="bmNote">Groups smaller than 40 are directional. These are descriptive comparisons, not significance tests.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICES -->
+  <section class="sec" id="voices" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">In their own words</div>
+        <h2>What ecommerce leaders told us.</h2>
+        <p>Answers to two open questions: their number one ecommerce priority for the next 12 months, and what they've done to prepare for agentic shopping. Lightly edited for typos.</p>
+      </div>
+      <div class="chips" id="qChips" role="group" aria-label="Filter quotes by theme"></div>
+      <div class="quotes" id="quotes"></div>
+    </div>
+  </section>
+
+  <!-- ACTIONS -->
+  <section class="sec" id="action" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Closing the gap</div>
+        <h2>Six moves that close the gap.</h2>
+        <p>None of these needs a new strategy. Each one turns confidence into something you can check.</p>
+      </div>
+      <div class="acts">
+        <article class="act">
+          <div class="why-stat"><b>41%</b>have never audited their feeds</div>
+          <h3>Audit your feeds, then keep auditing.</h3>
+          <p>Run a formal quality audit across every active channel, and put the next one on the calendar. Track disapprovals and suppressions so lost reach shows up in a report instead of a revenue dip.</p>
+          <div class="links"><a href="https://feedonomics.com/services/" target="_blank" rel="noopener">Feedonomics services ↗</a></div>
+        </article>
+        <article class="act">
+          <div class="why-stat"><b>23%</b>spend 11+ hours a week on manual data</div>
+          <h3>Automate the feed work that eats your week.</h3>
+          <p>Rules-based and AI-assisted feed management takes channel-by-channel upkeep off the team, so adding a channel doesn't add a day of maintenance.</p>
+          <div class="links"><a href="https://feedonomics.com/product/advertising-feed-management/" target="_blank" rel="noopener">Feed management ↗</a><a href="https://feedonomics.com/product/" target="_blank" rel="noopener">Feedonomics platform ↗</a></div>
+        </article>
+        <article class="act">
+          <div class="why-stat"><b>11%</b>trust their data for AI targeting</div>
+          <h3>Make your catalog readable by machines.</h3>
+          <p>Complete attributes, identifiers and enriched descriptions are what AI search, ad algorithms and shopping agents read. Fill the gaps before you scale AI-driven spend.</p>
+          <div class="links"><a href="https://feedonomics.com/product/agentic-commerce/ai-data-enrichment/" target="_blank" rel="noopener">AI data enrichment ↗</a><a href="https://www.bigcommerce.com/product/catalog-enrichment/" target="_blank" rel="noopener">Catalog enrichment ↗</a></div>
+        </article>
+        <article class="act">
+          <div class="why-stat"><b>23%</b>don't track checkout abandonment</div>
+          <h3>Measure the blind spots first.</h3>
+          <p>Start with checkout abandonment, AI-assistant traffic and listing rejections. Each is cheap to measure and tells you where the next dollar should go.</p>
+          <div class="links"><a href="https://www.bigcommerce.com/product/checkout/" target="_blank" rel="noopener">BigCommerce checkout ↗</a></div>
+        </article>
+        <article class="act">
+          <div class="why-stat"><b>54%</b>were hurt by an integration failure</div>
+          <h3>Cut the hand-offs that break.</h3>
+          <p>Map every integration your orders, stock and payments pass through. Replace fragile point-to-point links with native or managed connections, and plan migrations around data and integrations first.</p>
+          <div class="links"><a href="https://www.bigcommerce.com/apps/" target="_blank" rel="noopener">Integrations ↗</a><a href="https://www.bigcommerce.com/solutions/omnichannel/" target="_blank" rel="noopener">Omnichannel ↗</a><a href="https://www.bigcommerce.com/migration/" target="_blank" rel="noopener">Migration ↗</a></div>
+        </article>
+        <article class="act">
+          <div class="why-stat"><b>9%</b>have made real agentic changes</div>
+          <h3>Get checkout ready for agents.</h3>
+          <p>Structured product data, agent-accessible checkout and clear APIs are the groundwork for AI agents that browse and buy. The brands doing it now are a small, early group.</p>
+          <div class="links"><a href="https://www.bigcommerce.com/product/agentic-commerce/" target="_blank" rel="noopener">Agentic commerce ↗</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITE -->
+  <section class="sec" id="cite" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Use the data</div>
+        <h2>Citable stats.</h2>
+        <p>Each line is written to stand on its own. Copy includes the source line.</p>
+      </div>
+      <ul class="cite" id="citeList"></ul>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section class="sec" id="method" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Methodology</div>
+        <h2>How we ran the study.</h2>
+      </div>
+      <div class="method">
+        <div class="prose">
+          <p>We surveyed <strong>141 senior ecommerce decision-makers</strong> at product-selling brands between September 15 and October 29, 2026. Respondents were recruited through User Interviews and the survey was administered in SurveyMonkey. 98.6% are the primary decision-maker or directly involved in decisions about their ecommerce platform, tools or vendors.</p>
+          <ul>
+            <li>Percentages are shares of all 141 respondents unless a smaller group is named. Multi-select questions can total more than 100%.</li>
+            <li>Comparisons between groups are descriptive and not formal significance tests. Treat groups under 40 respondents as directional.</li>
+            <li>The customer-trust question asks ecommerce leaders what they believe their customers feel. It isn't a customer survey.</li>
+            <li>Regional results are directional, especially for Asia-Pacific (n=25). Latin America isn't represented.</li>
+            <li>Quality checks flagged four responses (3%). Excluding them doesn't change any finding, so all 141 are included.</li>
+          </ul>
+        </div>
+        <div class="prof">
+          <div><h4>Company size (annual online revenue)</h4><div class="chart" data-fig="p_size" data-plain></div></div>
+          <div><h4>Headquarters</h4><div class="chart" data-fig="p_region" data-plain></div></div>
+          <div><h4>Role</h4><div class="chart" data-fig="p_role" data-plain></div></div>
+          <div><h4>Primary vertical</h4><div class="chart" data-fig="p_vert" data-plain></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEW NOTES -->
+  <section class="sec" id="notes" style="padding-top:0">
+    <div class="wrap">
+      <div class="notes-card">
+        <div class="eyebrow">Concept notes for the team</div>
+        <h3>What to check before this moves to design.</h3>
+        <ul>
+          <li><strong>Data source.</strong> Every figure on this page was recomputed from the SurveyMonkey export (141 responses) and checked against the findings doc.</li>
+          <li><strong>Q8 growth targets don't reconcile.</strong> The findings doc says 73% target 11%+ growth. The export shows 50% (34.0% + 13.5% + 2.8%). Not used on this page.</li>
+          <li><strong>Q15 AI-assistant traffic.</strong> The 32% includes "None that we can measure" (7.8%). The stricter "don't track or can't measure" figure is 24%. Wording on the page covers both.</li>
+          <li><strong>Agentic benchmark row.</strong> The size and region "agentic action" figures (12% / 37% / 44%) count researching, piloting or already changed (33% overall), not the 9% who made changes. Labelled that way here.</li>
+          <li><strong>Two new cuts.</strong> Per-channel growth (Finding 06) and retail-media investors × data readiness (Finding 09) aren't in the findings doc yet.</li>
+          <li><strong>Source lines.</strong> Public source lines quote the survey question and base. SurveyMonkey question numbers appear only in these review notes.</li>
+          <li><strong>Left out of the public copy.</strong> The APAC recruitment overlap (now "directional" in the method) and the "first edition / year-over-year" framing.</li>
+          <li><strong>Quotes.</strong> Answers that name vendors or platforms were left out of the quote wall. Attribution is question, region and company size only.</li>
+          <li><strong>Brand.</strong> Built on the Commerce design system tokens (Pearl, Indigo, Iris, Neon highlighter, Aeonik Medium with DM Sans). BigCommerce and Feedonomics appear as text links only, in line with the multi-brand rule.</li>
+          <li><strong>Not built yet.</strong> PDF download, the email asset, the brand-specific blog cuts, and an optional single "Commerce Gap Index" score for year-over-year tracking.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot band">
+  <div class="wrap">
+    <img src="logos/commerce-white.svg" alt="Commerce" width="154" height="30">
+    <span>© 2026 Commerce. The Commerce Gap Report 2026.</span>
+    <button class="rv-toggle" id="notesToggle" type="button" aria-pressed="false">Show review notes</button>
+  </div>
+</footer>
+
+<div id="tip" role="tooltip"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+const $=(s,el=document)=>el.querySelector(s);
+const $$=(s,el=document)=>Array.from(el.querySelectorAll(s));
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const pc=v=>Math.round(v)+"%";
+const pc1=v=>v.toFixed(1)+"%";
+
+/* ---------------- settings ---------------- */
+// Set to false to turn chart animations off for everyone (this also hides the header toggle).
+const ANIMATE_CHARTS = true;
+
+/* ---------------- data (computed from the SurveyMonkey export, n=141) ---------------- */
+const FIG={
+  gap:{type:"dumbbell",rows:[
+    {theme:"Growth readiness",hi:[75.2,"feel ready to grow"],lo:[13.5,"run mostly or fully automated feeds"]},
+    {theme:"AI and product data",hi:[90.1,"use AI somewhere"],lo:[11.3,"are confident their data meets AI targeting needs"]},
+    {theme:"Agentic shopping",hi:[73.8,"are planning, researching or acting"],lo:[9.2,"have made real changes"]},
+    {theme:"AI search",hi:[63.8,"are optimizing for AI search in some way"],lo:[17.7,"have a formal AEO/GEO strategy"]},
+    {theme:"Leadership",hi:[72.3,"say leadership is aligned"],lo:[31.9,"have dedicated budget and ownership"]},
+    {theme:"Product data quality",hi:[27.7,"are very or completely confident in their data"],lo:[12.8,"audit their feeds on a schedule"]}
+  ]},
+  ai:{type:"hbar",max:60,keys:[{label:"AI use",c:"say"},{label:"Touches price or payment",c:"gap"},{label:"Not using AI",c:"na"}],rows:[
+    {group:"Back-end",note:"74% use any"},
+    {label:"Product content generation",v:52.5},
+    {label:"Feed management and optimization",v:38.3},
+    {label:"Inventory and demand forecasting",v:37.6},
+    {label:"Dynamic pricing",v:15.6,c:"gap"},
+    {group:"Customer-facing",note:"60% use any"},
+    {label:"Recommendations and personalization",v:39.7},
+    {label:"Chatbot or AI customer service",v:36.2},
+    {label:"AI-assisted site search",v:24.1},
+    {label:"AI-assisted checkout or payments",v:7.8,c:"gap"},
+    {group:"No AI"},
+    {label:"Not using AI in ecommerce",v:9.9,c:"na"}
+  ]},
+  trust:{type:"stack",keys:[{label:"High or moderate trust",c:"say"},{label:"Low trust",c:"gap"},{label:"Don't use it or don't know",c:"na"}],rows:[
+    {label:"AI-powered search results",v:[80.9,5.0,14.2]},
+    {label:"AI product recommendations",v:[74.5,14.9,10.6]},
+    {label:"AI customer service and chatbots",v:[42.6,38.3,19.1]},
+    {label:"AI-assisted or agentic payments",v:[36.9,27.0,36.2]},
+    {label:"AI-driven personalized pricing",v:[24.1,32.6,43.3]}
+  ]},
+  audit:{type:"stack",keys:[{label:"Audit on a schedule",c:"s4"},{label:"Audited, not regularly",c:"s2"},{label:"Never audited",c:"gap"},{label:"Don't know",c:"na"}],rows:[
+    {label:"All respondents",n:141,v:[12.8,37.6,41.1,8.5]},
+    {label:"Very or completely confident in their product data",n:39,v:[23.1,38.5,30.8,7.7]}
+  ]},
+  feeds:{type:"stack",keys:[{label:"Entirely manual",c:"d1"},{label:"Mostly manual",c:"d2"},{label:"Partially automated",c:"d3"},{label:"Mostly automated",c:"d4"},{label:"Fully automated",c:"d5"}],rows:[
+    {v:[17.7,21.3,47.5,11.3,2.1]}
+  ]},
+  hours:{type:"cols",max:30,keys:[{label:"Under a full day",c:"say"},{label:"11+ hours a week",c:"gap"},{label:"Don't know",c:"na"}],rows:[
+    {label:"Under 2",v:17.0},{label:"2–5",v:27.7},{label:"6–10",v:26.2},{label:"11–20",v:13.5,c:"gap"},{label:"20+",v:9.2,c:"gap"},{label:"Don't know",v:6.4,c:"na"}
+  ]},
+  chancount:{type:"cols",max:25,rows:[
+    {label:"0",v:0.7,c:"na"},{label:"1",v:0.7,c:"na"},{label:"2",v:5.0,c:"na"},{label:"3",v:11.3,c:"na"},{label:"4",v:18.4},{label:"5",v:16.3},{label:"6",v:15.6},{label:"7",v:11.3},{label:"8",v:20.6}
+  ],keys:[{label:"Four or more channels (82%)",c:"say"},{label:"Three or fewer",c:"na"}]},
+  channels:{type:"sm2",cols:["Active on the channel","Grew revenue there"],rows:[
+    {label:"Own website",a:97.2,b:73.0},
+    {label:"Meta",a:83.0,b:51.3},
+    {label:"Google Shopping",a:78.7,b:53.2},
+    {label:"B2B / wholesale portal",a:68.8,b:73.2},
+    {label:"Regional marketplaces",a:61.7,b:62.1},
+    {label:"Retail media networks",a:57.4,b:51.9},
+    {label:"Amazon",a:49.6,b:58.6},
+    {label:"TikTok Shop",a:41.1,b:67.2}
+  ]},
+  abandon:{type:"hbar",max:50,keys:[{label:"Abandonment rate",c:"say"},{label:"Not tracked",c:"gap"}],rows:[
+    {label:"Below 50%",v:43.3},{label:"50–60%",v:14.2},{label:"61–70%",v:12.1},{label:"71–80%",v:4.3},{label:"Above 80%",v:3.5},{label:"Don't know or don't track",v:22.7,c:"gap"}
+  ]},
+  checkout:{type:"hbar",max:40,rows:[
+    {label:"Poor mobile checkout",v:27.7},{label:"Complex or lengthy checkout flow",v:24.8},{label:"No buy now, pay later option",v:19.9},{label:"Limited B2B payment options",v:17.7},{label:"Missing local payment methods",v:14.2},{label:"B2B approval chain friction",v:12.1},{label:"Cross-border payment and currency limits",v:9.9},{label:"None, checkout performs well",v:38.3,c:"na"}
+  ]},
+  integ:{type:"stack",keys:[{label:"No or not sure",c:"v0"},{label:"Yes, slightly",c:"v1"},{label:"Yes, moderately",c:"v2"},{label:"Yes, very",c:"v3"},{label:"Yes, extremely",c:"v4"}],rows:[
+    {v:[46.1,22.0,19.9,9.9,2.1]}
+  ]},
+  migration:{type:"hbar",max:80,rows:[
+    {label:"Data migration",v:73.8},{label:"Integrations and compatibility",v:58.9},{label:"Budget and hidden costs",v:51.8},{label:"SEO and organic traffic",v:44.0},{label:"Timeline and project management",v:44.0},{label:"Team training and adoption",v:34.8},{label:"Design or theme rebuild",v:31.9},{label:"Vendor or agency management",v:23.4}
+  ]},
+  ladders:{type:"ladders",items:[
+    {label:"Optimizing for AI search (AEO/GEO)",q:"SM Q17",keys:[{label:"Never heard of it",c:"s1"},{label:"Not a priority",c:"s1"},{label:"On our radar",c:"s2"},{label:"Experimenting informally",c:"s3"},{label:"Formal strategy with time or budget",c:"s5"}],v:[1.4,5.7,29.1,46.1,17.7]},
+    {label:"Preparing for agentic shopping",q:"SM Q18",keys:[{label:"Not familiar with it",c:"s1"},{label:"No action taken",c:"s1"},{label:"On the roadmap",c:"s2"},{label:"Researching or piloting",c:"s3"},{label:"Already made changes",c:"s5"}],v:[3.5,22.7,40.4,24.1,9.2]}
+  ]},
+  organic:{type:"stack",keys:[{label:"Increased",c:"say"},{label:"No change",c:"na"},{label:"Decreased",c:"gap"},{label:"Don't know",c:"hatch"}],rows:[
+    {v:[27.7,27.7,24.8,19.9]}
+  ]},
+  lead:{type:"stack",keys:[{label:"Fully aligned, with budget and ownership",c:"say"},{label:"Mostly aligned, investment lags",c:"gap"},{label:"Somewhat aligned",c:"s2"},{label:"Not aligned",c:"na"}],rows:[
+    {v:[31.9,40.4,27.0,0.7]}
+  ]},
+  invest:{type:"hbar",max:60,keys:[{label:"Planned increase",c:"say"},{label:"Product data and feeds",c:"gap"}],rows:[
+    {label:"Paid social",v:51.8},{label:"AI personalization and recommendations",v:48.9},{label:"Google Shopping / Performance Max",v:46.8},{label:"Product data and feed management",v:31.2,c:"gap"},{label:"Retail media",v:28.4},{label:"Checkout and payment optimization",v:19.1},{label:"Marketplace expansion",v:19.1},{label:"International expansion",v:17.7},{label:"Returns and logistics",v:12.1},{label:"Headless or composable architecture",v:7.1}
+  ]},
+  p_size:{type:"hbar",max:60,compact:true,rows:[{label:"Mid-market ($5M–$250M)",v:49.6},{label:"Large enterprise ($250M+)",v:27.7},{label:"Small business (under $5M)",v:22.7}]},
+  p_region:{type:"hbar",max:60,compact:true,rows:[{label:"North America",v:58.2},{label:"Europe, Middle East and Africa",v:24.1},{label:"Asia-Pacific",v:17.7}]},
+  p_role:{type:"hbar",max:60,compact:true,rows:[{label:"Head of marketing or demand gen",v:34.0},{label:"Director of ecommerce or digital",v:19.9},{label:"C-suite or VP",v:17.7},{label:"Operations, merchandising or logistics",v:13.5},{label:"Head of IT or engineering",v:5.0},{label:"Other",v:9.9}]},
+  p_vert:{type:"hbar",max:60,compact:true,rows:[{label:"B2B and industrial",v:22.0},{label:"Apparel and fashion",v:17.0},{label:"Food and beverage",v:14.9},{label:"Home and décor",v:10.6},{label:"Branded manufacturer / DTC",v:7.8},{label:"Beauty and skincare",v:6.4},{label:"Consumer electronics",v:5.7},{label:"Other verticals",v:15.6}]}
+};
+
+/* ---------------- renderers ---------------- */
+function legend(keys,vals){
+  const seen=new Set();
+  return `<ul class="legend">${keys.map((k,i)=>{const id=k.c+"|"+k.label;if(seen.has(id))return"";seen.add(id);return `<li><span class="sw c-${k.c}"></span><span>${esc(k.label)}${vals?` <b>${pc(vals[i])}</b>`:""}</span></li>`;}).join("")}</ul>`;
+}
+function ticks(max){
+  const t=[0,max/4,max/2,max*3/4,max];
+  return t.map(v=>`<span style="left:${v/max*100}%">${Math.round(v)}%</span>`).join("");
+}
+function hbar(s){
+  const max=s.max||100;
+  const secs=[];let cur=null;
+  for(const r of s.rows){
+    if(r.group){cur={g:r.group,note:r.note,rows:[]};secs.push(cur);continue;}
+    if(!cur){cur={g:null,rows:[]};secs.push(cur);}
+    cur.rows.push(r);
+  }
+  const row=r=>`<div class="hb-row" data-tip="${esc(r.label)}: ${pc1(r.v)}"><span class="hb-label">${esc(r.label)}</span><span class="hb-track"><span class="hb-bar c-${r.c||"say"}" style="width:${Math.min(100,r.v/max*100)}%"></span></span><span class="hb-val">${pc(r.v)}</span></div>`;
+  const axis=`<div class="hb-axis" aria-hidden="true"><span class="ticks">${ticks(max)}</span><span></span></div>`;
+  const grouped=secs.some(x=>x.g);
+  let h=s.keys?legend(s.keys):"";
+  h+=`<div class="hb${grouped?" grouped":""}">`+secs.map((x,i)=>`<div class="hb-sec">${x.g?`<div class="hb-group">${esc(x.g)}${x.note?`<span>${esc(x.note)}</span>`:""}</div>`:""}${x.rows.map(row).join("")}${i===secs.length-1?axis:""}</div>`).join("")+`</div>`;
+  return h;
+}
+function stackRow(keys,v,label,n){
+  const bar=v.map((x,i)=>{if(x<=0)return"";const k=keys[i];const show=x>=7;return `<span class="seg c-${k.c}${x<16?" sm":""}" style="flex-grow:${x}" data-tip="${esc(k.label)}: ${pc1(x)}">${show?`<span>${pc(x)}</span>`:""}</span>`;}).join("");
+  return `<div class="st-row">${label?`<div class="st-label">${esc(label)}${n?` <span class="muted">n=${n}</span>`:""}</div>`:""}<div class="st-bar">${bar}</div></div>`;
+}
+function stack(s){
+  const one=s.rows.length===1;
+  return legend(s.keys,one?s.rows[0].v:null)+`<div class="st">${s.rows.map(r=>stackRow(s.keys,r.v,r.label,r.n)).join("")}</div>`;
+}
+function cols(s){
+  const max=s.max||100;
+  const bars=s.rows.map(r=>`<div class="col" data-tip="${esc(r.label)}: ${pc1(r.v)}"><span class="col-val">${pc(r.v)}</span><span class="col-bar c-${r.c||"say"}" style="height:${r.v/max*82}%"></span></div>`).join("");
+  return (s.keys?legend(s.keys):"")+`<div class="cols">${bars}</div><div class="col-labels">${s.rows.map(r=>`<span>${esc(r.label)}</span>`).join("")}</div>`;
+}
+function dumbbell(s){
+  const rows=s.rows.map(r=>{
+    const [hv,hl]=r.hi,[lv,ll]=r.lo;
+    return `<div class="db-row">
+      <div class="db-top"><span class="db-theme">${esc(r.theme)}</span><span class="db-gap">${Math.round(hv)-Math.round(lv)} pts</span></div>
+      <div class="db-track" style="--mid:${(lv+hv)/2}%" data-tip="${esc(r.theme)}: ${pc1(hv)} vs ${pc1(lv)}">
+        <span class="db-line" style="left:${lv}%;width:${hv-lv}%"></span>
+        <span class="db-dot lo" style="left:${lv}%"></span><span class="db-val lv" style="left:${lv}%">${pc(lv)}</span>
+        <span class="db-dot hi" style="left:${hv}%"></span><span class="db-val hv" style="left:${hv}%">${pc(hv)}</span>
+      </div>
+      <div class="db-desc"><span><i style="background:var(--say)"></i>${pc(hv)} ${esc(hl)}</span><span><i style="background:var(--gap)"></i>${pc(lv)} ${esc(ll)}</span></div>
+    </div>`;}).join("");
+  return `<div class="db">${rows}<div class="db-axis" aria-hidden="true">${ticks(100)}</div></div>`;
+}
+function sm2(s){
+  const cell=(v,tag)=>`<div class="sm2-cell"><span class="tag">${esc(tag)}</span><span class="hb-track"><span class="hb-bar c-say" style="width:${v}%"></span></span><span class="hb-val">${pc(v)}</span></div>`;
+  return `<div class="sm2"><div class="sm2-head"><span></span><span>${esc(s.cols[0])}</span><span>${esc(s.cols[1])} <span style="text-transform:none;letter-spacing:0">(% of active)</span></span></div>${s.rows.map(r=>`<div class="sm2-row" data-tip="${esc(r.label)}: ${pc1(r.a)} active, ${pc1(r.b)} of active grew"><span class="sm2-label">${esc(r.label)}</span>${cell(r.a,"Active")}${cell(r.b,"Grew")}</div>`).join("")}</div>`;
+}
+function ladders(s){
+  return `<div class="st" style="gap:14px">${s.items.map(it=>`<div class="ladder"><div class="st-label"><b style="color:var(--ink);font-weight:600">${esc(it.label)}</b></div>${legendLadder(it.keys,it.v)}${stackRow(it.keys,it.v).replace('<div class="st-row">','').replace(/<\/div>$/,'')}</div>`).join("")}</div>`;
+}
+function legendLadder(keys,v){
+  return `<ul class="legend">${keys.map((k,i)=>`<li><span class="sw c-${k.c}"></span><span>${esc(k.label)} <b>${pc(v[i])}</b></span></li>`).join("")}</ul>`;
+}
+
+/* data tables */
+function table(s){
+  let head=[],body=[];
+  if(s.type==="hbar"||s.type==="cols"){head=["Answer","Share"];body=s.rows.filter(r=>!r.group).map(r=>[r.label,pc1(r.v)]);}
+  else if(s.type==="stack"){head=[""].concat(s.keys.map(k=>k.label));body=s.rows.map(r=>[r.label||"All respondents"].concat(r.v.map(pc1)));}
+  else if(s.type==="dumbbell"){head=["Area","Activity or confidence","Share","Foundation in place","Share","Gap (pts)"];body=s.rows.map(r=>[r.theme,r.hi[1],pc1(r.hi[0]),r.lo[1],pc1(r.lo[0]),(Math.round(r.hi[0])-Math.round(r.lo[0]))+""]);}
+  else if(s.type==="sm2"){head=["Channel",s.cols[0],s.cols[1]+" (% of active)"];body=s.rows.map(r=>[r.label,pc1(r.a),pc1(r.b)]);}
+  else if(s.type==="ladders"){head=["Question","Answer","Share"];s.items.forEach(it=>it.keys.forEach((k,i)=>body.push([it.label,k.label,pc1(it.v[i])])));}
+  const th=head.map((x,i)=>`<th${i?' class="r"':''}>${esc(x)}</th>`).join("");
+  const tb=body.map(r=>`<tr>${r.map((x,i)=>`<td${i&&/%$|^\d+$/.test(x)?' class="r"':''}>${esc(x)}</td>`).join("")}</tr>`).join("");
+  return `<details class="data"><summary>View data table</summary><div class="tbl-wrap"><table><thead><tr>${th}</tr></thead><tbody>${tb}</tbody></table></div></details>`;
+}
+
+const R={hbar,stack,cols,dumbbell,sm2,ladders};
+let figN=0;
+$$("[data-fig]").forEach(el=>{
+  const s=FIG[el.dataset.fig]; if(!s) return;
+  el.innerHTML=R[s.type](s);
+  const fig=el.closest("figure");
+  if(fig){
+    figN++;
+    const cap=$("[data-cap]",fig); if(cap) cap.insertAdjacentHTML("afterbegin",`<b>Figure ${figN}.</b>`);
+    fig.insertAdjacentHTML("beforeend",table(s));
+  }
+});
+
+
+/* ---------------- benchmarks ---------------- */
+const BM={
+  dims:{size:{label:"By company size",segs:[["small","Small business",32],["mid","Mid-market",70],["large","Enterprise",39]],def:"mid"},
+        region:{label:"By region",segs:[["amer","AMER",82],["emea","EMEA",34],["apac","APAC",25]],def:"amer"}},
+  rows:[
+    {label:"Feel very or completely ready to grow",q:"SM Q9",all:28.4,small:31.2,mid:21.4,large:38.5,amer:26.8,emea:38.2,apac:20.0},
+    {label:"Very or completely confident in product data",q:"SM Q31",all:27.7,small:28.1,mid:21.4,large:38.5,amer:23.2,emea:41.2,apac:24.0},
+    {label:"Run feeds manually or mostly by hand",q:"SM Q33",all:39.0,small:50.0,mid:47.1,large:15.4,amer:47.6,emea:26.5,apac:28.0},
+    {label:"Have never audited their feeds",q:"SM Q35",all:41.1,small:46.9,mid:41.4,large:35.9,amer:45.1,emea:38.2,apac:32.0},
+    {label:"Spend 11+ hours a week on manual data tasks",q:"SM Q34",all:22.7,small:18.8,mid:15.7,large:38.5,amer:19.5,emea:35.3,apac:16.0},
+    {label:"Don't track checkout abandonment",q:"SM Q24",all:22.7,small:25.0,mid:20.0,large:25.6,amer:25.6,emea:20.6,apac:16.0},
+    {label:"Use any customer-facing AI",q:"SM Q12",all:60.3,small:46.9,mid:58.6,large:74.4,amer:56.1,emea:82.4,apac:44.0},
+    {label:"Have a formal AEO/GEO strategy",q:"SM Q17",all:17.7,small:9.4,mid:21.4,large:17.9,amer:19.5,emea:14.7,apac:16.0},
+    {label:"Researching, piloting or acting on agentic shopping",q:"SM Q18",all:33.3,small:12.5,mid:37.1,large:43.6,amer:34.1,emea:35.3,apac:28.0},
+    {label:"Had an integration failure hurt the business",q:"SM Q29",all:53.9,small:50.0,mid:52.9,large:59.0,amer:52.4,emea:58.8,apac:52.0}
+  ]
+};
+const bmState={dim:"size",seg:"mid"};
+try{const saved=JSON.parse(localStorage.getItem("gap-bm")||"null");if(saved&&BM.dims[saved.dim]&&BM.dims[saved.dim].segs.some(s=>s[0]===saved.seg)){bmState.dim=saved.dim;bmState.seg=saved.seg;}}catch(e){}
+const bmRows=$("#bmRows");
+bmRows.innerHTML=BM.rows.map((r,i)=>`<div class="bm-row" data-row="${i}"><span class="bm-label">${esc(r.label)}</span><span class="bm-track"><span class="bm-bar"></span><span class="bm-tick" style="left:${r.all}%"></span></span><span class="bm-val"><b class="num"></b><span class="num"></span></span></div>`).join("");
+function renderBM(){
+  const dim=BM.dims[bmState.dim];
+  $("#bmDim").innerHTML=Object.entries(BM.dims).map(([k,d])=>`<button type="button" data-dim="${k}" aria-pressed="${k===bmState.dim}">${esc(d.label)}</button>`).join("");
+  $("#bmSeg").innerHTML=dim.segs.map(([k,l,n])=>`<button type="button" data-seg="${k}" aria-pressed="${k===bmState.seg}">${esc(l)} <span class="num" style="opacity:.7">n=${n}</span></button>`).join("");
+  const seg=dim.segs.find(s=>s[0]===bmState.seg);
+  BM.rows.forEach((r,i)=>{
+    const row=bmRows.children[i], v=r[bmState.seg], d=Math.round(v)-Math.round(r.all);
+    $(".bm-bar",row).style.width=v+"%";
+    $(".bm-val b",row).textContent=pc(v);
+    $(".bm-val span",row).textContent=(d>0?"+":d<0?"−":"±")+Math.abs(d)+" vs all";
+    row.dataset.tip=`${r.label}: ${seg[1]} ${pc1(v)} · All ${pc1(r.all)}`;
+  });
+  $("#bmKeyLabel").textContent=seg[1]+" (n="+seg[2]+")";
+  $("#bmNote").textContent=bmState.dim==="region"
+    ? "Regional results are directional, especially APAC (n=25). Latin America isn't represented. These are descriptive comparisons, not significance tests."
+    : "Groups smaller than 40 are directional. These are descriptive comparisons, not significance tests.";
+  try{localStorage.setItem("gap-bm",JSON.stringify(bmState));}catch(e){}
+}
+$("#bmDim").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;bmState.dim=b.dataset.dim;bmState.seg=BM.dims[bmState.dim].def;renderBM();});
+$("#bmSeg").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;bmState.seg=b.dataset.seg;renderBM();});
+renderBM();
+
+/* ---------------- quotes ---------------- */
+const Q=[
+  {t:"We are restructuring our technical documentation and spec sheets into clean JSON schemas so external procurement bots can read product compatibility data without getting hung up.",q:"Q19",r:"EMEA",s:"Enterprise",th:"agentic"},
+  {t:"An audit of how AI agents see the site: whether product data is structured and readable, whether pages can be crawled, and whether product specs are clear enough for an agent to compare items.",q:"Q19",r:"AMER",s:"Mid-market",th:"data"},
+  {t:"We began having conversations about this, and will likely plan to visit this in Q2 of 2027. There's just too much going on right now for it to be a main focus. We're a pretty lean team.",q:"Q19",r:"AMER",s:"Mid-market",th:"lead"},
+  {t:"We are presently mapping our API architecture, which will enable our customers' automated procurement systems to query real-time stock levels as well as submit approved purchase orders directly into our ERP.",q:"Q19",r:"EMEA",s:"Enterprise",th:"agentic"},
+  {t:"To get data maintenance and updates more automated and autonomous.",q:"Q10",r:"AMER",s:"Mid-market",th:"data"},
+  {t:"It's not something our senior leadership understands, or is prepared to have a conversation about.",q:"Q19",r:"AMER",s:"Enterprise",th:"lead"},
+  {t:"Our number one priority is making sure to streamline our B2B buyer portal. This will allow wholesale customers to self-serve their re-orders without the need to rely on a sales rep.",q:"Q10",r:"EMEA",s:"Enterprise",th:"platform"},
+  {t:"We've been attending webinars and industry sessions to better understand how agentic shopping is evolving… We're also looking at how we can prepare our product data and systems.",q:"Q19",r:"EMEA",s:"Mid-market",th:"agentic"},
+  {t:"Structured data, schema, and adjusted back-end data. There's a lot more we need to do, but there is so much back and forth on decision making.",q:"Q19",r:"AMER",s:"Enterprise",th:"lead"},
+  {t:"Grow subscription and repeat purchase so LTV supports higher paid acquisition spend.",q:"Q10",r:"AMER",s:"Mid-market",th:"growth"},
+  {t:"We are enabling our capabilities to track different traffic types (AI/human), implement a KYA component to our website, and implement bot controls.",q:"Q19",r:"AMER",s:"Enterprise",th:"agentic"},
+  {t:"Full functioning online checkout process. This is more difficult in the automotive dealer retail world than traditional online sellers.",q:"Q10",r:"AMER",s:"Small business",th:"platform"},
+  {t:"Most importantly, we need to ensure that our product data is as up-to-date and as accurate as possible.",q:"Q19",r:"AMER",s:"Enterprise",th:"data"},
+  {t:"We are deciding if it should be given a higher priority, because we do not see the added value for our company versus the cost.",q:"Q19",r:"AMER",s:"Small business",th:"lead"},
+  {t:"Our brands to show up first the moment anyone types the name of the category we are in.",q:"Q10",r:"AMER",s:"Enterprise",th:"agentic"},
+  {t:"We are testing dedicated API connections with a few key accounts so their AI agents can check live warehouse stocks and reorder into our ERP.",q:"Q19",r:"EMEA",s:"Enterprise",th:"agentic"},
+  {t:"Diversifying our channel mix to reduce our dependency on paid acquisition.",q:"Q10",r:"EMEA",s:"Mid-market",th:"growth"},
+  {t:"Our industry is regulated and restricted so we can't sell directly through agentic, but we're doing a large GEO project to ensure we show up where we need, with better site infrastructure and external linking as priority.",q:"Q19",r:"EMEA",s:"Mid-market",th:"agentic"},
+  {t:"Reducing wasted ad spend, growing the product catalogue and expanding into new countries.",q:"Q10",r:"EMEA",s:"Mid-market",th:"growth"}
+];
+const QL={Q10:"On their top priority",Q19:"On agentic shopping"};
+const TH={all:"All",agentic:"Agentic and AI search",data:"Product data",platform:"Platform and checkout",lead:"Leadership and budget",growth:"Growth priorities"};
+let qTheme="all";
+function renderQ(){
+  $("#qChips").innerHTML=Object.entries(TH).map(([k,l])=>{const n=k==="all"?Q.length:Q.filter(x=>x.th===k).length;return `<button type="button" data-th="${k}" aria-pressed="${k===qTheme}">${esc(l)} <span class="num" style="opacity:.65">${n}</span></button>`;}).join("");
+  $("#quotes").innerHTML=Q.filter(x=>qTheme==="all"||x.th===qTheme).map(x=>`<figure class="q"><blockquote>${esc(x.t)}</blockquote><figcaption><span class="th">${esc(TH[x.th])}</span><span>${QL[x.q]} · ${x.r} · ${esc(x.s)}</span></figcaption></figure>`).join("");
+}
+$("#qChips").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;qTheme=b.dataset.th;renderQ();});
+renderQ();
+
+/* ---------------- citable stats ---------------- */
+const SRC="Source: The Commerce Gap Report 2026, Commerce. Survey of 141 senior ecommerce decision-makers, fielded Sept 15–Oct 29, 2026.";
+const ALL="Base: all respondents (n=141)";
+const CITE=[
+  ["75% of ecommerce leaders rate their organization moderately to completely ready to grow over the next 12 to 18 months.",ALL],
+  ["76% of ecommerce leaders who say they're ready to grow have at least one basic gap: manual feeds, no feed audit, or untracked checkout abandonment.","Base: respondents who say they're ready to grow (n=106)"],
+  ["90% of ecommerce organizations use AI somewhere in their operations, but only 8% use it in checkout or payments.",ALL],
+  ["Only 11% of ecommerce leaders are very or completely confident their product data meets the requirements of AI-powered targeting and bidding on retail media.",ALL],
+  ["39% of ecommerce teams still manage product feeds manually or mostly by hand. Only 13% are mostly or fully automated.",ALL],
+  ["41% of ecommerce organizations have never run a formal audit of their product feed quality.",ALL],
+  ["23% of ecommerce teams spend 11 or more hours a week on manual product-data tasks.",ALL],
+  ["23% of ecommerce leaders don't track their checkout abandonment rate.",ALL],
+  ["54% of ecommerce organizations say an integration failure hurt sales or operations in the past 12 months.",ALL],
+  ["Only 18% of ecommerce teams have a formal AEO/GEO strategy with dedicated time or budget.",ALL],
+  ["Only 9% of ecommerce organizations have made real changes to prepare for agentic shopping.",ALL],
+  ["40% of ecommerce leaders say leadership understands the impact of ecommerce infrastructure but investment lags.",ALL],
+  ["Brands are active on an average of 5.4 of 8 major sales channels, and 82% sell on four or more.",ALL]
+];
+$("#citeList").innerHTML=CITE.map((c,i)=>`<li><p>${esc(c[0])}<span>${esc(c[1])}</span></p><button type="button" class="copy" data-i="${i}">Copy</button></li>`).join("");
+const toast=$("#toast");let toastT;
+function say(msg){toast.textContent=msg;toast.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>toast.classList.remove("on"),1800);}
+$("#citeList").addEventListener("click",e=>{
+  const b=e.target.closest(".copy");if(!b)return;
+  const text=CITE[+b.dataset.i][0]+" "+SRC;
+  const done=()=>{b.textContent="Copied";b.classList.add("done");say("Copied with source line");setTimeout(()=>{b.textContent="Copy";b.classList.remove("done");},1600);};
+  const fallback=()=>{const p=b.parentElement.querySelector("p");const r=document.createRange();r.selectNodeContents(p);const sel=getSelection();sel.removeAllRanges();sel.addRange(r);say("Selected. Press Ctrl+C or ⌘C to copy");};
+  try{navigator.clipboard.writeText(text).then(done,fallback);}catch(err){fallback();}
+});
+
+/* ---------------- review notes toggle ---------------- */
+const tg=$("#notesToggle");
+function setNotes(on){document.documentElement.classList.toggle("notes-on",on);tg.setAttribute("aria-pressed",String(on));tg.textContent=on?"Hide review notes":"Show review notes";try{localStorage.setItem("gap-review-notes",on?"1":"0");}catch(e){}}
+let notesOn=false;try{notesOn=localStorage.getItem("gap-review-notes")==="1";}catch(e){}
+setNotes(notesOn);
+tg.addEventListener("click",()=>setNotes(tg.getAttribute("aria-pressed")!=="true"));
+
+/* ---------------- chart animation ---------------- */
+const motionBtn=$("#motionBtn");
+const reduceMq=window.matchMedia?matchMedia("(prefers-reduced-motion: reduce)"):null;
+const ANIM_SEL=".chart:not([data-fig=gap]), .funnel, .bm-rows, .db-row";
+const ITEM_SEL=".hb-bar,.bm-bar,.st-bar,.col,.db-row,.fn-row";
+let userMotion=true, io=null;
+try{userMotion=localStorage.getItem("gap-motion")!=="0";}catch(e){}
+const motionOn=()=>ANIMATE_CHARTS&&userMotion&&!(reduceMq&&reduceMq.matches);
+$$(ANIM_SEL).forEach(el=>$$(ITEM_SEL,el).forEach((b,i)=>{b.style.setProperty("--k",i);$$(".db-line,.db-dot,.db-val,.col-bar,.col-val,.fn-fill,.fn-prev,.fn-meta em",b).forEach(c=>c.style.setProperty("--k",i));}));
+function settle(){if(io){io.disconnect();io=null;}$$(".anim-pending").forEach(el=>el.classList.remove("anim-pending"));}
+function arm(){
+  settle();
+  document.documentElement.classList.toggle("anim",motionOn());
+  if(!motionOn()||!("IntersectionObserver" in window))return;
+  io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);requestAnimationFrame(()=>requestAnimationFrame(()=>e.target.classList.remove("anim-pending")));}),{threshold:0.2,rootMargin:"0px 0px -12% 0px"});
+  $$(ANIM_SEL).forEach(el=>{el.classList.add("anim-pending");io.observe(el);});
+}
+function paintMotion(){motionBtn.setAttribute("aria-checked",String(userMotion));}
+if(!ANIMATE_CHARTS)motionBtn.closest(".utility").hidden=true;
+motionBtn.addEventListener("click",()=>{userMotion=!userMotion;try{localStorage.setItem("gap-motion",userMotion?"1":"0");}catch(e){}paintMotion();arm();});
+if(reduceMq&&reduceMq.addEventListener)reduceMq.addEventListener("change",arm);
+paintMotion();arm();
+
+/* ---------------- theme toggle ---------------- */
+const themeBtn=$("#themeBtn");
+const mq=window.matchMedia?matchMedia("(prefers-color-scheme: dark)"):null;
+const curTheme=()=>document.documentElement.dataset.theme||(mq&&mq.matches?"dark":"light");
+function paintTheme(){const d=curTheme()==="dark";themeBtn.classList.toggle("is-dark",d);themeBtn.setAttribute("aria-checked",String(d));}
+try{const t=localStorage.getItem("gap-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t;}catch(e){}
+themeBtn.addEventListener("click",()=>{const n=curTheme()==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("gap-theme",n);}catch(e){}paintTheme();});
+if(mq&&mq.addEventListener)mq.addEventListener("change",paintTheme);
+paintTheme();
+
+/* ---------------- tooltip ---------------- */
+const tip=$("#tip");
+document.addEventListener("pointermove",e=>{
+  if(e.pointerType==="touch")return;
+  const t=e.target.closest&&e.target.closest("[data-tip]");
+  if(!t){tip.classList.remove("on");return;}
+  tip.textContent=t.dataset.tip;
+  const w=tip.offsetWidth,h=tip.offsetHeight;
+  let x=e.clientX+14,y=e.clientY-h-12;
+  if(x+w>innerWidth-8)x=e.clientX-w-14;
+  if(y<8)y=e.clientY+18;
+  tip.style.left=x+"px";tip.style.top=y+"px";tip.classList.add("on");
+});
+document.addEventListener("pointerleave",()=>tip.classList.remove("on"));
+})();
+</script>
