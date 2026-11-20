@@ -117,7 +117,7 @@ p{margin:0}
 .theme-btn.is-dark .i-sun{color:var(--ink-3)}
 .theme-btn.is-dark .i-moon{color:var(--on-accent)}
 .utility{background:var(--tint);color:var(--ink-2);font-size:12px;line-height:1}
-.utility .wrap{display:flex;align-items:center;justify-content:flex-end;min-height:30px}
+.utility .wrap{display:flex;align-items:center;justify-content:flex-end;gap:24px;min-height:30px}
 .motion-btn{display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:6px 0;font:400 12px/1 var(--f-body);color:var(--ink-2);cursor:pointer}
 .motion-btn:hover{color:var(--ink)}
 .motion-btn .mini{width:22px;height:12px;border-radius:999px;background:var(--line-2);position:relative;transition:background .2s}
@@ -164,6 +164,8 @@ p{margin:0}
 .btn-primary{background:var(--accent);color:var(--on-accent)}
 .btn-ghost{border-color:var(--line-2);color:var(--ink);background:transparent}
 .btn-ghost:hover{border-color:var(--ink)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn svg{width:18px;height:18px;flex-shrink:0}
 
 .funnel-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(20px,3vw,32px);display:grid;gap:18px}
 .funnel-card .legend{margin:0}
@@ -330,6 +332,59 @@ details.data summary:hover{color:var(--ink)}
 .callout p{color:var(--ink-2);font-size:16px;line-height:1.5}
 .caveat{font-size:15px;color:var(--ink-3);font-style:italic}
 
+/* product CTAs: one per finding, switched off with the CTAs toggle in the top bar (.ctas-off on the root) */
+.cta{position:relative;overflow:hidden;display:grid;gap:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:24px 28px 26px 32px}
+.cta::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--accent)}
+.cta-brand{font:500 13px/1.3 var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.cta h4{font-size:22px;line-height:1.25;letter-spacing:-0.015em;margin-top:8px}
+.cta p{font-size:16px;line-height:1.5;color:var(--ink-2);margin-top:8px;max-width:52ch}
+.cta-acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.cta-more{font-size:14px;line-height:1.4}
+.cta .btn{font-size:15px;padding:13px 20px}
+.ctas-off .cta{display:none}
+
+/* PDF download */
+.dl{display:grid;gap:40px;align-items:center;background:var(--tint);border-radius:var(--r-lg);padding:clamp(28px,4.5vw,64px);overflow:hidden}
+@media (min-width:900px){.dl{grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:64px}}
+.dl h2{font-size:clamp(32px,3.8vw,50px);line-height:1.06;margin-top:16px}
+.dl-copy > p{color:var(--ink-2);margin-top:18px;max-width:44ch}
+.dl-form{display:grid;gap:8px;margin-top:32px;max-width:560px}
+.dl-form label{font-size:14px;font-weight:600;color:var(--ink)}
+.dl-row{display:flex;flex-wrap:wrap;gap:10px}
+.dl-row input{flex:1 1 240px;min-width:0;font:400 17px/1.2 var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:999px;padding:14px 20px}
+.dl-row input::placeholder{color:var(--ink-3)}
+.dl-row input:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:999px}
+.dl-row input[aria-invalid="true"]{border-color:var(--gap);box-shadow:0 0 0 1px var(--gap)}
+.dl-row .btn{flex:0 0 auto}
+.dl-row .btn[disabled]{opacity:.7;cursor:progress}
+.dl-err{min-height:1.4em;font-size:14px;color:var(--ink);font-weight:500}
+.dl-err:empty{min-height:0}
+.dl-fine{font-size:13px;line-height:1.45;color:var(--ink-3);max-width:52ch}
+.dl-done{margin-top:32px;display:grid;gap:8px;justify-items:start;outline:none}
+.dl-done h3{font-size:26px;display:flex;align-items:center;gap:12px}
+.dl-done h3 svg{width:28px;height:28px;color:var(--accent);flex-shrink:0}
+.dl-done p{color:var(--ink-2)}
+[data-dl] [hidden]{display:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.hero-dl{margin-top:36px;max-width:560px}
+.hero-dl .dl-form{margin-top:0;gap:10px}
+.hero-dl .dl-form label{font-size:18px;font-weight:600;line-height:1.3}
+.hero-dl .dl-done{margin-top:0}
+.hero-dl .dl-done h3{font-size:24px}
+.dl .rn{margin-top:20px}
+.dl-art{position:relative;justify-self:center;width:min(64%,300px);aspect-ratio:3/4;margin:12px 12px 12px 0}
+@media (min-width:900px){.dl-art{width:min(100%,300px)}}
+.dl-art::before{content:"";position:absolute;inset:0;border-radius:10px;background:var(--surface);transform:rotate(4deg) translate(10px,6px);box-shadow:0 10px 30px rgba(23,2,69,.12)}
+.dl-cover{position:absolute;inset:0;border-radius:10px;background:#170245;color:#FFFFFF;padding:24px 22px;display:flex;flex-direction:column;gap:14px;transform:rotate(-2deg);box-shadow:0 18px 40px rgba(23,2,69,.28);overflow:hidden}
+.dl-cover img{height:18px;width:auto;align-self:flex-start}
+.dl-cover .k{font:500 10px/1.3 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:#A5A0FF;margin-top:auto}
+.dl-cover b{font:500 24px/1.08 var(--f-display);letter-spacing:-0.02em}
+.dl-cover b span{background:#B3FF3D;color:#170245;padding:0 .06em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.dl-cover .bars{display:grid;gap:6px;margin-top:6px}
+.dl-cover .bars i{display:block;height:6px;border-radius:3px;background:#6058FF}
+.dl-cover .bars i:nth-child(2){background:#EA3BA7}
+.dl-cover .meta{font-size:10px;line-height:1.3;color:#A9B0BF;display:flex;justify-content:space-between;border-top:1px solid #33236E;padding-top:10px}
+
 /* review notes */
 .rn{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.45;color:var(--ink-2);background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--r-sm);padding:10px 12px}
 .rn-tag{flex-shrink:0;font:600 11px/1.6 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--on-accent);background:var(--accent);border-radius:4px;padding:0 6px;margin-top:1px}
@@ -428,6 +483,7 @@ details.data summary:hover{color:var(--ink)}
 
 <div class="utility">
   <div class="wrap">
+    <button class="motion-btn" id="ctaBtn" type="button" role="switch" aria-checked="true" title="Show or hide the product calls to action">CTAs <span class="mini" aria-hidden="true"></span></button>
     <button class="motion-btn" id="motionBtn" type="button" role="switch" aria-checked="true">Animations <span class="mini" aria-hidden="true"></span></button>
   </div>
 </div>
@@ -462,9 +518,21 @@ details.data summary:hover{color:var(--ink)}
         <div class="eyebrow">The Commerce Gap Report 2026</div>
         <h1>Leaders are ready to grow. Their systems are <span class="hl">still catching up.</span></h1>
         <p class="deck">We asked 141 senior ecommerce decision-makers how ready they are for the next 12 to 18 months. Then we asked how their operations actually run. Three in four ecommerce leaders say they're ready. Their answers about feeds, product data, checkout and AI search tell a different story.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#findings">Read the findings</a>
-          <a class="btn btn-ghost" href="#benchmarks">See how you compare</a>
+        <div class="hero-dl" data-dl>
+          <form class="dl-form" novalidate>
+            <label for="dlEmailHero">Download the full report<span class="sr-only">: work email</span></label>
+            <div class="dl-row">
+              <input id="dlEmailHero" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Work email" aria-describedby="dlErrHero dlFineHero" required>
+              <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg><span>Download</span></button>
+            </div>
+            <p class="dl-err" id="dlErrHero" role="alert"></p>
+            <p class="dl-fine" id="dlFineHero">Free PDF, sent to your inbox. You'll also get occasional research from Commerce, BigCommerce and Feedonomics. Unsubscribe any time.</p>
+          </form>
+          <div class="dl-done" tabindex="-1" hidden>
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>Check your inbox.</h3>
+            <p>We've sent the full report to <b class="dl-to"></b>.</p>
+            <button type="button" class="rv-toggle dl-reset">Use a different email</button>
+          </div>
         </div>
       </div>
 
@@ -881,6 +949,43 @@ details.data summary:hover{color:var(--ink)}
     </div>
   </section>
 
+  <!-- PDF DOWNLOAD -->
+  <section class="sec" id="download" style="padding-top:0">
+    <div class="wrap">
+      <div class="dl">
+        <div class="dl-copy" data-dl>
+          <div class="eyebrow">Download the report</div>
+          <h2>Take the full report with you.</h2>
+          <p>Get the PDF edition: all nine findings, every chart and the full benchmarks in one file you can share with your team or bring to a budget meeting.</p>
+          <form class="dl-form" novalidate>
+            <label for="dlEmail">Work email</label>
+            <div class="dl-row">
+              <input id="dlEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" aria-describedby="dlErr dlFine" required>
+              <button class="btn btn-primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg><span>Download PDF</span></button>
+            </div>
+            <p class="dl-err" id="dlErr" role="alert"></p>
+            <p class="dl-fine" id="dlFine">We'll email you a link to the PDF. You'll also get occasional research from Commerce, BigCommerce and Feedonomics, and you can unsubscribe at any time.</p>
+          </form>
+          <div class="dl-done" tabindex="-1" hidden>
+            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>Check your inbox.</h3>
+            <p>We've sent the PDF to <b class="dl-to"></b>.</p>
+            <button type="button" class="rv-toggle dl-reset">Use a different email</button>
+          </div>
+          <p class="rn"><span class="rn-tag">Review</span><span>Front-end mock only. The email is checked for format, then the confirmation shows; nothing is sent or stored. Needs the real form handler, the hosted PDF, and legal sign-off on the consent line.</span></p>
+        </div>
+        <div class="dl-art" aria-hidden="true">
+          <div class="dl-cover">
+            <img src="logos/commerce-white.svg" alt="" width="92" height="18">
+            <span class="k">The Commerce Gap Report 2026</span>
+            <b>Leaders are ready to grow. Their systems are <span>still catching up.</span></b>
+            <span class="bars"><i style="width:75%"></i><i style="width:18%"></i><i style="width:46%;opacity:.6"></i></span>
+            <span class="meta"><span>141 ecommerce leaders</span><span>PDF</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CITE -->
   <section class="sec" id="cite" style="padding-top:0">
     <div class="wrap">
@@ -936,8 +1041,10 @@ details.data summary:hover{color:var(--ink)}
           <li><strong>Source lines.</strong> Public source lines quote the survey question and base. SurveyMonkey question numbers appear only in these review notes.</li>
           <li><strong>Left out of the public copy.</strong> The APAC recruitment overlap (now "directional" in the method) and the "first edition / year-over-year" framing.</li>
           <li><strong>Quotes.</strong> Answers that name vendors or platforms were left out of the quote wall. Attribution is question, region and company size only.</li>
-          <li><strong>Brand.</strong> Built on the Commerce design system tokens (Pearl, Indigo, Iris, Neon highlighter, Aeonik Medium with DM Sans). BigCommerce and Feedonomics appear as text links only, in line with the multi-brand rule.</li>
-          <li><strong>Not built yet.</strong> PDF download, the email asset, the brand-specific blog cuts, and an optional single "Commerce Gap Index" score for year-over-year tracking.</li>
+          <li><strong>Brand.</strong> Built on the Commerce design system tokens (Pearl, Indigo, Iris, Neon highlighter, Aeonik Medium with DM Sans). BigCommerce and Feedonomics appear as text links only, in line with the multi-brand rule. The product CTAs name the brand in text, with no logos.</li>
+          <li><strong>Product CTAs.</strong> One per finding, covering the ten product pages in the brief. Every BigCommerce and Feedonomics link on the page carries UTM parameters (campaign <code>commerce-gap-report</code>, content set to the finding or action). Turn them off with the CTAs switch in the top bar, next to Animations, or share the page with <code>?ctas=off</code>. Copy for the three Feedonomics pages (feed management, platform, services) is written from the product names because those pages couldn't be read; it needs a product-marketing check.</li>
+          <li><strong>PDF download.</strong> Email capture appears twice: in the hero, in place of the "Read the findings" and "See how you compare" buttons, and in the download section near the end. Both are front-end mocks that check the address format and show a confirmation (a sign-up in one confirms both), but nothing is sent or stored.</li>
+          <li><strong>Not built yet.</strong> The PDF itself, the email asset, the brand-specific blog cuts, and an optional single "Commerce Gap Index" score for year-over-year tracking.</li>
         </ul>
       </div>
     </div>
@@ -965,7 +1072,7 @@ const pc=v=>Math.round(v)+"%";
 const pc1=v=>v.toFixed(1)+"%";
 
 /* ---------------- settings ---------------- */
-// Set to false to turn chart animations off for everyone (this also hides the header toggle).
+// Set to false to turn chart animations off for everyone (this also hides the Animations toggle in the top bar).
 const ANIMATE_CHARTS = true;
 
 /* ---------------- data (computed from the SurveyMonkey export, n=141) ---------------- */
@@ -1253,6 +1360,97 @@ let notesOn=false;try{notesOn=localStorage.getItem("gap-review-notes")==="1";}ca
 setNotes(notesOn);
 tg.addEventListener("click",()=>setNotes(tg.getAttribute("aria-pressed")!=="true"));
 
+/* ---------------- product CTAs ---------------- */
+// One CTA per finding, keyed by the finding's id. Mapped to the product pages listed in the brief.
+// Every BigCommerce and Feedonomics link on the page gets these UTM parameters, plus utm_content.
+const UTM={utm_source:"commerce.com",utm_medium:"referral",utm_campaign:"commerce-gap-report"};
+const CTAS={
+  ai:{brand:"Feedonomics",product:"AI Data Enrichment",
+    h:"Get your product data ready for AI-driven targeting.",
+    p:"Generative AI rewrites and fills titles, descriptions and attributes across the whole catalog, so ad algorithms and AI search have complete data to work with.",
+    btn:"Explore AI Data Enrichment",url:"https://feedonomics.com/product/agentic-commerce/ai-data-enrichment/"},
+  trust:{brand:"BigCommerce",product:"Agentic Commerce",
+    h:"Get your store ready for AI that browses and buys.",
+    p:"AI tools for product discovery, shopper assistance and developer access, built for the moment agents move from suggesting products to paying for them.",
+    btn:"Explore Agentic Commerce",url:"https://www.bigcommerce.com/product/agentic-commerce/"},
+  "ai-search":{brand:"BigCommerce",product:"Catalog Enrichment",
+    h:"Give AI search better product content to cite.",
+    p:"Built-in AI bulk-generates titles, descriptions, FAQs and SEO and AEO content, and your team reviews every change before it publishes.",
+    btn:"Explore Catalog Enrichment",url:"https://www.bigcommerce.com/product/catalog-enrichment/"},
+  data:{brand:"Feedonomics",product:"Services",
+    h:"Get an expert check on your feed quality.",
+    p:"Feedonomics specialists audit, fix and manage product feeds across your active channels, so rejected and suppressed listings show up before they cost you reach.",
+    btn:"Explore Feedonomics services",url:"https://feedonomics.com/services/"},
+  feeds:{brand:"Feedonomics",product:"Advertising Feed Management",
+    h:"Take the manual work out of feed management.",
+    p:"Optimize and send product feeds to every ad channel from one place, with rules and automation handling the channel-by-channel upkeep.",
+    btn:"Explore feed management",url:"https://feedonomics.com/product/advertising-feed-management/"},
+  channels:{brand:"BigCommerce",product:"Omnichannel",
+    h:"Run every channel from one store.",
+    p:"Sell across marketplaces, social, search and ads, with inventory and orders kept in sync with your storefront.",
+    btn:"Explore omnichannel",url:"https://www.bigcommerce.com/solutions/omnichannel/"},
+  checkout:{brand:"BigCommerce",product:"Checkout",
+    h:"Fix the checkout friction shoppers feel first.",
+    p:"A checkout optimized for every device out of the box, customizable through no-code settings or an open checkout SDK.",
+    btn:"Explore BigCommerce Checkout",url:"https://www.bigcommerce.com/product/checkout/"},
+  integrations:{brand:"BigCommerce",product:"Apps and Integrations",
+    h:"Cut the fragile hand-offs between your systems.",
+    p:"Connect orders, inventory, shipping and payments through a directory of pre-built apps and integrations.",
+    btn:"Browse apps and integrations",url:"https://www.bigcommerce.com/apps/",
+    more:["Planning a platform move? See how migration works","https://www.bigcommerce.com/migration/"]},
+  leadership:{brand:"Feedonomics",product:"Platform",
+    h:"Make sure your data can carry the media spend.",
+    p:"One platform for the product data behind every channel, so retail media and shopping budgets run on listings that are complete and accurate.",
+    btn:"Explore the Feedonomics platform",url:"https://feedonomics.com/product/"}
+};
+const ARROW=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>`;
+Object.entries(CTAS).forEach(([id,c])=>{
+  const f=document.getElementById(id), why=f&&$(".why",f); if(!why) return;
+  why.insertAdjacentHTML("afterend",`<aside class="cta" aria-label="${esc(c.brand+" "+c.product)}" data-utm="finding-${esc(id)}">
+    <div><div class="cta-brand">${esc(c.brand)} · ${esc(c.product)}</div><h4>${esc(c.h)}</h4><p>${esc(c.p)}</p></div>
+    <div class="cta-acts"><a class="btn btn-primary" href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.btn)}${ARROW}</a>${c.more?`<a class="cta-more" href="${esc(c.more[1])}" target="_blank" rel="noopener">${esc(c.more[0])} ↗</a>`:""}</div>
+  </aside>`);
+});
+$$(".act").forEach((a,i)=>a.dataset.utm="action-"+(i+1));
+$$('a[href^="https://feedonomics.com"],a[href^="https://www.bigcommerce.com"]').forEach(a=>{
+  try{
+    const u=new URL(a.href);
+    Object.entries(UTM).forEach(([k,v])=>u.searchParams.set(k,v));
+    const ctx=a.closest("[data-utm]"); if(ctx) u.searchParams.set("utm_content",ctx.dataset.utm);
+    a.href=u.toString();
+  }catch(e){}
+});
+
+/* CTA toggle: remembered per browser; ?ctas=off or ?ctas=on in the URL wins for that visit */
+const ctaBtn=$("#ctaBtn");
+let ctasOn=true;
+try{ctasOn=localStorage.getItem("gap-ctas")!=="0";}catch(e){}
+try{const p=new URLSearchParams(location.search).get("ctas");if(p==="off"||p==="0")ctasOn=false;else if(p==="on"||p==="1")ctasOn=true;}catch(e){}
+function setCtas(on){ctasOn=on;document.documentElement.classList.toggle("ctas-off",!on);ctaBtn.setAttribute("aria-checked",String(on));}
+setCtas(ctasOn);
+ctaBtn.addEventListener("click",()=>{setCtas(!ctasOn);try{localStorage.setItem("gap-ctas",ctasOn?"1":"0");}catch(e){}say(ctasOn?"Product CTAs on":"Product CTAs off");});
+
+/* ---------------- PDF download (front-end mock: nothing is sent or stored) ---------------- */
+// Two captures share this: the hero and the download section. A sign-up in either one shows the confirmation in both.
+const EMAIL_OK=/^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[A-Za-z]{2,}$/;
+const DL=$$("[data-dl]").map(box=>{const btn=$("button[type=submit]",box);return {box,btn,label:$("span",btn).textContent,form:$(".dl-form",box),email:$("input[type=email]",box),err:$(".dl-err",box),done:$(".dl-done",box),to:$(".dl-to",box)};});
+function dlClear(d){d.err.textContent="";d.email.removeAttribute("aria-invalid");}
+function dlShow(sentTo){DL.forEach(d=>{dlClear(d);d.form.hidden=!!sentTo;d.done.hidden=!sentTo;if(sentTo)d.to.textContent=sentTo;else d.email.value="";});}
+DL.forEach(d=>{
+  const invalid=msg=>{d.err.textContent=msg;d.email.setAttribute("aria-invalid","true");d.email.focus();};
+  d.form.addEventListener("submit",e=>{
+    e.preventDefault();
+    const v=d.email.value.trim();
+    if(!v)return invalid("Enter your work email to get the report.");
+    if(!EMAIL_OK.test(v))return invalid("That email doesn't look right. Try something like you@company.com.");
+    dlClear(d);
+    d.btn.disabled=true;$("span",d.btn).textContent="Sending…";
+    setTimeout(()=>{d.btn.disabled=false;$("span",d.btn).textContent=d.label;dlShow(v);d.done.focus();},700);
+  });
+  d.email.addEventListener("input",()=>{if(d.email.hasAttribute("aria-invalid"))dlClear(d);});
+  $(".dl-reset",d.box).addEventListener("click",()=>{dlShow(null);d.email.focus();});
+});
+
 /* ---------------- chart animation ---------------- */
 const motionBtn=$("#motionBtn");
 const reduceMq=window.matchMedia?matchMedia("(prefers-reduced-motion: reduce)"):null;
@@ -1271,7 +1469,7 @@ function arm(){
   $$(ANIM_SEL).forEach(el=>{el.classList.add("anim-pending");io.observe(el);});
 }
 function paintMotion(){motionBtn.setAttribute("aria-checked",String(userMotion));}
-if(!ANIMATE_CHARTS)motionBtn.closest(".utility").hidden=true;
+if(!ANIMATE_CHARTS)motionBtn.hidden=true;
 motionBtn.addEventListener("click",()=>{userMotion=!userMotion;try{localStorage.setItem("gap-motion",userMotion?"1":"0");}catch(e){}paintMotion();arm();});
 if(reduceMq&&reduceMq.addEventListener)reduceMq.addEventListener("change",arm);
 paintMotion();arm();

@@ -50,3 +50,5 @@ python3 commerce-gap-report/src/build.py
 ```
 
 `src/report.html` has no `<html>/<head>/<body>` wrapper because it is also published as a claude.ai artifact, which adds its own; the build script adds the wrapper for Pages. Chart animations can be turned off for everyone with `ANIMATE_CHARTS = false` near the top of the script. Review notes are hidden by default; the footer link shows them.
+
+Product CTAs (one per finding) live in the `CTAS` object in the script, keyed by finding id; `UTM` holds the parameters added to every BigCommerce and Feedonomics link. The CTAs switch in the top bar (next to Animations) hides them and is remembered per browser; `?ctas=off` or `?ctas=on` in the URL overrides it for that visit. The PDF email capture appears in the hero and in the download section near the end; both are front-end mocks that share one script, and nothing is sent or stored.
